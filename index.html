@@ -45,7 +45,8 @@ html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--bg); color: var(--text); font: 500 16px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--bg); }
 a { color: inherit; }
-.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1680px; margin: 0 auto; padding-left: max(clamp(16px, 5vw, 96px), env(safe-area-inset-left, 0px)); padding-right: max(clamp(16px, 5vw, 96px), env(safe-area-inset-right, 0px)); }
+@media (min-width: 1200px) { main, section, .marquee, footer { padding-right: 0; } body.has-toc .wrap { padding-right: max(150px, 7vw); } }
 h1, h2, h3 { text-wrap: balance; margin: 0; }
 h2 { font: 400 clamp(30px, 4.6vw, 52px)/1.04 var(--display); letter-spacing: -.02em; }
 h3 { font: 800 19px/1.25 var(--body); }
@@ -61,7 +62,7 @@ p { margin: 0; }
 
 /* navigation flottante en verre */
 nav { position: fixed; top: calc(12px + env(safe-area-inset-top, 0px)); left: 0; right: 0; z-index: 50; }
-nav .bar { max-width: 1180px; margin: 0 auto; transition: max-width .5s cubic-bezier(.2,.8,.2,1), padding .5s cubic-bezier(.2,.8,.2,1), background .5s, box-shadow .5s, transform .5s; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 16px 18px 26px; border-radius: 999px; border: 1px solid var(--line2); background: rgba(14,14,18,.62); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); box-shadow: 0 10px 40px rgba(0,0,0,.35); }
+nav .bar { max-width: 1680px; margin: 0 auto; transition: max-width .5s cubic-bezier(.2,.8,.2,1), padding .5s cubic-bezier(.2,.8,.2,1), background .5s, box-shadow .5s, transform .5s; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 16px 18px 26px; border-radius: 999px; border: 1px solid var(--line2); background: rgba(14,14,18,.62); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); box-shadow: 0 10px 40px rgba(0,0,0,.35); }
 .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
 nav .logo svg, nav .logo b { transition: all .5s cubic-bezier(.2,.8,.2,1); }
 nav.scrolled .bar { max-width: 920px; padding: 8px 8px 8px 18px; background: rgba(10,10,14,.82); box-shadow: 0 14px 40px rgba(0,0,0,.5), 0 0 0 1px rgba(255,225,77,.08); }
@@ -75,7 +76,8 @@ nav.scrolled .navlinks .btn { padding: 10px 14px; }
 .navlinks .btn { padding: 11px 16px; font-size: 14px; }
 
 /* hero */
-.hero { position: relative; padding-block: 150px 70px; overflow: hidden; }
+.hero { position: relative; min-height: 100svh; display: flex; align-items: center; padding-block: 140px 70px; overflow: hidden; }
+.hero > .wrap { width: 100%; }
 .hero::before { content: ""; position: absolute; inset: 0; background:
   radial-gradient(600px 420px at 78% 38%, rgba(255,225,77,.16), transparent 70%),
   radial-gradient(520px 380px at 12% 20%, rgba(124,92,255,.14), transparent 70%),
@@ -83,7 +85,7 @@ nav.scrolled .navlinks .btn { padding: 10px 14px; }
   linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 56px 56px;
   -webkit-mask: radial-gradient(ellipse 90% 80% at 50% 40%, #000 40%, transparent 100%); mask: radial-gradient(ellipse 90% 80% at 50% 40%, #000 40%, transparent 100%); }
 .hero .wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 40px; align-items: center; }
-.hero h1 { font: 400 clamp(42px, 6.6vw, 82px)/.98 var(--display); letter-spacing: -.03em; margin: 22px 0 20px; }
+.hero h1 { font: 400 clamp(42px, 6.2vw, 104px)/.96 var(--display); letter-spacing: -.03em; margin: 22px 0 20px; }
 .hero h1 .hl { display: inline-block; background: linear-gradient(180deg, transparent 62%, rgba(255,225,77,.22) 62%); }
 .hero .lead { font-size: 18px; color: var(--muted); max-width: 52ch; }
 .doors { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
@@ -92,7 +94,7 @@ nav.scrolled .navlinks .btn { padding: 10px 14px; }
 .trust svg { color: var(--ok); flex: none; }
 
 /* téléphone 3D : coque jaune, épaisseur, face avant et arrière */
-.stage { position: relative; height: 620px; perspective: 1400px; }
+.stage { position: relative; height: min(700px, 78svh); min-height: 560px; perspective: 1400px; }
 .phone3d { position: absolute; left: 50%; top: 50%; width: 280px; aspect-ratio: 9 / 19.3; margin: -300px 0 0 -140px; transform-style: preserve-3d; transform: rotateY(-18deg) rotateX(8deg) rotateZ(5deg); will-change: transform; z-index: 2; }
 .phone3d .edge { position: absolute; inset: 0; border-radius: 52px; background: linear-gradient(90deg, #C9A100, #F2C200 30%, #FFD84A 50%, #F2C200 70%, #B98F00); transform: translateZ(var(--z)); }
 .phone3d .face { position: absolute; inset: 0; border-radius: 52px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
@@ -151,6 +153,39 @@ nav.scrolled .navlinks .btn { padding: 10px 14px; }
 .thumb .playb { position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: rgba(0,0,0,.55); backdrop-filter: blur(4px); display: grid; place-items: center; }
 .arrow { position: absolute; left: 4%; top: 17%; width: 150px; z-index: 4; pointer-events: none; filter: drop-shadow(0 4px 10px rgba(255,225,77,.35)); }
 @media (max-width: 600px) { .thumb { width: 180px; } .arrow { width: 100px; left: 18%; top: 22%; } }
+
+
+/* graphiques */
+.charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.chart { margin: 0; border-radius: var(--r); background: linear-gradient(180deg, var(--panel2), var(--panel)); border: 1px solid var(--line); padding: 22px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.chart figcaption { display: flex; flex-direction: column; gap: 4px; } .chart figcaption b { font: 800 17px/1.25 var(--body); } .chart figcaption span { color: var(--muted); font-size: 14px; font-weight: 600; }
+.chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart .ax { stroke: rgba(255,255,255,.08); } .chart .tk { fill: var(--dim); font: 600 12px var(--body); font-variant-numeric: tabular-nums; }
+.chart .bar { fill: rgba(255,255,255,.12); transition: fill .3s; transform-box: fill-box; transform-origin: 50% 100%; } .chart .bar.on { fill: var(--y); filter: drop-shadow(0 0 12px rgba(255,225,77,.45)); }
+.chart .val { fill: var(--muted); font: 800 12px var(--body); text-anchor: middle; } .chart .val.on { fill: var(--y); }
+.chart .line { fill: none; stroke: var(--y); stroke-width: 3.5; stroke-linecap: round; filter: drop-shadow(0 6px 14px rgba(255,225,77,.35)); }
+.chart .area { fill: url(#earnfill); }
+.chart .dot { fill: var(--y); stroke: var(--bg); stroke-width: 4; transition: cx .3s, cy .3s; } .chart .halo { fill: rgba(255,225,77,.18); }
+.chart .lab { fill: var(--text); font: 400 15px var(--display); }
+.grow .bar { animation: growbar .9s cubic-bezier(.2,.8,.2,1) both; } .grow .line { stroke-dasharray: 1; stroke-dashoffset: 0; animation: drawl 1.2s cubic-bezier(.4,0,.2,1) both; }
+@keyframes growbar { from { transform: scaleY(.02); } to { transform: scaleY(1); } } @keyframes drawl { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@media (max-width: 980px) { .charts { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .grow .bar, .grow .line { animation: none; } }
+/* sommaire qui suit le défilement */
+.toc { left: auto; position: fixed; right: max(18px, env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%); z-index: 40; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 20px; background: rgba(12,12,16,.55); border: 1px solid var(--line); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.toc a { position: relative; display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 7px 8px; border-radius: 12px; text-decoration: none; color: var(--dim); font: 700 12px/1 var(--body); white-space: nowrap; transition: color .3s, background .3s; }
+.toc a .lbl { max-width: 0; overflow: hidden; opacity: 0; transition: max-width .4s cubic-bezier(.2,.8,.2,1), opacity .3s; }
+.toc:hover a .lbl, .toc a.on .lbl { max-width: 160px; opacity: 1; }
+.toc a i { width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex: none; transition: transform .3s, background .3s, box-shadow .3s; }
+.toc a.on { color: var(--text); } .toc a.on i { background: var(--y); transform: scale(1.5); box-shadow: 0 0 0 4px rgba(255,225,77,.18), 0 0 14px rgba(255,225,77,.6); }
+.toc a:hover { color: var(--text); background: rgba(255,255,255,.05); }
+.toc .prog { position: absolute; right: 13px; top: 18px; bottom: 18px; width: 2px; background: var(--line); border-radius: 2px; z-index: -1; }
+.toc .prog b { display: block; width: 100%; height: 0; background: linear-gradient(var(--y), rgba(255,225,77,.3)); border-radius: 2px; }
+@media (max-width: 1199px) {
+  .toc { top: auto; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); right: 50%; transform: translateX(50%); flex-direction: row; max-width: calc(100vw - 32px); overflow-x: auto; scrollbar-width: none; border-radius: 999px; padding: 6px; }
+  .toc a { padding: 9px 12px; border-radius: 999px; } .toc a .lbl { max-width: none; opacity: 1; } .toc a i, .toc .prog { display: none; }
+  .toc a.on { background: var(--y); color: var(--ink); }
+}
 /* bandeau défilant */
 .marquee { border-block: 1px solid var(--line); background: var(--bg2); overflow: hidden; padding-block: 18px; }
 .marquee .track { display: flex; gap: 46px; width: max-content; animation: slide 36s linear infinite; font: 400 20px/1 var(--display); color: var(--dim); }
@@ -312,6 +347,17 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
   </div>
 </nav>
 
+<nav class="toc" id="toc" aria-label="Sommaire">
+  <span class="prog"><b id="tocprog"></b></span>
+  <a href="#top"><span class="lbl">Accueil</span><i></i></a>
+  <a href="#pourquoi"><span class="lbl">Pourquoi Klip</span><i></i></a>
+  <a href="#clipping"><span class="lbl">Le clipping</span><i></i></a>
+  <a href="#simulateur"><span class="lbl">Tarifs et chiffres</span><i></i></a>
+  <a href="#comparatif"><span class="lbl">Pub ou clips</span><i></i></a>
+  <a href="#createurs"><span class="lbl">Créateurs</span><i></i></a>
+  <a href="#clippeurs"><span class="lbl">Clippeurs</span><i></i></a>
+  <a href="#faq"><span class="lbl">FAQ</span><i></i></a>
+</nav>
 <header class="hero" id="top">
   <div class="wrap">
     <div>
@@ -456,6 +502,18 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
         <div class="res"><div><b id="r-week">21 €</b><span>par semaine</span></div><div><b id="r-month">91 €</b><span>par mois environ</span></div><div><b>+ bonus</b><span>dès 1 000 vues</span></div></div>
         <p class="fine">0,70 € par clip validé, payé dans tous les cas, chaque fin de semaine. Le bonus aux vues s'ajoute, jusqu'à un plafond par clip annoncé avant chaque mission.</p>
       </div>
+    </div>
+    <div class="charts">
+      <figure class="chart">
+        <figcaption><b>Prix par clip selon le volume</b><span>Créateurs · après les 20 clips test offerts</span></figcaption>
+        <svg id="ch-price" viewBox="0 0 560 300" role="img" aria-label="Prix par clip : 1 € à 100 clips, puis 5 centimes de moins par tranche de 100 clips, jusqu'à 0,70 € dès 700 clips"></svg>
+        <p class="fine">La barre en jaune suit ton choix dans le simulateur créateur.</p>
+      </figure>
+      <figure class="chart">
+        <figcaption><b>Ce que gagne un clippeur par semaine</b><span>0,70 € par clip validé, hors bonus aux vues</span></figcaption>
+        <svg id="ch-earn" viewBox="0 0 560 300" role="img" aria-label="Gains d'un clippeur : 0,70 € par clip validé, de 7 € pour 10 clips à 105 € pour 150 clips par semaine"></svg>
+        <p class="fine">Le point jaune suit ton choix dans le simulateur clippeur. Le bonus dès 1 000 vues s'ajoute en plus.</p>
+      </figure>
     </div>
   </div>
 </section>
@@ -751,6 +809,54 @@ document.getElementById('copy').addEventListener('click', function () {
 });
 </script>
 <script>
+(function charts() {
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(n, a, p) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+  var eur = function (x, d) { return x.toFixed(d === undefined ? 2 : d).replace('.', ','); };
+  // 1) prix par clip
+  var P = document.getElementById('ch-price'), L = 54, Rr = 545, T = 24, B = 262, steps = [100, 200, 300, 400, 500, 600, 700];
+  [0, .25, .5, .75, 1].forEach(function (v) { var y = B - (B - T) * v; el('line', { x1: L, x2: Rr, y1: y, y2: y, class: 'ax' }, P); el('text', { x: L - 10, y: y + 4, class: 'tk', 'text-anchor': 'end' }, P).textContent = eur(v) + ' €'; });
+  var bw = (Rr - L) / steps.length, bars = [];
+  steps.forEach(function (n, i) {
+    var price = Math.max(.70, 1 - .05 * i), h = (B - T) * price, x = L + i * bw + bw * .18, w = bw * .64;
+    var r = el('rect', { x: x, y: B - h, width: w, height: h, rx: 8, class: 'bar', style: 'animation-delay:' + (i * 70) + 'ms' }, P);
+    var t = el('text', { x: x + w / 2, y: B - h - 8, class: 'val' }, P); t.textContent = eur(price) + ' €';
+    el('text', { x: x + w / 2, y: B + 20, class: 'tk', 'text-anchor': 'middle' }, P).textContent = n + (i === steps.length - 1 ? '+' : '');
+    bars.push({ n: n, r: r, t: t });
+  });
+  el('text', { x: (L + Rr) / 2, y: 298, class: 'tk', 'text-anchor': 'middle' }, P).textContent = 'clips par mois';
+  function hiPrice() { var n = (+document.getElementById('s-hours').value) * (+document.getElementById('s-rate').value), idx = n < 100 ? -1 : Math.min(6, Math.floor(n / 100) - 1);
+    bars.forEach(function (b, i) { b.r.classList.toggle('on', i === idx); b.t.classList.toggle('on', i === idx); }); }
+  // 2) gains clippeur
+  var E = document.getElementById('ch-earn'), xmin = 10, xmax = 150, ymax = 110;
+  var X = function (c) { return L + (Rr - L) * (c - xmin) / (xmax - xmin); }, Y = function (v) { return B - (B - T) * v / ymax; };
+  var d = el('defs', {}, E), g = el('linearGradient', { id: 'earnfill', x1: 0, y1: 0, x2: 0, y2: 1 }, d);
+  el('stop', { offset: '0', 'stop-color': '#FFE14D', 'stop-opacity': '.28' }, g); el('stop', { offset: '1', 'stop-color': '#FFE14D', 'stop-opacity': '0' }, g);
+  [0, 25, 50, 75, 100].forEach(function (v) { el('line', { x1: L, x2: Rr, y1: Y(v), y2: Y(v), class: 'ax' }, E); el('text', { x: L - 10, y: Y(v) + 4, class: 'tk', 'text-anchor': 'end' }, E).textContent = v + ' €'; });
+  [10, 50, 100, 150].forEach(function (c) { el('text', { x: X(c), y: B + 20, class: 'tk', 'text-anchor': 'middle' }, E).textContent = c; });
+  el('text', { x: (L + Rr) / 2, y: 298, class: 'tk', 'text-anchor': 'middle' }, E).textContent = 'clips validés par semaine';
+  el('path', { d: 'M' + X(xmin) + ' ' + Y(xmin * .7) + ' L' + X(xmax) + ' ' + Y(xmax * .7) + ' L' + X(xmax) + ' ' + B + ' L' + X(xmin) + ' ' + B + ' Z', class: 'area' }, E);
+  el('path', { d: 'M' + X(xmin) + ' ' + Y(xmin * .7) + ' L' + X(xmax) + ' ' + Y(xmax * .7), class: 'line', pathLength: 1 }, E);
+  var halo = el('circle', { r: 16, class: 'halo' }, E), dot = el('circle', { r: 8, class: 'dot' }, E), lab = el('text', { class: 'lab', 'text-anchor': 'middle' }, E);
+  function hiEarn() { var c = +document.getElementById('s-clips').value, x = X(c), y = Y(c * .7);
+    [halo, dot].forEach(function (k) { k.setAttribute('cx', x); k.setAttribute('cy', y); }); lab.setAttribute('x', Math.min(Rr - 30, Math.max(L + 30, x))); lab.setAttribute('y', y - 22); lab.textContent = eur(c * .7, c * .7 % 1 ? 2 : 0) + ' €'; }
+  ['s-hours', 's-rate'].forEach(function (id) { document.getElementById(id).addEventListener('input', hiPrice); }); document.getElementById('s-clips').addEventListener('input', hiEarn);
+  hiPrice(); hiEarn();
+  if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('grow'); io.unobserve(e.target); } }); }, { threshold: .35 }); [P, E].forEach(function (k) { io.observe(k); }); }
+})();
+(function toc() {
+  var links = [].slice.call(document.querySelectorAll('#toc a')), prog = document.getElementById('tocprog');
+  document.body.classList.add('has-toc');
+  var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  function upd() {
+    var y = window.scrollY + window.innerHeight * .35, cur = 0;
+    secs.forEach(function (s, i) { if (s && s.getBoundingClientRect().top + window.scrollY <= y) cur = i; });
+    links.forEach(function (a, i) { a.classList.toggle('on', i === cur); });
+    var h = document.documentElement.scrollHeight - window.innerHeight; prog.style.height = (h > 0 ? window.scrollY / h * 100 : 0) + '%';
+    var on = links[cur]; if (on && window.innerWidth < 1200) { var t = document.getElementById('toc'); t.scrollTo({ left: on.offsetLeft - t.clientWidth / 2 + on.clientWidth / 2, behavior: 'smooth' }); }
+  }
+  window.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', upd); upd();
+})();
 (function navShrink() {
   var nav = document.querySelector('nav');
   function upd() { nav.classList.toggle('scrolled', window.scrollY > 40); }
