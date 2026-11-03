@@ -151,7 +151,7 @@ nav.scrolled .navlinks .btn { padding: 10px 14px; }
 .thumb .live { position: absolute; left: 10px; top: 10px; background: #FF3B4A; color: #fff; font: 800 11px/1 var(--body); padding: 5px 8px; border-radius: 6px; }
 .thumb .dur { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.75); color: #fff; font: 700 11px/1 var(--body); padding: 4px 6px; border-radius: 5px; font-variant-numeric: tabular-nums; }
 .thumb .playb { position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: rgba(0,0,0,.55); backdrop-filter: blur(4px); display: grid; place-items: center; }
-.arrow { position: absolute; left: 4%; top: 17%; width: 150px; z-index: 4; pointer-events: none; filter: drop-shadow(0 4px 10px rgba(255,225,77,.35)); }
+.arrow-old { position: absolute; left: 4%; top: 17%; width: 150px; z-index: 4; pointer-events: none; filter: drop-shadow(0 4px 10px rgba(255,225,77,.35)); }
 @media (max-width: 600px) { .thumb { width: 180px; } .arrow { width: 100px; left: 18%; top: 22%; } }
 
 
@@ -186,6 +186,16 @@ nav.scrolled .navlinks .btn { padding: 10px 14px; }
   .toc a { padding: 9px 12px; border-radius: 999px; } .toc a .lbl { max-width: none; opacity: 1; } .toc a i, .toc .prog { display: none; }
   .toc a.on { background: var(--y); color: var(--ink); }
 }
+.arrow3d { z-index: 6; pointer-events: none; filter: drop-shadow(0 0 18px rgba(255,225,77,.25)); }
+.arrow3d svg { overflow: visible; display: block; transform: rotate(-4deg); }
+.ar-side { fill: none; stroke-width: 16; stroke-linecap: round; }
+.ar-top { fill: none; stroke: url(#arTop); stroke-width: 16; stroke-linecap: round; }
+.ar-shine { fill: none; stroke: rgba(255,255,255,.85); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 26 220; animation: shine 2.6s cubic-bezier(.4,0,.2,1) infinite; transform: translate(0,-4px); }
+@keyframes shine { from { stroke-dashoffset: 240; } to { stroke-dashoffset: -10; } }
+.stage .far { filter: blur(.6px) saturate(.9); }
+.stage .far .thumb { transform: rotate(-7deg) scale(.92); }
+@media (max-width: 600px) { .arrow3d svg { width: 130px; height: 105px; } }
+@media (prefers-reduced-motion: reduce) { .ar-shine { animation: none; } }
 /* bandeau défilant */
 .marquee { border-block: 1px solid var(--line); background: var(--bg2); overflow: hidden; padding-block: 18px; }
 .marquee .track { display: flex; gap: 46px; width: max-content; animation: slide 36s linear infinite; font: 400 20px/1 var(--display); color: var(--dim); }
@@ -363,7 +373,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
     <div>
       <span class="eyebrow">Agence de clipping</span>
       <h1>Tes lives deviennent des <span class="hl">clips viraux</span>.</h1>
-      <p class="lead">On repère les meilleurs moments de tes lives, podcasts et vidéos longues, et on les transforme en shorts TikTok, Reels et YouTube Shorts, sous-titrés et prêts à poster.</p>
+      <p class="lead">Tes meilleurs moments, découpés en clips TikTok, Reels et Shorts. Sous-titrés, prêts à poster.</p>
       <div class="doors">
         <a class="btn btn-solid" href="#createurs">Je suis créateur <span aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="#clippeurs">Je suis clippeur</a>
@@ -401,11 +411,20 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
           <div class="backlogo"><svg width="34" height="58" viewBox="0 0 72 124" aria-hidden="true"><rect x="5" y="5" width="62" height="114" rx="14" fill="none" stroke="#0E0E10" stroke-width="10"/><path d="M28 46 L50 62 L28 78 Z" fill="#0E0E10"/></svg><span>klip</span><small>AGENCY</small></div>
         </div>
       </div>
-      <div class="float f1 pop" data-depth="26" style="left:6%;top:4%;--d:.15s"><div class="coin">0,70 €</div></div>
+      <div class="float f1 pop" data-depth="26" style="left:-6%;top:6%;--d:.15s"><div class="coin">0,70 €</div></div>
       <div class="float f2 pop" data-depth="40" style="right:2%;top:9%;--d:.3s"><div class="pill notif"><span>▶ +1 clip validé</span></div></div>
       <!-- Miniature de la vidéo longue : remplace assets/miniature.jpg (format 16:9) -->
-      <div class="float f3 pop" data-depth="14" style="left:-14%;top:30%;z-index:1;--d:.45s"><div class="thumb"><img src="assets/miniature.jpg" alt=""><span class="live">▶ Vidéo longue</span><i class="playb"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 4l13 8-13 8z"/></svg></i></div></div>
-      <svg class="arrow" viewBox="0 0 220 160" aria-hidden="true"><defs><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#FFE14D"/></marker></defs><path d="M14 140 C 40 60, 110 20, 196 46" fill="none" stroke="#FFE14D" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 12" marker-end="url(#ah)"/></svg>
+      <div class="float f3 pop far" data-depth="8" style="left:-14%;top:30%;z-index:1;--d:.45s"><div class="thumb"><img src="assets/miniature.jpg" alt=""><span class="live">▶ Vidéo longue</span><i class="playb"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 4l13 8-13 8z"/></svg></i></div></div>
+      <div class="float arrow3d pop" data-depth="70" style="left:7%;top:15%;--d:1s" aria-hidden="true">
+        <svg viewBox="0 0 210 170" width="210" height="170">
+          <defs><linearGradient id="arTop" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFC93D"/><stop offset=".55" stop-color="#FFE14D"/><stop offset="1" stop-color="#FFF3A8"/></linearGradient>
+          <filter id="arSh" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7"/></filter></defs>
+          <path d="M18 128 C 26 66, 86 30, 166 34" transform="translate(10 30)" style="fill:none;stroke:rgba(0,0,0,.55);stroke-width:20;stroke-linecap:round" filter="url(#arSh)"/>
+          <path d="M18 128 C 26 66, 86 30, 166 34" transform="translate(0 9)" class="ar-side" style="stroke:hsl(46 100% 46%)"/><path d="M162 16 L196 36 L160 56 Z" transform="translate(0 9)" style="fill:hsl(46 100% 46%)"/><path d="M18 128 C 26 66, 86 30, 166 34" transform="translate(0 8)" class="ar-side" style="stroke:hsl(46 100% 44%)"/><path d="M162 16 L196 36 L160 56 Z" transform="translate(0 8)" style="fill:hsl(46 100% 44%)"/><path d="M18 128 C 26 66, 86 30, 166 34" transform="translate(0 7)" class="ar-side" style="stroke:hsl(46 100% 42%)"/><path d="M162 16 L196 36 L160 56 Z" transform="translate(0 7)" style="fill:hsl(46 100% 42%)"/><path d="M18 128 C 26 66, 86 30, 166 34" transform="translate(0 6)" class="ar-side" style="stroke:hsl(46 100% 40%)"/><path d="M162 16 L196 36 L160 56 Z" transform="translate(0 6)" style="fill:hsl(46 100% 40%)"/><path d="M18 128 C 26 66, 86 30, 166 34" transform="translate(0 5)" class="ar-side" style="stroke:hsl(46 100% 38%)"/><path d="M162 16 L196 36 L160 56 Z" transform="translate(0 5)" style="fill:hsl(46 100% 38%)"/><path d="M18 128 C 26 66, 86 30, 166 34" transform="translate(0 4)" class="ar-side" style="stroke:hsl(46 100% 36%)"/><path d="M162 16 L196 36 L160 56 Z" transform="translate(0 4)" style="fill:hsl(46 100% 36%)"/><path d="M18 128 C 26 66, 86 30, 166 34" transform="translate(0 3)" class="ar-side" style="stroke:hsl(46 100% 34%)"/><path d="M162 16 L196 36 L160 56 Z" transform="translate(0 3)" style="fill:hsl(46 100% 34%)"/><path d="M18 128 C 26 66, 86 30, 166 34" transform="translate(0 2)" class="ar-side" style="stroke:hsl(46 100% 32%)"/><path d="M162 16 L196 36 L160 56 Z" transform="translate(0 2)" style="fill:hsl(46 100% 32%)"/><path d="M18 128 C 26 66, 86 30, 166 34" transform="translate(0 1)" class="ar-side" style="stroke:hsl(46 100% 30%)"/><path d="M162 16 L196 36 L160 56 Z" transform="translate(0 1)" style="fill:hsl(46 100% 30%)"/>
+          <path d="M18 128 C 26 66, 86 30, 166 34" class="ar-top"/><path d="M162 16 L196 36 L160 56 Z" fill="url(#arTop)" stroke="#FFF7C2" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M18 128 C 26 66, 86 30, 166 34" class="ar-shine"/>
+        </svg>
+      </div>
       <div class="float f1 hideS pop" data-depth="20" style="left:-4%;top:74%;--d:.6s"><div class="pill"><span class="ic" style="background:var(--y)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="3" stroke-linecap="round"><path d="M14 6l6 6-6 6M4 12h16"/></svg></span><span>Ta vidéo longue<small>devient des clips de 30 s</small></span></div></div>
       <div class="float f4 pop" data-depth="34" style="right:-4%;top:50%;--d:.75s"><div class="pill"><span class="ic" style="background:var(--y)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="3"><path d="M4 7h16M4 12h10M4 17h13"/></svg></span><span>Sous-titres<small>mot par mot</small></span></div></div>
       <div class="float f2 pop" data-depth="22" style="right:6%;top:82%;--d:.9s"><div class="pill"><span class="ic" style="background:var(--ok)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span><span>Paiement reçu<small>chaque fin de semaine</small></span></div></div>
@@ -413,43 +432,29 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
   </div>
 </header>
 
-<div class="marquee" aria-hidden="true"><div class="track">
-  <span>TikTok</span><span>Instagram Reels</span><span>YouTube Shorts</span><span>Twitch</span><span>Kick</span><span>Podcasts</span><span>Sous-titres mot par mot</span><span>Réponse sous 24 h</span>
-  <span>TikTok</span><span>Instagram Reels</span><span>YouTube Shorts</span><span>Twitch</span><span>Kick</span><span>Podcasts</span><span>Sous-titres mot par mot</span><span>Réponse sous 24 h</span>
-</div></div>
 
 <section id="pourquoi" aria-labelledby="t-why">
   <div class="wrap">
     <div class="head c">
       <span class="eyebrow">Pourquoi Klip</span>
       <h2 id="t-why">Ton meilleur moment de live mérite d'être vu <span class="hl">partout</span>.</h2>
-      <p>Un live de 3 heures est vu une fois, puis il disparaît. Les nouveaux abonnés, eux, se trouvent sur TikTok, Reels et Shorts, en 30 secondes. On fait le lien entre les deux.</p>
+      <p>Un live est vu une fois. Un clip tourne pendant des mois.</p>
     </div>
     <div class="bento">
       <article class="tile">
         <span class="tag"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.6-1-1.7-1.5-3-1.5-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.3 2.2-3 2.2-1.4 0-2.5-.6-3-1.6M12 6v2M12 16v2"/></svg>Clippeurs payés</span>
         <div class="viz coins"><i style="left:16%;top:16%">€</i><i class="big" style="animation-delay:-1.5s">0,70</i><i style="right:14%;top:22%;animation-delay:-3s">€</i><i style="left:30%;bottom:6%;animation-delay:-2s">€</i></div>
-        <p><b>0,70 € par clip validé</b>, payé dans tous les cas, plus un bonus dès 1 000 vues.</p>
+        <p><b>0,70 € par clip</b> + bonus dès 1 000 vues.</p>
       </article>
       <article class="tile">
         <span class="tag"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Rythme régulier</span>
         <div class="viz"><div class="cal"><i>L</i><i>M</i><i>M</i><i>J</i><i>V</i><i>S</i><i>D</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i></div></div>
-        <p><b>Des clips chaque semaine</b>, sans que tu aies à monter quoi que ce soit.</p>
+        <p><b>Des clips chaque semaine</b>, sans rien monter.</p>
       </article>
       <article class="tile">
-        <span class="tag"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 14l2 2 4-4"/></svg>Cadre clair</span>
-        <div class="viz"><div class="pill" style="transform:rotate(-4deg);font-size:15px"><span class="ic" style="background:var(--ok)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span><span>Contrat signé<small>avant le premier clip</small></span></div></div>
-        <p><b>Tout est écrit</b> : droits sur tes vidéos, prix, comptes de publication, paiement.</p>
-      </article>
-      <article class="tile w">
         <span class="tag"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>Partout à la fois</span>
         <div class="viz"><div class="stackp"><div class="plat">TikTok</div><div class="plat">Reels</div><div class="plat">Shorts</div><div class="plat">@clip.toi</div></div></div>
-        <p><b>Tes clips tournent sur tous les réseaux</b>, sur les comptes de nos clippeurs ou sur un compte de clips dédié à ton nom.</p>
-      </article>
-      <article class="tile">
-        <span class="tag"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Rapide</span>
-        <div class="viz"><div style="font:400 92px/1 var(--display);color:var(--y);letter-spacing:-.04em">24 h</div></div>
-        <p><b>Une réponse à chaque candidature</b>, créateur ou clippeur, en moins de 24 heures.</p>
+        <p><b>TikTok, Reels, Shorts</b> : tes clips partout.</p>
       </article>
     </div>
   </div>
@@ -463,8 +468,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
     </div>
     <div class="showgrid">
       <div class="notes">
-        <div class="note"><span class="n">1</span><b>On repère les moments forts</b><span>Réactions, punchlines, fous rires, débats : ce qui donne envie de partager.</span></div>
-        <div class="note"><span class="n">2</span><b>On monte en vertical</b><span>Format 9:16, visage bien cadré, accroche dans les 2 premières secondes.</span></div>
+        <div class="note"><span class="n">1</span><b>On repère les moments forts</b><span>Réactions, punchlines, fous rires.</span></div>
+        <div class="note"><span class="n">2</span><b>On monte en vertical</b><span>9:16, accroche en 2 secondes.</span></div>
       </div>
       <div class="bigphone">
         <video src="clips/01_elle-monte.mp4" poster="clips/01_elle-monte.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Exemple de clip test"></video>
@@ -472,8 +477,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
         <div class="pill float f3" style="right:-64px;bottom:22%"><span class="ic" style="background:var(--violet)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M4 7h16M4 12h10M4 17h13"/></svg></span><span>Sous-titres<small>mot par mot</small></span></div>
       </div>
       <div class="notes">
-        <div class="note"><span class="n">3</span><b>On sous-titre mot par mot</b><span>Gros, lisible, avec les mots clés en couleur : beaucoup de gens regardent sans le son.</span></div>
-        <div class="note"><span class="n">4</span><b>On publie partout</b><span>TikTok, Instagram Reels et YouTube Shorts, avec un rythme régulier.</span></div>
+        <div class="note"><span class="n">3</span><b>On sous-titre mot par mot</b><span>Gros, lisible, mots clés en couleur.</span></div>
+        <div class="note"><span class="n">4</span><b>On publie partout</b><span>TikTok, Reels et Shorts.</span></div>
       </div>
     </div>
   </div>
@@ -483,7 +488,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
     <div class="head">
       <p class="eyebrow">Simulateurs</p>
       <h2 id="t-sim">Fais le calcul <span class="hl">en 10 secondes</span>.</h2>
-      <p>Deux calculs simples avec nos vrais tarifs. Aucune estimation de vues inventée : les vues dépendent de ta niche et de ton contenu.</p>
+      <p>Nos vrais tarifs, sans promesse de vues.</p>
     </div>
     <div class="sims">
       <div class="sim">
@@ -493,26 +498,26 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
         <label for="s-rate">Clips par heure de contenu : <output id="o-rate">6</output></label>
         <input id="s-rate" type="range" min="2" max="15" step="1" value="6">
         <div class="res"><div><b id="r-clips">120</b><span>clips par mois</span></div><div><b id="r-price">1,00 €</b><span>par clip</span></div><div><b id="r-total">120 €</b><span>par mois</span></div></div>
-        <p class="fine">Les 20 premiers clips sont offerts. Grille : 1 € le clip dès 100 clips, puis −5 centimes par tranche de 100, jamais sous 0,70 €.</p>
+        <p class="fine">20 premiers clips offerts. Jamais sous 0,70 € le clip.</p>
       </div>
       <div class="sim">
         <h3>Je suis clippeur</h3>
         <label for="s-clips">Clips validés par semaine : <output id="o-clips">30</output></label>
         <input id="s-clips" type="range" min="5" max="150" step="5" value="30">
         <div class="res"><div><b id="r-week">21 €</b><span>par semaine</span></div><div><b id="r-month">91 €</b><span>par mois environ</span></div><div><b>+ bonus</b><span>dès 1 000 vues</span></div></div>
-        <p class="fine">0,70 € par clip validé, payé dans tous les cas, chaque fin de semaine. Le bonus aux vues s'ajoute, jusqu'à un plafond par clip annoncé avant chaque mission.</p>
+        <p class="fine">Payé chaque fin de semaine. Bonus aux vues en plus.</p>
       </div>
     </div>
     <div class="charts">
       <figure class="chart">
         <figcaption><b>Prix par clip selon le volume</b><span>Créateurs · après les 20 clips test offerts</span></figcaption>
         <svg id="ch-price" viewBox="0 0 560 300" role="img" aria-label="Prix par clip : 1 € à 100 clips, puis 5 centimes de moins par tranche de 100 clips, jusqu'à 0,70 € dès 700 clips"></svg>
-        <p class="fine">La barre en jaune suit ton choix dans le simulateur créateur.</p>
+        <p class="fine">La barre jaune suit le simulateur.</p>
       </figure>
       <figure class="chart">
         <figcaption><b>Ce que gagne un clippeur par semaine</b><span>0,70 € par clip validé, hors bonus aux vues</span></figcaption>
         <svg id="ch-earn" viewBox="0 0 560 300" role="img" aria-label="Gains d'un clippeur : 0,70 € par clip validé, de 7 € pour 10 clips à 105 € pour 150 clips par semaine"></svg>
-        <p class="fine">Le point jaune suit ton choix dans le simulateur clippeur. Le bonus dès 1 000 vues s'ajoute en plus.</p>
+        <p class="fine">Le point jaune suit le simulateur. Bonus aux vues en plus.</p>
       </figure>
     </div>
   </div>
@@ -539,17 +544,16 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
     <div class="head">
       <p class="eyebrow">Coin créateurs</p>
       <h2 id="t-crea">Tu fais le contenu long. <span class="hl">On fait les shorts.</span></h2>
-      <p>Tu continues tes lives, podcasts et vidéos. On s'occupe de les découper en clips qui ramènent des vues et des abonnés vers ta chaîne.</p>
-      <p><strong style="color: var(--text)">Aucun minimum d'abonnés.</strong> Tu démarres avec 0 abonné ? Aucun problème, c'est justement le meilleur moment pour lancer tes shorts.</p>
+      <p>Tu continues tes lives. On en fait des clips qui ramènent des abonnés.</p>
+      <p><strong>Aucun minimum d'abonnés.</strong> Même à 0, c'est le bon moment.</p>
     </div>
 
     <ol class="steps">
-      <li><h3>Candidature</h3><p>Tu remplis le formulaire. On regarde ta chaîne et ton rythme de publication.</p></li>
-      <li><h3>Clips test</h3><p>On te livre 20 clips test gratuits tirés de tes contenus. Tu valides le style, ou pas.</p></li>
-      <li><h3>Contrat</h3><p>Un pack de clips au mois, avec un bonus seulement si les vues décollent.</p></li>
-      <li><h3>Clips et stats</h3><p>Tu reçois tes clips chaque semaine et un bilan des vues à la fin du mois.</p></li>
+      <li><h3>Candidature</h3><p>Tu remplis le formulaire.</p></li>
+      <li><h3>Clips test</h3><p>20 clips offerts pour valider le style.</p></li>
+      <li><h3>Contrat</h3><p>Un pack de clips par mois.</p></li>
+      <li><h3>Clips et stats</h3><p>Tes clips chaque semaine, un bilan chaque mois.</p></li>
     </ol>
-    <p class="filigrane">Après tes 20 clips test : <span>1,00 € le clip pour 100 clips</span> · <span>0,95 € pour 200</span> · <span>0,90 € pour 300</span> · <span>0,85 € pour 400</span> · <span>0,80 € pour 500</span> · <span>0,75 € pour 600</span> · <span>0,70 € dès 700 clips</span>. <a href="#faq">Détail des prix</a></p>
 
     <div class="clips" role="list" aria-label="Exemples de clips test">
       <figure class="vclip" role="listitem">
@@ -569,12 +573,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
     <div class="apply">
       <aside>
         <h3>Rejoins la liste d'attente</h3>
-        <p>Petite ou grande chaîne, tout le monde peut candidater : il n'y a aucun minimum d'abonnés. On accompagne peu de créateurs à la fois pour garder des clips soignés, et les places se libèrent dans l'ordre d'arrivée.</p>
-        <ul class="queue">
-          <li><b>Étape 1</b>Ta candidature arrive chez nous</li>
-          <li><b>Étape 2</b>On étudie ta chaîne sous 24 h</li>
-          <li><b>Étape 3</b>On te contacte pour lancer tes 20 clips test</li>
-        </ul>
+        <p>Petite ou grande chaîne, tout le monde peut candidater. Réponse sous 24 h.</p>
       </aside>
       <form id="form-crea" data-kind="Créateur" novalidate>
         <div class="f"><label for="c-nom">Prénom et nom <span class="req">*</span></label><input id="c-nom" name="nom" autocomplete="name" required></div>
@@ -603,32 +602,27 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
     <div class="head">
       <p class="eyebrow">Coin clippeurs</p>
       <h2 id="t-clip">Tu sais monter ? <span class="hl">Fais-toi payer à chaque clip.</span></h2>
-      <p>On te fournit les rushs de créateurs sous contrat. Tu montes les clips : chaque clip validé est payé, et tu gagnes un bonus quand il fait des vues.</p>
+      <p>On fournit les rushs. Tu montes. Chaque clip validé est payé.</p>
     </div>
 
     <div class="perks">
-      <div class="perk"><h3>Les rushs sont fournis</h3><p>Lives et podcasts déjà autorisés par les créateurs. Pas besoin de chercher du contenu.</p></div>
-      <div class="perk"><h3>0,70 € par clip + bonus</h3><p>Chaque clip validé est payé 0,70 €. Dès 1 000 vues, un bonus s'ajoute selon les vues, jusqu'à un plafond par clip. Paiement chaque semaine par PayPal ou virement.</p></div>
-      <div class="perk"><h3>Un cahier des charges clair</h3><p>Style de sous-titres, durée, accroche : tu sais exactement ce qu'on attend avant de commencer.</p></div>
+      <div class="perk"><h3>Les rushs sont fournis</h3><p>Contenus déjà autorisés par les créateurs.</p></div>
+      <div class="perk"><h3>0,70 € par clip + bonus</h3><p>Bonus dès 1 000 vues. PayPal ou virement chaque semaine.</p></div>
+      <div class="perk"><h3>Un cahier des charges clair</h3><p>Tu sais exactement ce qu'on attend.</p></div>
     </div>
 
     <ol class="steps">
-      <li><h3>Candidature</h3><p>Tu nous montres ton niveau et tes logiciels.</p></li>
-      <li><h3>Clip test</h3><p>On t'envoie un rush, tu nous rends un clip.</p></li>
-      <li><h3>Validation</h3><p>Si le clip est au niveau, tu rejoins l'équipe.</p></li>
-      <li><h3>Missions</h3><p>Tu reçois des rushs chaque semaine et tu es payé en fin de semaine.</p></li>
+      <li><h3>Candidature</h3><p>Montre-nous tes montages.</p></li>
+      <li><h3>Clip test</h3><p>Un rush, un clip.</p></li>
+      <li><h3>Validation</h3><p>Au niveau ? Tu es dans l'équipe.</p></li>
+      <li><h3>Missions</h3><p>Des rushs chaque semaine, payé chaque semaine.</p></li>
     </ol>
 
     <div class="apply">
       <aside>
         <h3>Candidature clippeur</h3>
-        <p><strong style="color: var(--text)">Pas besoin de statut d'auto-entrepreneur.</strong> Tu n'es pas obligé d'en avoir un pour candidater ni pour faire le clip test : on voit ensemble la meilleure solution quand tu commences les missions.</p>
-        <p><strong style="color: var(--text)">Tu es mineur ?</strong> Aucun souci, tu peux candidater. On te demandera simplement l'accord d'un parent avant de commencer.</p>
-        <ul class="queue">
-          <li><b>Étape 1</b>Ta candidature arrive chez nous</li>
-          <li><b>Étape 2</b>On te répond sous 24 h</li>
-          <li><b>Étape 3</b>Tu reçois ton rush pour le clip test</li>
-        </ul>
+        <p><strong>Pas besoin de statut</strong> pour candidater.</p>
+        <p><strong>Mineur ?</strong> Accepté, avec l'accord d'un parent.</p>
       </aside>
       <form id="form-clip" data-kind="Clippeur" novalidate>
         <div class="f"><label for="k-nom">Prénom et nom <span class="req">*</span></label><input id="k-nom" name="nom" autocomplete="name" required></div>
@@ -666,17 +660,15 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
       <h2 id="t-faq">Ce que les créateurs nous demandent</h2>
     </div>
     <div class="faq">
-      <details><summary>Où sont publiés les clips ?</summary><div><p>La plupart du temps sur les comptes de nos clippeurs, ou sur un compte de clips dédié à ton nom, par exemple @clip.tonpseudo. Ta chaîne principale reste intacte : les clips renvoient vers elle et t'amènent de nouveaux abonnés.</p></div></details>
-      <details><summary>Il faut combien d'abonnés pour candidater ?</summary><div><p>Aucun. Tu peux candidater avec 0 abonné : il suffit d'avoir du contenu long (lives, podcasts, vidéos) à découper.</p></div></details>
-      <details><summary>Comment je vous envoie mes vidéos ?</summary><div><p>Par un lien Google Drive ou WeTransfer. Si tes lives ou vidéos sont déjà publics, on peut aussi les récupérer directement, avec ton accord écrit dans le contrat.</p></div></details>
+      <details><summary>Où sont publiés les clips ?</summary><div><p>Sur les comptes de nos clippeurs ou un compte dédié (ex. @clip.tonpseudo). Ta chaîne reste intacte.</p></div></details>
+      <details><summary>Il faut combien d'abonnés pour candidater ?</summary><div><p>Aucun. Il suffit d'avoir du contenu long.</p></div></details>
+      <details><summary>Comment je vous envoie mes vidéos ?</summary><div><p>Par Google Drive ou WeTransfer.</p></div></details>
       <details><summary>Combien ça coûte après les 20 clips test ?</summary><div><p>Le prix baisse avec le volume, et ne descend jamais sous 0,70 € le clip :</p>
         <div style="overflow-x: auto"><table class="prices"><thead><tr><th scope="col">Clips par mois</th><th scope="col">Prix par clip</th><th scope="col">Total</th></tr></thead><tbody><tr><td>100</td><td>1,00 €</td><td>100 €</td></tr><tr><td>200</td><td>0,95 €</td><td>190 €</td></tr><tr><td>300</td><td>0,90 €</td><td>270 €</td></tr><tr><td>400</td><td>0,85 €</td><td>340 €</td></tr><tr><td>500</td><td>0,80 €</td><td>400 €</td></tr><tr><td>600</td><td>0,75 €</td><td>450 €</td></tr><tr><td>700 et plus</td><td>0,70 €</td><td>0,70 € × nombre de clips</td></tr></tbody></table></div>
-        <p>Un bonus aux vues peut s'ajouter quand les clips dépassent un palier fixé ensemble dans le contrat.</p></div></details>
-      <details><summary>Est-ce que je garde mes droits ?</summary><div><p>Oui. Tu restes propriétaire de tes contenus. Le contrat précise ce qu'on a le droit d'en faire et sur quels comptes les clips sont publiés.</p><p>La monétisation des clips, quand il y en a une, revient au clippeur et à Klip Agency. Toi, tu gagnes la visibilité : les clips amènent de nouveaux abonnés sur ta chaîne principale, qui reste entièrement à toi.</p></div></details>
-      <details><summary>Je suis clippeur, combien je gagne ?</summary><div><p>0,70 € par clip validé, payé dans tous les cas, même si le clip fait peu de vues. À partir de 1 000 vues, un bonus s'ajoute selon les vues, avec un plafond par clip annoncé avant chaque mission.</p><p>Paiement chaque fin de semaine par PayPal ou virement, sur facture. Tu peux candidater sans statut d'auto-entrepreneur.</p></div></details>
-      <details><summary>C'est légal de clipper le contenu d'un créateur ?</summary><div><p>Oui, quand le créateur est d'accord. Chez Klip, on ne clippe que des créateurs sous contrat : l'autorisation d'utiliser leurs vidéos est écrite noir sur blanc avant le premier clip.</p></div></details>
-      <details><summary>Avec quels outils vous montez ?</summary><div><p>CapCut, Premiere Pro ou DaVinci Resolve selon les clippeurs, et nos propres outils pour repérer les meilleurs moments et générer les sous-titres mot par mot.</p></div></details>
-      <details><summary>Vous faites quoi exactement, vous ?</summary><div><p>On fait le lien : on signe avec les créateurs, on forme et on paie les clippeurs, on vérifie chaque clip avant publication et on suit les vues. Tu n'as qu'un seul interlocuteur.</p></div></details>
+        </div></details>
+      <details><summary>Est-ce que je garde mes droits ?</summary><div><p>Oui, tes contenus restent à toi. La monétisation des clips revient au clippeur et à Klip ; toi, tu gagnes la visibilité.</p></div></details>
+      <details><summary>Je suis clippeur, combien je gagne ?</summary><div><p>0,70 € par clip validé, même avec peu de vues, plus un bonus dès 1 000 vues. Payé chaque semaine, sans statut.</p></div></details>
+      <details><summary>C'est légal de clipper le contenu d'un créateur ?</summary><div><p>Oui : on ne clippe que des créateurs sous contrat.</p></div></details>
     </div>
   </div>
 </section>
@@ -881,7 +873,7 @@ document.getElementById('copy').addEventListener('click', function () {
     var e = cs < .5 ? 4 * cs * cs * cs : 1 - Math.pow(-2 * cs + 2, 3) / 2;  // rotation adoucie
     var spin = e * 360;
     phone.style.transform = 'translateY(' + (cs * 70) + 'px) rotateY(' + (-18 + cx * 12 + spin) + 'deg) rotateX(' + (8 - cy * 9 - cs * 6) + 'deg) rotateZ(' + (5 * (1 - e)) + 'deg) scale(' + (1 - cs * .08) + ')';
-    floats.forEach(function (f) { var d = +f.dataset.depth || 20; f.style.transform = 'translate3d(' + (cx * d) + 'px,' + (cy * d - cs * d * 3) + 'px,0)'; f.style.opacity = 1 - Math.min(1, cs * 1.6); });
+    floats.forEach(function (f) { var d = +f.dataset.depth || 20; f.style.transform = 'translate3d(' + (cx * d * 1.2) + 'px,' + (cy * d * 1.2 - cs * d * 3) + 'px,' + (d * 1.5) + 'px) rotateY(' + (cx * d * .12) + 'deg) rotateX(' + (-cy * d * .1) + 'deg)'; f.style.opacity = 1 - Math.min(1, cs * 1.6); });
     requestAnimationFrame(loop);
   })();
 })();
