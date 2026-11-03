@@ -61,9 +61,13 @@ p { margin: 0; }
 
 /* navigation flottante en verre */
 nav { position: fixed; top: calc(12px + env(safe-area-inset-top, 0px)); left: 0; right: 0; z-index: 50; }
-nav .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 10px 10px 18px; border-radius: 999px; border: 1px solid var(--line2); background: rgba(14,14,18,.62); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); box-shadow: 0 10px 40px rgba(0,0,0,.35); }
+nav .bar { max-width: 1180px; margin: 0 auto; transition: max-width .5s cubic-bezier(.2,.8,.2,1), padding .5s cubic-bezier(.2,.8,.2,1), background .5s, box-shadow .5s, transform .5s; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 16px 18px 26px; border-radius: 999px; border: 1px solid var(--line2); background: rgba(14,14,18,.62); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); box-shadow: 0 10px 40px rgba(0,0,0,.35); }
 .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-.logo b { font: 400 22px/1 var(--display); letter-spacing: -.03em; }
+nav .logo svg, nav .logo b { transition: all .5s cubic-bezier(.2,.8,.2,1); }
+nav.scrolled .bar { max-width: 920px; padding: 8px 8px 8px 18px; background: rgba(10,10,14,.82); box-shadow: 0 14px 40px rgba(0,0,0,.5), 0 0 0 1px rgba(255,225,77,.08); }
+nav.scrolled .logo b { font-size: 19px; } nav.scrolled .logo svg { width: 16px; height: 28px; }
+nav.scrolled .navlinks .btn { padding: 10px 14px; }
+.logo b { font: 400 25px/1 var(--display); letter-spacing: -.03em; }
 .logo small { display: block; font: 800 8px/1 var(--body); letter-spacing: .32em; color: var(--y); margin-top: 3px; }
 .navlinks { display: flex; align-items: center; gap: 4px; }
 .navlinks a.lk { padding: 10px 12px; border-radius: 999px; text-decoration: none; color: var(--muted); font: 600 14px/1 var(--body); }
@@ -87,11 +91,32 @@ nav .bar { display: flex; align-items: center; justify-content: space-between; g
 .trust span { display: inline-flex; align-items: center; gap: 8px; }
 .trust svg { color: var(--ok); flex: none; }
 
-/* téléphone 3D */
-.stage { position: relative; height: 600px; perspective: 1300px; }
-.phone3d { position: absolute; left: 50%; top: 50%; width: 270px; aspect-ratio: 9 / 19.3; margin: -290px 0 0 -135px; border-radius: 46px; background: linear-gradient(145deg, #2A2A33, #0E0E12 55%, #1E1E25); padding: 11px; transform: rotateY(-18deg) rotateX(8deg) rotateZ(5deg); transform-style: preserve-3d; box-shadow: -30px 40px 80px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.12) inset, 0 0 90px rgba(255,225,77,.18); will-change: transform; z-index: 2; }
+/* téléphone 3D : coque jaune, épaisseur, face avant et arrière */
+.stage { position: relative; height: 620px; perspective: 1400px; }
+.phone3d { position: absolute; left: 50%; top: 50%; width: 280px; aspect-ratio: 9 / 19.3; margin: -300px 0 0 -140px; transform-style: preserve-3d; transform: rotateY(-18deg) rotateX(8deg) rotateZ(5deg); will-change: transform; z-index: 2; }
+.phone3d .edge { position: absolute; inset: 0; border-radius: 52px; background: linear-gradient(90deg, #C9A100, #F2C200 30%, #FFD84A 50%, #F2C200 70%, #B98F00); transform: translateZ(var(--z)); }
+.phone3d .face { position: absolute; inset: 0; border-radius: 52px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.phone3d .face.front { transform: translateZ(8px); padding: 10px; background:
+  radial-gradient(120% 60% at 20% 0%, rgba(255,255,255,.45), transparent 50%),
+  linear-gradient(160deg, #FFE97A, #FFE14D 35%, #F5C800 75%, #E8B800);
+  box-shadow: -34px 46px 90px rgba(0,0,0,.6), 0 0 0 1px rgba(0,0,0,.25) inset, 0 2px 0 rgba(255,255,255,.6) inset, 0 0 120px rgba(255,225,77,.22); }
+.phone3d .face.back { transform: rotateY(180deg) translateZ(8px); background:
+  radial-gradient(120% 70% at 80% 0%, rgba(255,255,255,.4), transparent 50%),
+  linear-gradient(200deg, #FFE97A, #FFE14D 40%, #EDC000 85%);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.25) inset, 0 2px 0 rgba(255,255,255,.55) inset; }
+.phone3d .face::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: .35; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.phone3d .bezel { position: relative; width: 100%; height: 100%; border-radius: 43px; padding: 7px; background: linear-gradient(145deg, #2A2A31, #08080B 50%, #1D1D23); box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset, 0 6px 14px rgba(0,0,0,.35); }
 .phone3d .screen { position: relative; width: 100%; height: 100%; border-radius: 36px; overflow: hidden; background: #000; }
 .phone3d .screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.btn-side { position: absolute; width: 5px; border-radius: 3px; background: linear-gradient(90deg, #C9A100, #FFE14D); box-shadow: 0 1px 2px rgba(0,0,0,.3); }
+.btn-side.b1 { left: -4px; top: 110px; height: 26px; } .btn-side.b2 { left: -4px; top: 150px; height: 46px; } .btn-side.b3 { left: -4px; top: 206px; height: 46px; } .btn-side.b4 { right: -4px; top: 170px; height: 70px; }
+.cam { position: absolute; left: 18px; top: 18px; width: 108px; height: 108px; border-radius: 30px; background: linear-gradient(145deg, rgba(0,0,0,.22), rgba(0,0,0,.08)); box-shadow: 0 0 0 1px rgba(0,0,0,.18) inset, 0 2px 0 rgba(255,255,255,.5); }
+.cam i { position: absolute; width: 42px; height: 42px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #3B3B48, #050507 60%); box-shadow: 0 0 0 4px #1A1A20, 0 0 0 5px rgba(255,255,255,.15), 0 4px 8px rgba(0,0,0,.45); }
+.cam i:nth-child(1) { left: 10px; top: 10px; } .cam i:nth-child(2) { left: 10px; top: 58px; } .cam i:nth-child(3) { left: 58px; top: 34px; }
+.cam b { position: absolute; right: 14px; top: 14px; width: 12px; height: 12px; border-radius: 50%; background: #FFF7D0; box-shadow: 0 0 6px rgba(255,255,255,.8); }
+.backlogo { position: absolute; left: 0; right: 0; top: 46%; display: flex; flex-direction: column; align-items: center; gap: 6px; color: #0E0E10; opacity: .82; }
+.backlogo span { font: 400 40px/1 var(--display); letter-spacing: -.04em; } .backlogo small { font: 800 10px/1 var(--body); letter-spacing: .4em; }
 .phone3d .notch { position: absolute; top: 10px; left: 50%; width: 86px; height: 24px; margin-left: -43px; border-radius: 20px; background: #000; z-index: 3; }
 .phone3d .glare { position: absolute; inset: 0; border-radius: 36px; background: linear-gradient(120deg, rgba(255,255,255,.18), transparent 32%, transparent 70%, rgba(255,255,255,.06)); pointer-events: none; z-index: 4; }
 .ui-side { position: absolute; right: 10px; bottom: 90px; display: flex; flex-direction: column; gap: 14px; align-items: center; z-index: 3; color: #fff; font: 700 11px/1 var(--body); text-shadow: 0 1px 4px rgba(0,0,0,.6); }
@@ -103,12 +128,15 @@ nav .bar { display: flex; align-items: center; justify-content: space-between; g
 .caption { position: absolute; left: 12px; right: 52px; bottom: 22px; color: #fff; font: 600 11px/1.35 var(--body); z-index: 3; text-shadow: 0 1px 4px rgba(0,0,0,.7); }
 .caption b { display: block; font-size: 12px; margin-bottom: 3px; }
 .float { position: absolute; z-index: 5; will-change: transform; animation: bob 6s ease-in-out infinite; }
+.float.pop > * { animation: popin .9s cubic-bezier(.2,1.4,.4,1) both; animation-delay: var(--d, 0s); transition: transform .35s cubic-bezier(.2,1.4,.4,1), box-shadow .35s; }
+.float.pop:hover > * { transform: scale(1.06) rotate(0deg); }
+@keyframes popin { from { opacity: .001; scale: .6; filter: blur(6px); } to { opacity: 1; scale: 1; filter: blur(0); } }
 .float.f2 { animation-delay: -2s; } .float.f3 { animation-delay: -4s; } .float.f4 { animation-delay: -1s; animation-duration: 7s; }
-@keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
-.pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 15px; border-radius: 16px; background: rgba(22,22,28,.82); border: 1px solid var(--line2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font: 700 13px/1.1 var(--body); box-shadow: 0 16px 40px rgba(0,0,0,.45); white-space: nowrap; }
-.pill .ic { width: 26px; height: 26px; border-radius: 9px; display: grid; place-items: center; flex: none; }
+@keyframes bob { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: 0 -12px; rotate: 1.5deg; } }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 11px 16px 11px 11px; border-radius: 18px; background: linear-gradient(180deg, rgba(34,34,42,.86), rgba(18,18,24,.86)); border: 1px solid var(--line2); box-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 18px 44px rgba(0,0,0,.5), 0 0 0 6px rgba(255,255,255,.02) !important; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font: 700 13px/1.1 var(--body); box-shadow: 0 16px 40px rgba(0,0,0,.45); white-space: nowrap; }
+.pill .ic { width: 30px; height: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,.3), 0 1px 0 rgba(255,255,255,.35) inset; display: grid; place-items: center; flex: none; }
 .pill small { display: block; color: var(--muted); font: 600 11px/1.2 var(--body); margin-top: 2px; }
-.pill.notif { background: var(--bad); border-color: transparent; color: #fff; transform: rotate(-6deg); font-size: 15px; gap: 12px; }
+.pill.notif { background: linear-gradient(135deg, #FF6B7A, #FE2C55); border-color: rgba(255,255,255,.25); color: #fff; transform: rotate(-6deg); font-size: 15px; padding: 12px 18px; box-shadow: 0 16px 40px rgba(254,44,85,.4) !important; }
 .coin { width: 74px; height: 74px; border-radius: 50%; display: grid; place-items: center; font: 400 17px/1 var(--display); color: var(--ink); background: radial-gradient(circle at 35% 30%, #FFF3A8, var(--y) 45%, #E0B400); box-shadow: 0 18px 40px rgba(255,201,61,.35), inset 0 -6px 0 rgba(0,0,0,.18); transform: rotate(-14deg); }
 .cardmini { width: 190px; border-radius: 18px; overflow: hidden; border: 1px solid var(--line2); box-shadow: 0 20px 50px rgba(0,0,0,.55); background: var(--panel); transform: rotate(-8deg); }
 .cardmini .bar2 { height: 92px; background: linear-gradient(135deg, #2D2140, #17171A); display: grid; place-items: center; }
@@ -121,7 +149,7 @@ nav .bar { display: flex; align-items: center; justify-content: space-between; g
 .thumb .live { position: absolute; left: 10px; top: 10px; background: #FF3B4A; color: #fff; font: 800 11px/1 var(--body); padding: 5px 8px; border-radius: 6px; }
 .thumb .dur { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.75); color: #fff; font: 700 11px/1 var(--body); padding: 4px 6px; border-radius: 5px; font-variant-numeric: tabular-nums; }
 .thumb .playb { position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: rgba(0,0,0,.55); backdrop-filter: blur(4px); display: grid; place-items: center; }
-.arrow { position: absolute; left: 6%; top: 15%; width: 150px; z-index: 4; pointer-events: none; filter: drop-shadow(0 4px 10px rgba(255,225,77,.35)); }
+.arrow { position: absolute; left: 4%; top: 17%; width: 150px; z-index: 4; pointer-events: none; filter: drop-shadow(0 4px 10px rgba(255,225,77,.35)); }
 @media (max-width: 600px) { .thumb { width: 180px; } .arrow { width: 100px; left: 18%; top: 22%; } }
 /* bandeau défilant */
 .marquee { border-block: 1px solid var(--line); background: var(--bg2); overflow: hidden; padding-block: 18px; }
@@ -302,7 +330,11 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
     </div>
 
     <div class="stage" id="stage" aria-hidden="true">
-      <div class="phone3d" id="phone" data-depth="0">
+      <div class="phone3d" id="phone">
+        <i class="edge" style="--z:-7px"></i><i class="edge" style="--z:-5px"></i><i class="edge" style="--z:-3px"></i><i class="edge" style="--z:-1px"></i><i class="edge" style="--z:1px"></i><i class="edge" style="--z:3px"></i><i class="edge" style="--z:5px"></i><i class="edge" style="--z:7px"></i>
+        <div class="face front">
+          <span class="btn-side b1"></span><span class="btn-side b2"></span><span class="btn-side b3"></span><span class="btn-side b4"></span>
+          <div class="bezel">
         <div class="screen">
           <!-- Pour changer l'image du téléphone : remplace le fichier assets/telephone.jpg (format vertical 9:16) -->
           <img src="assets/telephone.jpg" alt="">
@@ -316,15 +348,21 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
           <div class="caption"><b>@klipagencyfr</b>Le meilleur moment du live, sous-titré mot par mot.</div>
           <div class="glare"></div>
         </div>
+                </div>
+        </div>
+        <div class="face back">
+          <div class="cam"><i></i><i></i><i></i><b></b></div>
+          <div class="backlogo"><svg width="34" height="58" viewBox="0 0 72 124" aria-hidden="true"><rect x="5" y="5" width="62" height="114" rx="14" fill="none" stroke="#0E0E10" stroke-width="10"/><path d="M28 46 L50 62 L28 78 Z" fill="#0E0E10"/></svg><span>klip</span><small>AGENCY</small></div>
+        </div>
       </div>
-      <div class="float f1" data-depth="26" style="left:2%;top:8%"><div class="coin">0,70 €</div></div>
-      <div class="float f2" data-depth="40" style="right:0;top:12%"><div class="pill notif"><span>▶ +1 clip validé</span></div></div>
+      <div class="float f1 pop" data-depth="26" style="left:6%;top:4%;--d:.15s"><div class="coin">0,70 €</div></div>
+      <div class="float f2 pop" data-depth="40" style="right:2%;top:9%;--d:.3s"><div class="pill notif"><span>▶ +1 clip validé</span></div></div>
       <!-- Miniature de la vidéo longue : remplace assets/miniature.jpg (format 16:9) -->
-      <div class="float f3" data-depth="14" style="left:-17%;top:27%;z-index:1"><div class="thumb"><img src="assets/miniature.jpg" alt=""><span class="live">▶ Vidéo longue</span><i class="playb"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 4l13 8-13 8z"/></svg></i></div></div>
+      <div class="float f3 pop" data-depth="14" style="left:-14%;top:30%;z-index:1;--d:.45s"><div class="thumb"><img src="assets/miniature.jpg" alt=""><span class="live">▶ Vidéo longue</span><i class="playb"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 4l13 8-13 8z"/></svg></i></div></div>
       <svg class="arrow" viewBox="0 0 220 160" aria-hidden="true"><defs><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#FFE14D"/></marker></defs><path d="M14 140 C 40 60, 110 20, 196 46" fill="none" stroke="#FFE14D" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 12" marker-end="url(#ah)"/></svg>
-      <div class="float f1 hideS" data-depth="20" style="left:-6%;top:80%"><div class="pill"><span class="ic" style="background:var(--y)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="3" stroke-linecap="round"><path d="M14 6l6 6-6 6M4 12h16"/></svg></span><span>Ta vidéo longue<small>devient des clips de 30 s</small></span></div></div>
-      <div class="float f4" data-depth="34" style="right:-2%;bottom:20%"><div class="pill"><span class="ic" style="background:var(--y)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="3"><path d="M4 7h16M4 12h10M4 17h13"/></svg></span><span>Sous-titres<small>mot par mot</small></span></div></div>
-      <div class="float f2" data-depth="22" style="right:6%;bottom:2%"><div class="pill"><span class="ic" style="background:var(--ok)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span><span>Paiement reçu<small>chaque fin de semaine</small></span></div></div>
+      <div class="float f1 hideS pop" data-depth="20" style="left:-4%;top:74%;--d:.6s"><div class="pill"><span class="ic" style="background:var(--y)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="3" stroke-linecap="round"><path d="M14 6l6 6-6 6M4 12h16"/></svg></span><span>Ta vidéo longue<small>devient des clips de 30 s</small></span></div></div>
+      <div class="float f4 pop" data-depth="34" style="right:-4%;top:50%;--d:.75s"><div class="pill"><span class="ic" style="background:var(--y)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="3"><path d="M4 7h16M4 12h10M4 17h13"/></svg></span><span>Sous-titres<small>mot par mot</small></span></div></div>
+      <div class="float f2 pop" data-depth="22" style="right:6%;top:82%;--d:.9s"><div class="pill"><span class="ic" style="background:var(--ok)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0E0E10" stroke-width="3" stroke-linecap="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span><span>Paiement reçu<small>chaque fin de semaine</small></span></div></div>
     </div>
   </div>
 </header>
@@ -713,20 +751,31 @@ document.getElementById('copy').addEventListener('click', function () {
 });
 </script>
 <script>
-(function parallax() {
-  var stage = document.getElementById('stage'), phone = document.getElementById('phone');
-  if (!stage || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var floats = stage.querySelectorAll('.float'), tx = 0, ty = 0, cx = 0, cy = 0, sy = 0;
-  document.querySelector('.hero').addEventListener('pointermove', function (e) {
+(function navShrink() {
+  var nav = document.querySelector('nav');
+  function upd() { nav.classList.toggle('scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', upd, { passive: true }); upd();
+})();
+(function phone3d() {
+  var stage = document.getElementById('stage'), phone = document.getElementById('phone'), hero = document.querySelector('.hero');
+  if (!stage) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var floats = stage.querySelectorAll('.float'), tx = 0, ty = 0, cx = 0, cy = 0, ts = 0, cs = 0;
+  hero.addEventListener('pointermove', function (e) {
     var r = stage.getBoundingClientRect();
     tx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width / 2)));
     ty = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height / 2)));
   });
-  window.addEventListener('scroll', function () { sy = Math.min(1, window.scrollY / 600); }, { passive: true });
+  hero.addEventListener('pointerleave', function () { tx = 0; ty = 0; });
+  function target() { var h = hero.offsetHeight || 800; ts = Math.max(0, Math.min(1, window.scrollY / (h * .85))); }
+  window.addEventListener('scroll', target, { passive: true }); target();
+  if (reduce) { phone.style.transform = 'rotateY(-18deg) rotateX(8deg) rotateZ(5deg)'; return; }
   (function loop() {
-    cx += (tx - cx) * .08; cy += (ty - cy) * .08;
-    phone.style.transform = 'translateY(' + (-sy * 40) + 'px) rotateY(' + (-18 + cx * 10) + 'deg) rotateX(' + (8 - cy * 8) + 'deg) rotateZ(' + (5 - sy * 4) + 'deg)';
-    floats.forEach(function (f) { var d = +f.dataset.depth || 20; f.style.transform = 'translate(' + (cx * d) + 'px,' + (cy * d - sy * d * 2) + 'px)'; });
+    cx += (tx - cx) * .07; cy += (ty - cy) * .07; cs += (ts - cs) * .085;
+    var e = cs < .5 ? 4 * cs * cs * cs : 1 - Math.pow(-2 * cs + 2, 3) / 2;  // rotation adoucie
+    var spin = e * 360;
+    phone.style.transform = 'translateY(' + (cs * 70) + 'px) rotateY(' + (-18 + cx * 12 + spin) + 'deg) rotateX(' + (8 - cy * 9 - cs * 6) + 'deg) rotateZ(' + (5 * (1 - e)) + 'deg) scale(' + (1 - cs * .08) + ')';
+    floats.forEach(function (f) { var d = +f.dataset.depth || 20; f.style.transform = 'translate3d(' + (cx * d) + 'px,' + (cy * d - cs * d * 3) + 'px,0)'; f.style.opacity = 1 - Math.min(1, cs * 1.6); });
     requestAnimationFrame(loop);
   })();
 })();
