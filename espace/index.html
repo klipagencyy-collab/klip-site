@@ -290,6 +290,8 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
   *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; }
   .rv { opacity: 1; transform: none; filter: none; } .cline { stroke-dashoffset: 0; }
 }
+.sh .nv b { white-space: nowrap; }
+#shFilter { min-width: 200px; }
 </style>
 </head>
 <body>
@@ -355,6 +357,7 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
     </div>
     <div class="demo-band" id="demoBand" hidden><span id="demoTxt">Ton espace est prêt. Tes stats apparaîtront ici dès que tes premiers clips seront publiés.</span></div>
 
+    <div id="vMine">
     <section class="lives rv" id="secDepot" hidden aria-labelledby="tDepot">
       <form id="fDep" novalidate>
         <div class="lv-head"><h2 id="tDepot">Déposer tes <span class="hl">clips</span></h2><p>Choisis le créateur, colle tes liens TikTok.</p></div>
@@ -367,7 +370,6 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
       </form>
     </section>
 
-    <div id="vMine">
     <section class="lives rv" id="secLives" aria-labelledby="tLives">
       <form id="fTr" novalidate>
         <div class="lv-head">
@@ -482,7 +484,7 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
 var SB_URL = 'https://uinkjgbisypgrtnojuyo.supabase.co';
 var SB_KEY = 'sb_publishable_M8nkSG-QmQhdfJZIKbxNGg_NKCUZrYX';
 var DEMO = /[?&]demo/.test(location.search), DEMO_CLIP = /demo=clip/.test(location.search);
-var DEMO_FULL = /demo=(plein|clip)/.test(location.search);
+var DEMO_FULL = /demo=(plein|clip|commun)/.test(location.search), DEMO_COMMUN = /demo=commun/.test(location.search);
 var SITE = 'https://klipagencyy-collab.github.io/klip-site/espace/', PRICE = 0.7;
 var $ = function (id) { return document.getElementById(id); };
 var sb = (!DEMO && window.supabase) ? window.supabase.createClient(SB_URL, SB_KEY) : null;
@@ -836,6 +838,33 @@ function trend() {
 }
 
 /* ---------- espace commun ---------- */
+/* démo de l'espace commun : plusieurs créateurs et clippeurs (noms et chiffres fictifs, sauf ReYoz) */
+function demoCommun() {
+  var now = Date.now(), out = [], id = 100;
+  var cl = ['Yanis', 'Sofiane', 'Lina', 'Adam', 'Inès', 'Rayan', 'Chloé', 'Nathan', 'Bilal'];
+  var C = [
+    ['ReYoz', ['../media/t/V7.jpg', '../media/t/V3.jpg', '../media/t/V4.jpg', '../media/t/V6.jpg', '../media/t/V5.jpg', '../media/t/V2.jpg'],
+      ['7 kills à l\'Oris 8.6 : « OH MON DIEU » 😳', 'Intro tryhard : la classe Oris 8.6 complète', '« Il va niquer toutes mes séries » 💀', '« Gros j\'fais une dinguerie »', 'Session « chill »… pas du tout chill 😂', '« Je suis allergique au jeu en fait »']],
+    ['Nova', ['../media/t/V3.jpg', '../media/t/V5.jpg', '../media/t/V2.jpg'], ['Elle clashe tout le chat en 10 secondes', 'Le don qui l\'a fait pleurer en live', 'Story time : son premier live raté']],
+    ['Kenzo Live', ['../media/t/V2.jpg', '../media/t/V6.jpg', '../media/t/V1.jpg', '../media/t/V6.jpg'], ['Il devine l\'âge des viewers 🎯', 'La phrase qui a choqué tout le chat', 'Il répond aux haters', 'Combien il gagne en live ? 💸']],
+    ['Maëlle', ['../media/t/V4.jpg', '../media/t/V7.jpg', '../media/t/V1.jpg'], ['Le fou rire qui a duré 4 minutes', 'Son conseil n°1 pour percer', 'Quand sa mère débarque en plein live']],
+    ['Tiko', ['../media/t/V6.jpg', '../media/t/V2.jpg', '../media/t/V3.jpg'], ['Clutch 1v4 en fin de game', 'Il rage sur un bot 🤖', 'La meilleure sensi de la saison']],
+    ['Sarah Plays', ['../media/t/V5.jpg', '../media/t/V1.jpg'], ['Elle bat le record du serveur', 'Le jumpscare qui a tout cassé 😱']],
+    ['Moha', ['../media/t/V7.jpg', '../media/t/V2.jpg', '../media/t/V4.jpg'], ['Il appelle son ex en live', 'Le défi des 24 h sans parler', 'Sa réaction au top 1 mondial']]
+  ];
+  var k = 0;
+  C.forEach(function (cr, ci) {
+    cr[2].forEach(function (t, j) {
+      var age = 1.5 + ((k * 7) % 19) * 1.1, big = (k % 5 === 0), v = Math.round((big ? 620000 + (k * 91337) % 900000 : 18000 + (k * 47123) % 260000));
+      var pts = [], n = Math.max(2, Math.floor(age) + 1);
+      for (var d = 0; d < n; d++) { var u = Math.min(1, Math.pow((d + 1) / n, big ? 1.6 : 1.1)); pts.push([(now - (age - d) * 864e5) / 1000, Math.round(v * u)]); }
+      out.push({ id: id++, url: 'https://www.tiktok.com/', title: t, cover_url: cr[1][j % cr[1].length], views: v, posted_at: new Date(now - age * 864e5).toISOString(), creator_name: cr[0], clipper_name: cl[(ci * 2 + j) % cl.length], points: pts });
+      k++;
+    });
+  });
+  return out;
+}
+
 var shared = [];
 function showTab(v) {
   document.querySelectorAll('.tabs button').forEach(function (b) { var on = b.dataset.v === v; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
@@ -846,6 +875,7 @@ function showTab(v) {
 document.querySelectorAll('.tabs button').forEach(function (b) { b.onclick = function () { showTab(b.dataset.v); }; });
 function loadShared() {
   if (DEMO) {
+    if (DEMO_COMMUN) { shared = demoCommun(); drawShared(); return; }
     var d = DEMO_FULL ? demoData() : { clips: [], stats: [] }, nm = ['Yanis', 'Sofiane', 'Lina'];
     shared = d.clips.map(function (c, i) { return { id: c.id, url: c.url, title: c.title, cover_url: c.cover_url, views: c.views, posted_at: c.posted_at, creator_name: 'ReYoz', clipper_name: nm[i % 3], points: d.stats.filter(function (s) { return s.clip_id === c.id; }).map(function (s) { return [new Date(s.captured_at) / 1000, s.views]; }) }; });
     drawShared(); return;
@@ -913,7 +943,7 @@ setInterval(function () { if (!$('vApp').hidden) { var upd = state.clips.reduce(
 
 /* ---------- démarrage ---------- */
 function boot() {
-  if (DEMO) { $('demoBand').hidden = false; if (DEMO_FULL) $('demoTxt').textContent = 'Aperçu avec des chiffres de démonstration.'; showApp(DEMO_CLIP ? { id: 'demo', name: 'Yanis', role: 'clipper' } : { id: 'demo', name: 'ReYoz', role: 'creator' }); return; }
+  if (DEMO) { $('demoBand').hidden = false; if (DEMO_FULL) $('demoTxt').textContent = 'Aperçu avec des chiffres de démonstration.'; showApp(DEMO_CLIP || DEMO_COMMUN ? { id: 'demo', name: 'Yanis', role: 'clipper' } : { id: 'demo', name: 'ReYoz', role: 'creator' }); if (DEMO_COMMUN) showTab('shared'); return; }
   if (!sb) { $('vLogin').hidden = false; observe(); return; }
   sb.auth.getSession().then(function (r) {
     var u = r.data.session && r.data.session.user;
