@@ -279,7 +279,16 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
       <div class="field"><label for="lEmail">Email</label><input id="lEmail" type="email" autocomplete="username" required></div>
       <div class="field"><label for="lPass">Mot de passe</label><input id="lPass" type="password" autocomplete="current-password" required></div>
       <button class="btn btn-solid" style="width:100%;margin-top:22px" id="bLogin">Entrer</button>
-      <p class="msg" id="mLogin">Tes identifiants te sont donnés par Klip Agency quand on commence à travailler ensemble.</p>
+      <p class="msg" id="mLogin">Tes identifiants te sont donnés par Klip Agency quand on commence à travailler ensemble. À ta première connexion, tu choisis ton propre mot de passe.</p>
+    </form>
+    <form class="card" id="fPw" novalidate hidden>
+      <span class="eyebrow">Première connexion</span>
+      <h2 style="margin-top:16px">Choisis ton mot de passe</h2>
+      <p class="hint" style="color:var(--muted);margin-top:8px">C'est le tien : personne d'autre ne le connaîtra, même pas Klip.</p>
+      <div class="field"><label for="pw1">Nouveau mot de passe</label><input id="pw1" type="password" autocomplete="new-password" minlength="8" required></div>
+      <div class="field"><label for="pw2">Encore une fois</label><input id="pw2" type="password" autocomplete="new-password" minlength="8" required></div>
+      <button class="btn btn-solid" style="width:100%;margin-top:22px" id="bPw">C'est parti</button>
+      <p class="msg" id="mPw">8 caractères minimum.</p>
     </form>
   </div>
 </main>
@@ -380,7 +389,7 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
       <div class="grid">
         <form class="panel" id="fNew" novalidate>
           <h3>Nouvel accès</h3>
-          <p class="hint">Crée les identifiants d'un créateur ou d'un clippeur. Le mot de passe s'affiche une seule fois : copie-le pour lui.</p>
+          <p class="hint">Crée l'accès d'un créateur ou d'un clippeur. Tu lui envoies le lien et un code provisoire : à sa première connexion, il choisit son propre mot de passe.</p>
           <div class="field"><label for="nRole">Type</label><select id="nRole"><option value="creator">Créateur</option><option value="clipper">Clippeur</option></select></div>
           <div class="field"><label for="nName">Nom affiché</label><input id="nName" required></div>
           <div class="field"><label for="nEmail">Email</label><input id="nEmail" type="email" required></div>
@@ -711,6 +720,17 @@ $('fLogin').onsubmit = function (e) {
     boot();
   });
 };
+$('fPw').onsubmit = function (e) {
+  e.preventDefault(); var a = $('pw1').value, b = $('pw2').value, m = $('mPw');
+  if (a.length < 8) { m.className = 'msg err'; m.textContent = '8 caractères minimum.'; return; }
+  if (a !== b) { m.className = 'msg err'; m.textContent = 'Les deux mots de passe ne sont pas identiques.'; return; }
+  $('bPw').disabled = true; m.className = 'msg'; m.textContent = 'Enregistrement…';
+  sb.auth.updateUser({ password: a, data: { must_change: false } }).then(function (r) {
+    $('bPw').disabled = false;
+    if (r.error) { m.className = 'msg err'; m.textContent = /different|same/i.test(r.error.message) ? 'Choisis un mot de passe différent du code provisoire.' : 'Impossible d\u2019enregistrer, réessaie.'; return; }
+    $('fPw').hidden = true; $('fLogin').hidden = false; toast('Mot de passe enregistré'); boot();
+  });
+};
 $('bOut').onclick = function () { if (DEMO) { location.href = './'; return; } sb.auth.signOut().then(function () { location.reload(); }); };
 $('fTr').onsubmit = function (e) {
   e.preventDefault(); var url = $('trUrl').value.trim(), m = $('mTr'), prov = (document.querySelector('input[name=prov]:checked') || {}).value || 'autre';
@@ -750,13 +770,13 @@ $('fNew').onsubmit = function (e) {
   var pass = genPass(); $('bNew').disabled = true; m.className = 'msg'; m.textContent = 'Création…';
   // client séparé : l'admin reste connecté
   var tmp = window.supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession: false, autoRefreshToken: false, storageKey: 'klip-tmp' } });
-  tmp.auth.signUp({ email: email, password: pass, options: { data: { name: name } } }).then(function (r) {
+  tmp.auth.signUp({ email: email, password: pass, options: { data: { name: name, must_change: true } } }).then(function (r) {
     if (r.error || !r.data.user) { $('bNew').disabled = false; m.className = 'msg err'; m.textContent = r.error && /registered/i.test(r.error.message) ? 'Cet email a déjà un compte.' : 'Création impossible : ' + (r.error ? r.error.message : 'réessaie'); return; }
     return sb.from('profiles').update({ approved: true, name: name, role: $('nRole').value }).eq('id', r.data.user.id).then(function (u) {
       $('bNew').disabled = false;
       if (u.error) { m.className = 'msg err'; m.textContent = 'Compte créé mais pas activé : ' + u.error.message; return; }
       m.className = 'msg ok'; m.textContent = 'Accès créé pour ' + name + '.';
-      var box = $('pwBox'); box.textContent = 'Lien : ' + SITE + ' · Email : ' + email + ' · Mot de passe : ' + pass; box.classList.add('on');
+      var box = $('pwBox'); box.textContent = 'Lien : ' + SITE + ' · Email : ' + email + ' · Code provisoire : ' + pass + ' (il choisira son propre mot de passe à sa première connexion)'; box.classList.add('on');
       $('nName').value = ''; $('nEmail').value = '';
       showApp(state.me);
     });
@@ -784,6 +804,7 @@ function boot() {
   sb.auth.getSession().then(function (r) {
     var u = r.data.session && r.data.session.user;
     if (!u) { $('vLogin').hidden = false; $('vApp').hidden = true; observe(); return; }
+    if (u.user_metadata && u.user_metadata.must_change) { $('vLogin').hidden = false; $('vApp').hidden = true; $('fLogin').hidden = true; $('fPw').hidden = false; observe(); $('pw1').focus(); return; }
     sb.from('profiles').select('*').eq('id', u.id).single().then(function (p) {
       if (p.error || !p.data || (!p.data.approved && p.data.role !== 'admin')) { sb.auth.signOut(); $('vLogin').hidden = false; $('mLogin').className = 'msg err'; $('mLogin').textContent = 'Ton accès n’est pas encore activé par Klip Agency.'; return; }
       showApp(p.data);
