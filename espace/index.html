@@ -220,6 +220,27 @@ select.who { padding: 10px 14px; border-radius: 999px; border: 1px solid var(--l
 .lives .tr .ic { width: 34px; height: 34px; border-radius: 10px; font-size: 14px; }
 .lives .split { gap: 10px; }
 @media (max-width: 600px) { .lv-row { flex-direction: column; } .lv-row .btn { width: 100%; } .lv-row select { flex: 1 1 auto !important; } }
+
+nav.top .left { display: flex; align-items: center; gap: 12px; }
+.more { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line2); background: rgba(255,255,255,.05); font: 800 20px/1 var(--body); cursor: pointer; display: grid; place-items: center; transition: background .2s; }
+.more:hover { background: rgba(255,225,77,.15); color: var(--y); }
+.scrim { position: fixed; inset: 0; z-index: 80; background: rgba(0,0,0,.55); backdrop-filter: blur(4px); }
+.drawer { position: fixed; z-index: 81; top: 0; left: 0; bottom: 0; width: min(520px, 100vw); overflow-y: auto; padding: 22px; background: var(--bg2); border-right: 1px solid var(--line2); box-shadow: 30px 0 80px rgba(0,0,0,.5); animation: slidein .35s cubic-bezier(.2,.8,.2,1); }
+@keyframes slidein { from { transform: translateX(-100%); } to { transform: none; } }
+.dr-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.dr-head b { font: 400 22px var(--display); }
+.drawer .lives { margin-top: 10px; }
+.drawer .lv-row { flex-direction: column; } .drawer .lv-row .btn { width: 100%; }
+.dr-block { margin-top: 18px; padding: 20px; border-radius: 22px; background: var(--panel); border: 1px solid var(--line); }
+.dr-block h3 { font: 800 16px var(--body); margin-bottom: 14px; }
+.top-chart { margin-top: 10px; } .top-chart .charts { grid-template-columns: minmax(0,1fr); }
+.top-chart .chart { padding: 26px; }
+.trend { font: 800 13px/1 var(--body) !important; padding: 7px 11px; border-radius: 999px; color: var(--ok) !important; background: rgba(89,211,142,.1); border: 1px solid rgba(89,211,142,.3); }
+.trend.down { color: var(--bad) !important; background: rgba(255,107,110,.1); border-color: rgba(255,107,110,.3); }
+.trend.flat { color: var(--muted) !important; background: rgba(255,255,255,.04); border-color: var(--line); }
+.dhero { padding: 40px 0 18px; }
+.dhero h1 { font-size: clamp(34px, 4.4vw, 60px); }
+.kpis { margin-top: 16px; }
 .adminbox { margin-top: 56px; border-radius: 28px; padding: clamp(20px, 3vw, 34px); border: 1px solid rgba(255,225,77,.25); background: linear-gradient(180deg, rgba(255,225,77,.06), rgba(255,225,77,.01)); }
 .adminbox .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
 .pw { margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(0,0,0,.4); border: 1px solid var(--line2); font: 700 14px/1.5 var(--body); word-break: break-all; display: none; }
@@ -298,10 +319,13 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
   <div class="wrap">
     <nav class="top" aria-label="Espace créateur">
       <div class="bar">
+        <div class="left">
+        <button class="more" id="bMore" aria-label="Plus d'options" aria-expanded="false" aria-controls="drawer">⋯</button>
         <a class="logo" href="../" aria-label="Klip Agency, accueil">
           <svg width="16" height="28" viewBox="0 0 72 124" aria-hidden="true"><rect x="5" y="5" width="62" height="114" rx="14" fill="none" stroke="currentColor" stroke-width="10"/><path d="M28 46 L50 62 L28 78 Z" fill="#FFE14D" stroke="#FFE14D" stroke-width="6" stroke-linejoin="round"/></svg>
           <span><b style="font-size:19px">klip</b><small>AGENCY</small></span>
         </a>
+        </div>
         <div class="right">
           <span class="live" id="live"><i></i><span id="liveTxt">En direct</span></span>
           <select class="who" id="who" aria-label="Créateur affiché" hidden></select>
@@ -323,34 +347,11 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
       </form>
     </section>
 
-    <section class="lives rv" id="secLives" aria-labelledby="tLives">
-      <form id="fTr" novalidate>
-        <div class="lv-head">
-          <h2 id="tLives">Tes <span class="hl">lives</span> à clipper</h2>
-          <p>Colle ton lien, on s'occupe du reste.</p>
-        </div>
-        <div class="prov" role="radiogroup" aria-label="Type de lien">
-          <label><input type="radio" name="prov" value="wetransfer" checked><span><i class="pi wetransfer">W</i>WeTransfer</span></label>
-          <label><input type="radio" name="prov" value="drive"><span><i class="pi drive">G</i>Google Drive</span></label>
-          <label><input type="radio" name="prov" value="dropbox"><span><i class="pi dropbox">D</i>Dropbox</span></label>
-          <label><input type="radio" name="prov" value="autre"><span><i class="pi autre">↗</i>Autre</span></label>
-        </div>
-        <div class="lv-row">
-          <input id="trUrl" type="url" placeholder="https://we.tl/t-…" aria-label="Lien de ton live" required>
-          <button class="btn btn-solid" id="bTr">Envoyer</button>
-        </div>
-        <button type="button" class="lv-note-t" id="noteT">+ Ajouter une note</button>
-        <input id="trNote" type="text" maxlength="500" placeholder="Ex. : le passage à 1 h 12 est fou" aria-label="Note pour l'équipe" hidden>
-        <p class="msg" id="mTr"></p>
-      </form>
-      <div class="tlist" id="tlist"></div>
-    </section>
-
     <header class="dhero">
       <div class="rv">
         <span class="eyebrow" id="eyebrow">Espace créateur</span>
-        <h1>Salut <span class="hl" id="hName">toi</span>,<br><span id="hLine">voilà ce que tes clips font.</span></h1>
-        <p class="sub" id="hSub">Chaque TikTok publié sur toi, suivi en continu.</p>
+        <h1>Salut <span class="hl" id="hName">toi</span>.<span id="hLine" hidden></span></h1>
+        <p class="sub" id="hSub" hidden></p>
       </div>
       <div class="bigcount rv" style="--d:.15s">
         <div class="n" id="kTotal">0</div>
@@ -359,20 +360,19 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
       </div>
     </header>
 
+    <section class="sect top-chart" aria-label="Évolution de tes vues">
+            <div class="charts">
+        <figure class="chart rv" id="chLine"><figcaption><b>Tes vues</b><span class="trend" id="trend">—</span><span id="chLineCap"></span></figcaption><svg id="svgLine" viewBox="0 0 640 300" role="img" aria-label="Évolution des vues cumulées"></svg></figure>
+        <div class="hbar" id="hbar" hidden></div>
+      </div>
+    </section>
+
     <div class="kpis">
       <div class="kpi yel rv" style="--d:.05s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 18h16M6 14l4-4 3 3 5-6"/></svg><span id="kAvgL">Vues moyennes par clip</span></div><div class="v" id="kAvg">0</div><div class="s" id="kAvgS">&nbsp;</div></div>
       <div class="kpi rv" style="--d:.12s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.4-9.3-9C1 8.4 3.3 4.5 7 4.5c2 0 3.6 1.1 5 2.8 1.4-1.7 3-2.8 5-2.8 3.7 0 6 3.9 4.3 7.5C19 16.6 12 21 12 21z"/></svg><span id="kLikesL">J'aime</span></div><div class="v" id="kLikes">0</div><div class="s" id="kEng">&nbsp;</div></div>
       <div class="kpi rv" style="--d:.19s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M10.5 9.5l4 2.5-4 2.5z" fill="currentColor"/></svg><span id="kClipsL">Clips publiés</span></div><div class="v" id="kClips">0</div><div class="s" id="kClipsS">&nbsp;</div></div>
       <div class="kpi rv" style="--d:.26s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span id="kBestL">Meilleur clip</span></div><div class="v" id="kBest">0</div><div class="s" id="kBestS">&nbsp;</div></div>
     </div>
-
-    <section class="sect" aria-labelledby="tCourbe">
-      <header class="rv"><div><h2 id="tCourbe">Ta <span class="hl">courbe</span>.</h2><p>Le total de vues de tous tes clips, jour après jour.</p></div></header>
-      <div class="charts">
-        <figure class="chart rv" id="chLine"><figcaption><b>Vues cumulées</b><span id="chLineCap"></span></figcaption><svg id="svgLine" viewBox="0 0 640 300" role="img" aria-label="Évolution des vues cumulées"></svg></figure>
-        <figure class="chart rv" style="--d:.1s"><figcaption><b>Top clips</b><span>par vues</span></figcaption><div class="hbar" id="hbar"></div></figure>
-      </div>
-    </section>
 
     <section class="sect" aria-labelledby="tClips">
       <header class="rv">
@@ -415,6 +415,34 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
     <footer>Klip Agency · Tes lives et podcasts en clips viraux. Tu nous diras merci.</footer>
   </div>
 </div>
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Options" hidden>
+  <div class="dr-head"><b>Plus d'options</b><button class="more" id="bClose" aria-label="Fermer">×</button></div>
+    <section class="lives" id="secLives" aria-labelledby="tLives">
+      <form id="fTr" novalidate>
+        <div class="lv-head">
+          <h2 id="tLives">Tes <span class="hl">lives</span> à clipper</h2>
+          <p>Colle ton lien, on s'occupe du reste.</p>
+        </div>
+        <div class="prov" role="radiogroup" aria-label="Type de lien">
+          <label><input type="radio" name="prov" value="wetransfer" checked><span><i class="pi wetransfer">W</i>WeTransfer</span></label>
+          <label><input type="radio" name="prov" value="drive"><span><i class="pi drive">G</i>Google Drive</span></label>
+          <label><input type="radio" name="prov" value="dropbox"><span><i class="pi dropbox">D</i>Dropbox</span></label>
+          <label><input type="radio" name="prov" value="autre"><span><i class="pi autre">↗</i>Autre</span></label>
+        </div>
+        <div class="lv-row">
+          <input id="trUrl" type="url" placeholder="https://we.tl/t-…" aria-label="Lien de ton live" required>
+          <button class="btn btn-solid" id="bTr">Envoyer</button>
+        </div>
+        <button type="button" class="lv-note-t" id="noteT">+ Ajouter une note</button>
+        <input id="trNote" type="text" maxlength="500" placeholder="Ex. : le passage à 1 h 12 est fou" aria-label="Note pour l'équipe" hidden>
+        <p class="msg" id="mTr"></p>
+      </form>
+      <div class="tlist" id="tlist"></div>
+    </section>
+
+  <div class="dr-block" id="drTop"><h3>Top 7 de tes clips</h3><div class="hbar" id="hbar2"></div></div>
+</aside>
 <div class="toast" id="toast"><div class="pill notif" id="toastTxt"></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
@@ -471,7 +499,7 @@ function demoData() {
     var c = { id: i + 1, url: 'https://www.tiktok.com/', title: t, author: 'klip.clips', cover_url: covers[i % covers.length], views: v, likes: Math.round(v * (.06 + (i % 5) * .012)), comments: Math.round(v * .004), shares: Math.round(v * .003), posted_at: new Date(now - age * 864e5).toISOString(), updated_at: new Date(now - 18 * 6e4).toISOString() };
     c.status = DEMO_CLIP && i % 5 === 4 ? 'en_attente' : 'valide'; c.bonus = DEMO_CLIP && v > 500000 ? 5 : 0; c.creator_id = ['rios', 'ines', 'rios'][i % 3]; c.created_at = c.posted_at;
     clips.push(c);
-    for (var d = 0; d <= Math.floor(age); d++) { var u = Math.min(1, Math.pow((d + 1) / Math.min(age, 6), .55)); stats.push({ clip_id: c.id, views: Math.round(v * u), captured_at: new Date(now - (age - d) * 864e5).toISOString() }); }
+    for (var d = 0; d <= Math.floor(age); d++) { var u = Math.min(1, Math.pow((d + 1) / (Math.floor(age) + 1), 1.15)); stats.push({ clip_id: c.id, views: Math.round(v * u), captured_at: new Date(now - (age - d) * 864e5).toISOString() }); }
   });
   return { clips: clips, stats: stats, transfers: [{ id: 1, provider: 'drive', url: 'https://drive.google.com/file/d/demo', note: 'Live du 2 novembre, regardez vers 1 h 12', status: 'clipe', created_at: new Date(now - 6 * 864e5).toISOString() }, { id: 2, url: 'https://we.tl/t-demo456', note: 'Podcast avec Inès', status: 'en_cours', created_at: new Date(now - 864e5).toISOString() }] };
 }
@@ -504,7 +532,7 @@ function render() {
   var g = growth(1);
   $('kDelta').className = 'delta' + (g > 0 ? '' : ' flat');
   $('kDelta').textContent = g > 0 ? '▲ +' + fmt(g) + ' vues en 24 h' : 'Prochaine mise à jour à 6 h ou 18 h';
-  drawLine(); drawBars(); drawClips(); drawTransfers();
+  drawLine(); trend(); drawBars(); drawClips(); drawTransfers();
   observe();
 }
 function series() {
@@ -556,7 +584,7 @@ function drawLine() {
   var g7 = growth(7); $('chLineCap').textContent = g7 ? '+' + fmt(g7) + ' sur 7 jours' : '';
 }
 function drawBars() {
-  var box = $('hbar'); box.textContent = '';
+  var box = $('hbar2'); box.textContent = '';
   var top = state.clips.slice().sort(function (a, b) { return b.views - a.views; }).slice(0, 7), max = top.length ? +top[0].views || 1 : 1;
   if (!top.length) { box.appendChild(el('p', 'tk', 'Aucun clip pour l’instant.')); return; }
   top.forEach(function (c, i) {
@@ -670,7 +698,7 @@ function setView(role) {
   $('hLine').textContent = clip ? 'voilà ce que tes clips rapportent.' : 'voilà ce que tes clips font.';
   $('eyebrow').textContent = state.me && state.me.role === 'admin' ? 'Espace admin' : (clip ? 'Espace clippeur' : 'Espace créateur');
   $('hSub').textContent = clip ? 'Chaque clip que tu déposes, ses vues et ce qu\u2019il te rapporte.' : 'Chaque TikTok publié sur toi, suivi en continu.';
-  $('secLives').hidden = clip;
+  $('secLives').hidden = clip; $('drTop').hidden = false;
   $('secDepot').hidden = !(clip && state.me && state.me.role === 'clipper');
 }
 function fillCreators(list) {
@@ -763,6 +791,18 @@ $('fDep').onsubmit = function (e) {
 };
 document.querySelectorAll('input[name=prov]').forEach(function (r) { r.onchange = function () { $('trUrl').placeholder = { wetransfer: 'https://we.tl/t-…', drive: 'https://drive.google.com/…', dropbox: 'https://www.dropbox.com/…', autre: 'https://…' }[r.value]; }; });
 $('noteT').onclick = function () { $('trNote').hidden = false; $('trNote').focus(); this.hidden = true; };
+function openDr(o) { $('drawer').hidden = !o; $('scrim').hidden = !o; $('bMore').setAttribute('aria-expanded', o); }
+$('bMore').onclick = function () { openDr(true); }; $('bClose').onclick = $('scrim').onclick = function () { openDr(false); };
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') openDr(false); });
+function trend() {
+  var sr = series(), t = $('trend');
+  if (sr.length < 3) { t.className = 'trend flat'; t.textContent = 'Les tendances arrivent après quelques jours'; return; }
+  var n = sr.length - 1, w = Math.min(7, Math.floor(n / 2)), a = sr[n].v - sr[n - w].v, b = sr[n - w].v - sr[n - 2 * w].v;
+  if (b <= 0 && a <= 0) { t.className = 'trend flat'; t.textContent = 'Stable'; return; }
+  var pc = b > 0 ? Math.round((a - b) / b * 100) : 100;
+  t.className = 'trend' + (pc < -3 ? ' down' : pc > 3 ? '' : ' flat');
+  t.textContent = (pc > 3 ? '▲ En hausse ' : pc < -3 ? '▼ En baisse ' : '● Stable ') + (Math.abs(pc) > 3 ? (pc > 0 ? '+' : '') + pc + ' %' : '') + ' sur ' + w + ' j';
+}
 function genPass() { var a = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789', r = new Uint32Array(12), s = ''; crypto.getRandomValues(r); r.forEach(function (x) { s += a[x % a.length]; }); return s.slice(0, 4) + '-' + s.slice(4, 8) + '-' + s.slice(8); }
 $('fNew').onsubmit = function (e) {
   e.preventDefault(); var name = $('nName').value.trim(), email = $('nEmail').value.trim(), m = $('mNew');
