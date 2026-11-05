@@ -333,7 +333,7 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
         </div>
       </div>
     </nav>
-    <div class="demo-band" id="demoBand" hidden>Aperçu avec des chiffres de démonstration. Les vrais chiffres apparaîtront dès que tes clips seront ajoutés.</div>
+    <div class="demo-band" id="demoBand" hidden><span id="demoTxt">Ton espace est prêt. Tes stats apparaîtront ici dès que tes premiers clips seront publiés.</span></div>
 
     <section class="lives rv" id="secDepot" hidden aria-labelledby="tDepot">
       <form id="fDep" novalidate>
@@ -452,6 +452,7 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
 var SB_URL = 'https://uinkjgbisypgrtnojuyo.supabase.co';
 var SB_KEY = 'sb_publishable_M8nkSG-QmQhdfJZIKbxNGg_NKCUZrYX';
 var DEMO = /[?&]demo/.test(location.search), DEMO_CLIP = /demo=clip/.test(location.search);
+var DEMO_FULL = /demo=(plein|clip)/.test(location.search);
 var SITE = 'https://klipagencyy-collab.github.io/klip-site/espace/', PRICE = 0.7;
 var $ = function (id) { return document.getElementById(id); };
 var sb = (!DEMO && window.supabase) ? window.supabase.createClient(SB_URL, SB_KEY) : null;
@@ -669,7 +670,7 @@ function drawTransfers() {
 /* ---------- chargement ---------- */
 function col() { return state.view === 'clipper' ? 'clipper_id' : 'creator_id'; }
 function load(cid) {
-  if (DEMO) { var d = demoData(); state.clips = d.clips; state.stats = d.stats; state.transfers = DEMO_CLIP ? [] : d.transfers; render(); return Promise.resolve(); }
+  if (DEMO) { var d = DEMO_FULL ? demoData() : { clips: [], stats: [], transfers: [] }; state.clips = d.clips; state.stats = d.stats; state.transfers = DEMO_CLIP ? [] : d.transfers; render(); return Promise.resolve(); }
   return Promise.all([
     sb.from('clips').select('*').eq(col(), cid),
     state.view === 'creator' ? sb.from('transfers').select('*').eq('creator_id', cid).order('created_at', { ascending: false }) : { data: [] }
@@ -839,7 +840,7 @@ setInterval(function () { if (!$('vApp').hidden) { var upd = state.clips.reduce(
 
 /* ---------- démarrage ---------- */
 function boot() {
-  if (DEMO) { $('demoBand').hidden = false; showApp(DEMO_CLIP ? { id: 'demo', name: 'Yanis', role: 'clipper' } : { id: 'demo', name: 'ReYoz', role: 'creator' }); return; }
+  if (DEMO) { $('demoBand').hidden = false; if (DEMO_FULL) $('demoTxt').textContent = 'Aperçu avec des chiffres de démonstration.'; showApp(DEMO_CLIP ? { id: 'demo', name: 'Yanis', role: 'clipper' } : { id: 'demo', name: 'ReYoz', role: 'creator' }); return; }
   if (!sb) { $('vLogin').hidden = false; observe(); return; }
   sb.auth.getSession().then(function (r) {
     var u = r.data.session && r.data.session.user;
