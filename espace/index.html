@@ -241,6 +241,22 @@ nav.top .left { display: flex; align-items: center; gap: 12px; }
 .dhero { padding: 40px 0 18px; }
 .dhero h1 { font-size: clamp(34px, 4.4vw, 60px); }
 .kpis { margin-top: 16px; }
+
+.tabs { display: inline-flex; gap: 6px; padding: 5px; margin-top: 16px; border-radius: 999px; background: rgba(255,255,255,.04); border: 1px solid var(--line); }
+.tabs button { border: 0; background: none; padding: 11px 18px; border-radius: 999px; font: 800 14px/1 var(--body); color: var(--muted); cursor: pointer; transition: background .25s, color .25s; }
+.tabs button.on { background: var(--y); color: var(--ink); box-shadow: 0 8px 24px rgba(255,225,77,.25); }
+.shlist { display: flex; flex-direction: column; gap: 10px; }
+.sh { display: grid; grid-template-columns: 56px minmax(0, 1fr) 150px 110px; align-items: center; gap: 16px; padding: 12px 16px 12px 12px; border-radius: 18px; background: linear-gradient(180deg, var(--panel2), var(--panel)); border: 1px solid var(--line); text-decoration: none; transition: transform .3s cubic-bezier(.2,1.4,.4,1), border-color .3s; }
+.sh:hover { transform: translateX(4px); border-color: rgba(255,225,77,.3); }
+.sh .th { width: 56px; height: 74px; border-radius: 10px; overflow: hidden; background: linear-gradient(160deg, #2D2140, #15151B 60%, #3A1220); }
+.sh .th img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sh .ti { font: 700 14px/1.35 var(--body); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sh .who2 { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; font: 700 12px/1 var(--body); color: var(--muted); }
+.sh .who2 b { color: var(--y); font-weight: 800; }
+.sh .spark { width: 150px; height: 40px; }
+.sh .spark path { fill: none; stroke: var(--y); stroke-width: 2.4; stroke-linecap: round; }
+.sh .nv { text-align: right; } .sh .nv b { display: block; font: 400 22px/1 var(--display); } .sh .nv small { color: var(--ok); font: 800 12px var(--body); }
+@media (max-width: 600px) { .sh { grid-template-columns: 48px minmax(0, 1fr) 84px; } .sh .spark { display: none; } .sh .th { width: 48px; height: 64px; } }
 .adminbox { margin-top: 56px; border-radius: 28px; padding: clamp(20px, 3vw, 34px); border: 1px solid rgba(255,225,77,.25); background: linear-gradient(180deg, rgba(255,225,77,.06), rgba(255,225,77,.01)); }
 .adminbox .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
 .pw { margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(0,0,0,.4); border: 1px solid var(--line2); font: 700 14px/1.5 var(--body); word-break: break-all; display: none; }
@@ -333,6 +349,10 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
         </div>
       </div>
     </nav>
+    <div class="tabs" role="tablist" aria-label="Espaces">
+      <button role="tab" class="on" data-v="mine" aria-selected="true">Mon espace</button>
+      <button role="tab" data-v="shared" aria-selected="false">Espace commun</button>
+    </div>
     <div class="demo-band" id="demoBand" hidden><span id="demoTxt">Ton espace est prêt. Tes stats apparaîtront ici dès que tes premiers clips seront publiés.</span></div>
 
     <section class="lives rv" id="secDepot" hidden aria-labelledby="tDepot">
@@ -345,6 +365,30 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
         </div>
         <p class="msg" id="mDep">0,70 € par clip validé, plus un bonus aux vues.</p>
       </form>
+    </section>
+
+    <div id="vMine">
+    <section class="lives rv" id="secLives" aria-labelledby="tLives">
+      <form id="fTr" novalidate>
+        <div class="lv-head">
+          <h2 id="tLives">Tes <span class="hl">lives</span> à clipper</h2>
+          <p>Colle ton lien, on s'occupe du reste.</p>
+        </div>
+        <div class="prov" role="radiogroup" aria-label="Type de lien">
+          <label><input type="radio" name="prov" value="wetransfer" checked><span><i class="pi wetransfer">W</i>WeTransfer</span></label>
+          <label><input type="radio" name="prov" value="drive"><span><i class="pi drive">G</i>Google Drive</span></label>
+          <label><input type="radio" name="prov" value="dropbox"><span><i class="pi dropbox">D</i>Dropbox</span></label>
+          <label><input type="radio" name="prov" value="autre"><span><i class="pi autre">↗</i>Autre</span></label>
+        </div>
+        <div class="lv-row">
+          <input id="trUrl" type="url" placeholder="https://we.tl/t-…" aria-label="Lien de ton live" required>
+          <button class="btn btn-solid" id="bTr">Envoyer</button>
+        </div>
+        <button type="button" class="lv-note-t" id="noteT">+ Ajouter une note</button>
+        <input id="trNote" type="text" maxlength="500" placeholder="Ex. : le passage à 1 h 12 est fou" aria-label="Note pour l'équipe" hidden>
+        <p class="msg" id="mTr"></p>
+      </form>
+      <div class="tlist" id="tlist"></div>
     </section>
 
     <header class="dhero">
@@ -382,6 +426,15 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
       <div class="clips" id="clips"></div>
     </section>
 
+    </div>
+    <div id="vShared" hidden>
+      <section class="sect" style="margin-top:28px" aria-labelledby="tShared">
+        <header class="rv"><div><h2 id="tShared">L'espace <span class="hl">commun</span>.</h2><p>Tous les clips publiés : qui l'a fait, pour qui, et comment la vidéo évolue.</p></div>
+          <select class="who" id="shFilter" aria-label="Filtrer par créateur"></select></header>
+        <div class="shlist" id="shList"></div>
+      </section>
+    </div>
+
     <!-- ============ ADMIN ============ -->
     <section class="adminbox rv" id="admin" hidden aria-labelledby="tAdmin">
       <span class="eyebrow">Admin</span>
@@ -418,29 +471,6 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
 <div class="scrim" id="scrim" hidden></div>
 <aside class="drawer" id="drawer" aria-label="Options" hidden>
   <div class="dr-head"><b>Plus d'options</b><button class="more" id="bClose" aria-label="Fermer">×</button></div>
-    <section class="lives" id="secLives" aria-labelledby="tLives">
-      <form id="fTr" novalidate>
-        <div class="lv-head">
-          <h2 id="tLives">Tes <span class="hl">lives</span> à clipper</h2>
-          <p>Colle ton lien, on s'occupe du reste.</p>
-        </div>
-        <div class="prov" role="radiogroup" aria-label="Type de lien">
-          <label><input type="radio" name="prov" value="wetransfer" checked><span><i class="pi wetransfer">W</i>WeTransfer</span></label>
-          <label><input type="radio" name="prov" value="drive"><span><i class="pi drive">G</i>Google Drive</span></label>
-          <label><input type="radio" name="prov" value="dropbox"><span><i class="pi dropbox">D</i>Dropbox</span></label>
-          <label><input type="radio" name="prov" value="autre"><span><i class="pi autre">↗</i>Autre</span></label>
-        </div>
-        <div class="lv-row">
-          <input id="trUrl" type="url" placeholder="https://we.tl/t-…" aria-label="Lien de ton live" required>
-          <button class="btn btn-solid" id="bTr">Envoyer</button>
-        </div>
-        <button type="button" class="lv-note-t" id="noteT">+ Ajouter une note</button>
-        <input id="trNote" type="text" maxlength="500" placeholder="Ex. : le passage à 1 h 12 est fou" aria-label="Note pour l'équipe" hidden>
-        <p class="msg" id="mTr"></p>
-      </form>
-      <div class="tlist" id="tlist"></div>
-    </section>
-
   <div class="dr-block" id="drTop"><h3>Top 7 de tes clips</h3><div class="hbar" id="hbar2"></div></div>
 </aside>
 <div class="toast" id="toast"><div class="pill notif" id="toastTxt"></div></div>
@@ -804,6 +834,49 @@ function trend() {
   t.className = 'trend' + (pc < -3 ? ' down' : pc > 3 ? '' : ' flat');
   t.textContent = (pc > 3 ? '▲ En hausse ' : pc < -3 ? '▼ En baisse ' : '● Stable ') + (Math.abs(pc) > 3 ? (pc > 0 ? '+' : '') + pc + ' %' : '') + ' sur ' + w + ' j';
 }
+
+/* ---------- espace commun ---------- */
+var shared = [];
+function showTab(v) {
+  document.querySelectorAll('.tabs button').forEach(function (b) { var on = b.dataset.v === v; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
+  $('vMine').hidden = v !== 'mine'; $('vShared').hidden = v !== 'shared';
+  if (v === 'shared') loadShared();
+  observe();
+}
+document.querySelectorAll('.tabs button').forEach(function (b) { b.onclick = function () { showTab(b.dataset.v); }; });
+function loadShared() {
+  if (DEMO) {
+    var d = DEMO_FULL ? demoData() : { clips: [], stats: [] }, nm = ['Yanis', 'Sofiane', 'Lina'];
+    shared = d.clips.map(function (c, i) { return { id: c.id, url: c.url, title: c.title, cover_url: c.cover_url, views: c.views, posted_at: c.posted_at, creator_name: 'ReYoz', clipper_name: nm[i % 3], points: d.stats.filter(function (s) { return s.clip_id === c.id; }).map(function (s) { return [new Date(s.captured_at) / 1000, s.views]; }) }; });
+    drawShared(); return;
+  }
+  sb.rpc('shared_feed').then(function (r) { shared = r.data || []; drawShared(); });
+}
+function drawShared() {
+  var f = $('shFilter'), cur = f.value, names = [];
+  shared.forEach(function (c) { if (names.indexOf(c.creator_name) < 0) names.push(c.creator_name); });
+  f.textContent = ''; var o = el('option', '', 'Tous les créateurs'); o.value = ''; f.appendChild(o);
+  names.sort().forEach(function (n) { var o = el('option', '', n); o.value = n; f.appendChild(o); });
+  f.value = names.indexOf(cur) > -1 ? cur : ''; f.hidden = names.length < 2;
+  var box = $('shList'); box.textContent = '';
+  var list = shared.filter(function (c) { return !f.value || c.creator_name === f.value; }).sort(function (a, b) { return b.views - a.views; });
+  if (!list.length) { var e = el('div', 'empty'); e.appendChild(el('b', '', 'Rien pour l’instant.')); e.appendChild(el('span', '', 'Dès qu’un clip est validé, il apparaît ici avec son clippeur, son créateur et sa courbe.')); box.appendChild(e); return; }
+  list.forEach(function (c, i) {
+    var a = el('a', 'sh rv'); a.href = c.url; a.target = '_blank'; a.rel = 'noopener'; a.style.setProperty('--d', Math.min(i, 10) * .04 + 's');
+    var th = el('div', 'th'); if (c.cover_url) { var im = new Image(); im.alt = ''; im.loading = 'lazy'; im.referrerPolicy = 'no-referrer'; im.src = c.cover_url; im.onerror = function () { im.remove(); }; th.appendChild(im); } a.appendChild(th);
+    var mid = el('div', ''); mid.appendChild(el('div', 'ti', c.title || 'Clip TikTok'));
+    var w = el('div', 'who2'); w.appendChild(el('span', '', 'par')); w.appendChild(el('b', '', c.clipper_name || 'Klip')); w.appendChild(el('span', '', '· pour')); w.appendChild(el('b', '', c.creator_name)); mid.appendChild(w); a.appendChild(mid);
+    var pts = (c.points || []).map(function (p) { return +p[1]; });
+    var sp = sv('svg', { viewBox: '0 0 150 40', preserveAspectRatio: 'none', class: 'spark' });
+    if (pts.length > 1) { var mx = Math.max.apply(null, pts) || 1; sp.appendChild(sv('path', { d: pts.map(function (v, k) { return (k ? 'L' : 'M') + (k / (pts.length - 1) * 148 + 1).toFixed(1) + ',' + (38 - v / mx * 34).toFixed(1); }).join(' ') })); }
+    a.appendChild(sp);
+    var nv = el('div', 'nv'), up = pts.length > 1 ? pts[pts.length - 1] - pts[Math.max(0, pts.length - 3)] : 0;
+    nv.appendChild(el('b', '', fmt(c.views))); nv.appendChild(el('small', '', up > 0 ? '▲ +' + fmt(up) : 'vues')); a.appendChild(nv);
+    box.appendChild(a);
+  });
+  observe();
+}
+$('shFilter').onchange = drawShared;
 function genPass() { var a = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789', r = new Uint32Array(12), s = ''; crypto.getRandomValues(r); r.forEach(function (x) { s += a[x % a.length]; }); return s.slice(0, 4) + '-' + s.slice(4, 8) + '-' + s.slice(8); }
 $('fNew').onsubmit = function (e) {
   e.preventDefault(); var name = $('nName').value.trim(), email = $('nEmail').value.trim(), m = $('mNew');

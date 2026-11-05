@@ -128,3 +128,16 @@ do $$ begin alter publication supabase_realtime add table public.transfers; exce
 --    (klip.agencyy@gmail.com, ton mot de passe, « Auto Confirm User » coché), puis lance :
 -- update public.profiles set role = 'admin', approved = true, name = 'Klip Agency'
 --   where id = (select id from auth.users where email = 'klip.agencyy@gmail.com');
+
+-- 6) Espace commun : tous les clips validés avec clippeur, créateur et courbe
+create or replace function public.shared_feed() returns table (
+  id bigint, url text, title text, cover_url text, views bigint, likes bigint, posted_at timestamptz, created_at timestamptz,
+  creator_name text, clipper_name text, points jsonb)
+language sql stable security definer set search_path = public as $$
+  select c.id, c.url, c.title, c.cover_url, c.views, c.likes, c.posted_at, c.created_at, pc.name, coalesce(pk.name, 'Klip'),
+    (select coalesce(jsonb_agg(jsonb_build_array(extract(epoch from s.captured_at)::bigint, s.views) order by s.captured_at), '[]'::jsonb)
+       from (select captured_at, views from public.clip_stats where clip_id = c.id order by captured_at desc limit 30) s)
+  from public.clips c join public.profiles pc on pc.id = c.creator_id left join public.profiles pk on pk.id = c.clipper_id
+  where c.status = 'valide' and (public.my_role() in ('admin', 'clipper') or (public.my_role() = 'creator' and c.creator_id = auth.uid()))
+  order by c.views desc limit 300;
+$$;
