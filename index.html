@@ -9,15 +9,15 @@
 <meta property="og:site_name" content="Klip Agency">
 <meta property="og:title" content="Klip Agency">
 <meta property="og:description" content="Tes lives et podcasts transformés en clips viraux. Tu nous diras merci.">
-<meta property="og:url" content="https://klipagency.netlify.app/">
-<meta property="og:image" content="https://klipagency.netlify.app/og-image.png">
+<meta property="og:url" content="https://klipagencyy-collab.github.io/klip-site/">
+<meta property="og:image" content="https://klipagencyy-collab.github.io/klip-site/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:title" content="Klip Agency">
 <meta name="twitter:description" content="Tes lives et podcasts transformés en clips viraux. Tu nous diras merci.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://klipagency.netlify.app/og-image.png">
+<meta name="twitter:image" content="https://klipagencyy-collab.github.io/klip-site/og-image.png">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -74,6 +74,9 @@ nav.scrolled .navlinks .btn { padding: 10px 14px; }
 .navlinks a.lk { padding: 10px 12px; border-radius: 999px; text-decoration: none; color: var(--muted); font: 600 14px/1 var(--body); }
 .navlinks a.lk:hover { color: var(--text); background: rgba(255,255,255,.06); }
 .navlinks .btn { padding: 11px 16px; font-size: 14px; }
+.btn-login { background: rgba(255,225,77,.08); color: var(--y); border-color: rgba(255,225,77,.35); }
+.btn-login:hover { background: rgba(255,225,77,.16); transform: translateY(-1px); }
+@media (max-width: 600px) { .navlinks .btn-login { padding: 10px 12px; } .navlinks .btn-login span { display: none; } }
 
 /* hero */
 .hero { position: relative; min-height: 100svh; display: flex; align-items: center; padding-block: 140px 70px; overflow: hidden; }
@@ -350,7 +353,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
         <a class="lk" href="#pourquoi">Comment ça marche</a>
         <a class="lk" href="#simulateur">Simulateur</a>
         <a class="lk" href="#faq">FAQ</a>
-        <a class="lk" href="/espace/">Espace créateur</a>
+        <a class="btn btn-login" href="espace/" title="Réservé aux créateurs et clippeurs Klip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="3"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Espace Klip</span></a>
         <a class="btn btn-ghost" href="#createurs">Je suis créateur</a>
         <a class="btn btn-solid" href="#clippeurs">Devenir clippeur</a>
       </div>

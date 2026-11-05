@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Espace créateur · Klip Agency</title>
+<title>Espace Klip · Klip Agency</title>
 <meta name="description" content="Tes clips, tes vues, ta croissance. En direct.">
 <meta name="robots" content="noindex">
 <meta property="og:title" content="Espace créateur · Klip Agency">
 <meta property="og:description" content="Tes clips, tes vues, ta croissance. En direct.">
-<meta property="og:image" content="https://klipagency.netlify.app/og-image.png">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:image" content="https://klipagencyy-collab.github.io/klip-site/og-image.png">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <meta name="theme-color" content="#07070A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,6 +167,10 @@ select.who { padding: 10px 14px; border-radius: 999px; border: 1px solid var(--l
 .clip .spark path { fill: none; stroke: var(--y); stroke-width: 2; stroke-linecap: round; }
 .clip .del { position: absolute; right: 10px; top: 10px; z-index: 3; width: 30px; height: 30px; border-radius: 50%; border: 0; background: rgba(0,0,0,.6); color: #fff; cursor: pointer; display: none; }
 .admin .clip .del { display: grid; place-items: center; }
+.clip .for { font: 800 11px/1 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--y); }
+.clip .act { display: flex; flex-wrap: wrap; gap: 6px; }
+.mini { border: 1px solid var(--line2); background: rgba(255,255,255,.05); border-radius: 999px; padding: 6px 10px; font: 700 12px/1 var(--body); cursor: pointer; }
+.mini:hover { background: var(--y); color: var(--ink); }
 .empty { border: 1px dashed var(--line2); border-radius: var(--r); padding: 40px 24px; text-align: center; color: var(--muted); }
 .empty b { display: block; color: var(--text); font: 400 22px/1.2 var(--display); margin-bottom: 8px; }
 
@@ -226,12 +230,12 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
 <!-- ============ CONNEXION ============ -->
 <main id="vLogin" class="wrap login" hidden>
   <div class="pitch">
-    <a class="logo" href="/" aria-label="Klip Agency, accueil">
+    <a class="logo" href="../" aria-label="Klip Agency, accueil">
       <svg width="20" height="34" viewBox="0 0 72 124" aria-hidden="true"><rect x="5" y="5" width="62" height="114" rx="14" fill="none" stroke="currentColor" stroke-width="10"/><path d="M28 46 L50 62 L28 78 Z" fill="#FFE14D" stroke="#FFE14D" stroke-width="6" stroke-linejoin="round"/></svg>
       <span><b>klip</b><small>AGENCY</small></span>
     </a>
     <h1>Tes clips.<br>Tes vues.<br><span class="hl">En direct.</span></h1>
-    <p class="lead">Ton espace créateur : chaque TikTok fait sur toi, ses vues, ses j'aime, et la courbe qui monte. Tu déposes aussi tes lives ici, en un lien.</p>
+    <p class="lead">Réservé aux créateurs et aux clippeurs qui travaillent avec Klip. Créateur : chaque TikTok fait sur toi, ses vues, et la courbe qui monte. Clippeur : tes clips, tes vues, tes gains.</p>
   </div>
   <div class="stage">
     <div class="float" style="left:2%;top:6%"><div class="pill notif" style="--d:.15s">+48,2 k vues</div></div>
@@ -239,12 +243,12 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
     <div class="float f3 hide-m" style="left:-2%;bottom:12%"><div class="pill" style="--d:.45s"><span class="ic" style="background:linear-gradient(135deg,#59D38E,#2FA866)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M4 16l6-6 4 4 6-8"/></svg></span><span>Nouveau record<small>sur ton dernier clip</small></span></div></div>
     <div class="float f2" style="right:4%;bottom:4%"><div class="pill" style="--d:.6s"><span class="ic" style="background:linear-gradient(135deg,#FFE97A,#F5C800)"><svg width="16" height="16" viewBox="0 0 24 24" fill="#0E0E10"><path d="M12 21s-7-4.4-9.3-9C1 8.4 3.3 4.5 7 4.5c2 0 3.6 1.1 5 2.8 1.4-1.7 3-2.8 5-2.8 3.7 0 6 3.9 4.3 7.5C19 16.6 12 21 12 21z"/></svg></span><span>12 400 j'aime<small>cette semaine</small></span></div></div>
     <form class="card" id="fLogin" novalidate>
-      <span class="eyebrow">Espace créateur</span>
+      <span class="eyebrow">Espace Klip</span>
       <h2 style="margin-top:16px">Connecte-toi</h2>
       <div class="field"><label for="lEmail">Email</label><input id="lEmail" type="email" autocomplete="username" required></div>
       <div class="field"><label for="lPass">Mot de passe</label><input id="lPass" type="password" autocomplete="current-password" required></div>
       <button class="btn btn-solid" style="width:100%;margin-top:22px" id="bLogin">Entrer</button>
-      <p class="msg" id="mLogin">Tes identifiants te sont donnés par Klip Agency.</p>
+      <p class="msg" id="mLogin">Tes identifiants te sont donnés par Klip Agency quand on commence à travailler ensemble.</p>
     </form>
   </div>
 </main>
@@ -254,7 +258,7 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
   <div class="wrap">
     <nav class="top" aria-label="Espace créateur">
       <div class="bar">
-        <a class="logo" href="/" aria-label="Klip Agency, accueil">
+        <a class="logo" href="../" aria-label="Klip Agency, accueil">
           <svg width="16" height="28" viewBox="0 0 72 124" aria-hidden="true"><rect x="5" y="5" width="62" height="114" rx="14" fill="none" stroke="currentColor" stroke-width="10"/><path d="M28 46 L50 62 L28 78 Z" fill="#FFE14D" stroke="#FFE14D" stroke-width="6" stroke-linejoin="round"/></svg>
           <span><b style="font-size:19px">klip</b><small>AGENCY</small></span>
         </a>
@@ -270,7 +274,7 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
     <header class="dhero">
       <div class="rv">
         <span class="eyebrow" id="eyebrow">Espace créateur</span>
-        <h1>Salut <span class="hl" id="hName">toi</span>,<br>voilà ce que tes clips font.</h1>
+        <h1>Salut <span class="hl" id="hName">toi</span>,<br><span id="hLine">voilà ce que tes clips font.</span></h1>
         <p class="sub" id="hSub">Chaque TikTok publié sur toi, suivi en continu.</p>
       </div>
       <div class="bigcount rv" style="--d:.15s">
@@ -281,11 +285,23 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
     </header>
 
     <div class="kpis">
-      <div class="kpi yel rv" style="--d:.05s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 18h16M6 14l4-4 3 3 5-6"/></svg>Vues moyennes par clip</div><div class="v" id="kAvg">0</div><div class="s" id="kAvgS">&nbsp;</div></div>
-      <div class="kpi rv" style="--d:.12s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.4-9.3-9C1 8.4 3.3 4.5 7 4.5c2 0 3.6 1.1 5 2.8 1.4-1.7 3-2.8 5-2.8 3.7 0 6 3.9 4.3 7.5C19 16.6 12 21 12 21z"/></svg>J'aime</div><div class="v" id="kLikes">0</div><div class="s" id="kEng">&nbsp;</div></div>
-      <div class="kpi rv" style="--d:.19s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M10.5 9.5l4 2.5-4 2.5z" fill="currentColor"/></svg>Clips publiés</div><div class="v" id="kClips">0</div><div class="s" id="kClipsS">&nbsp;</div></div>
-      <div class="kpi rv" style="--d:.26s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>Meilleur clip</div><div class="v" id="kBest">0</div><div class="s" id="kBestS">&nbsp;</div></div>
+      <div class="kpi yel rv" style="--d:.05s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 18h16M6 14l4-4 3 3 5-6"/></svg><span id="kAvgL">Vues moyennes par clip</span></div><div class="v" id="kAvg">0</div><div class="s" id="kAvgS">&nbsp;</div></div>
+      <div class="kpi rv" style="--d:.12s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.4-9.3-9C1 8.4 3.3 4.5 7 4.5c2 0 3.6 1.1 5 2.8 1.4-1.7 3-2.8 5-2.8 3.7 0 6 3.9 4.3 7.5C19 16.6 12 21 12 21z"/></svg><span id="kLikesL">J'aime</span></div><div class="v" id="kLikes">0</div><div class="s" id="kEng">&nbsp;</div></div>
+      <div class="kpi rv" style="--d:.19s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M10.5 9.5l4 2.5-4 2.5z" fill="currentColor"/></svg><span id="kClipsL">Clips publiés</span></div><div class="v" id="kClips">0</div><div class="s" id="kClipsS">&nbsp;</div></div>
+      <div class="kpi rv" style="--d:.26s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span id="kBestL">Meilleur clip</span></div><div class="v" id="kBest">0</div><div class="s" id="kBestS">&nbsp;</div></div>
     </div>
+
+    <section class="sect" id="secDepot" hidden aria-labelledby="tDepot">
+      <header class="rv"><div><h2 id="tDepot">Déposer tes <span class="hl">clips</span>.</h2><p>Choisis le créateur, colle tes liens TikTok : on valide, puis les vues sont suivies automatiquement.</p></div></header>
+      <form class="panel rv" id="fDep" novalidate>
+        <div class="split" style="align-items:end">
+          <div class="field" style="margin-top:0"><label for="dCreator">Le clip est pour</label><select id="dCreator" required></select></div>
+          <div class="field" style="margin-top:0"><label for="dLinks">Liens TikTok (un par ligne)</label><textarea id="dLinks" style="min-height:56px" placeholder="https://www.tiktok.com/@toncompte/video/…"></textarea></div>
+        </div>
+        <button class="btn btn-solid" style="margin-top:18px" id="bDep">Déposer</button>
+        <p class="msg" id="mDep">0,70 € par clip validé, plus un bonus aux vues.</p>
+      </form>
+    </section>
 
     <section class="sect" aria-labelledby="tCourbe">
       <header class="rv"><div><h2 id="tCourbe">Ta <span class="hl">courbe</span>.</h2><p>Le total de vues de tous tes clips, jour après jour.</p></div></header>
@@ -303,7 +319,7 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
       <div class="clips" id="clips"></div>
     </section>
 
-    <section class="sect" aria-labelledby="tLives">
+    <section class="sect" id="secLives" aria-labelledby="tLives">
       <header class="rv"><div><h2 id="tLives">Tes <span class="hl">lives</span> à clipper.</h2><p>Colle ton lien WeTransfer ici : plus besoin de nous l'envoyer en privé.</p></div></header>
       <div class="split">
         <form class="panel rv" id="fTr" novalidate>
@@ -324,8 +340,9 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
       <h2 id="tAdmin" style="font:400 clamp(26px,3vw,38px)/1.05 var(--display);margin-top:14px">Gérer les créateurs</h2>
       <div class="grid">
         <form class="panel" id="fNew" novalidate>
-          <h3>Nouveau créateur</h3>
-          <p class="hint">Crée ses identifiants. Le mot de passe s'affiche une seule fois : copie-le pour lui.</p>
+          <h3>Nouvel accès</h3>
+          <p class="hint">Crée les identifiants d'un créateur ou d'un clippeur. Le mot de passe s'affiche une seule fois : copie-le pour lui.</p>
+          <div class="field"><label for="nRole">Type</label><select id="nRole"><option value="creator">Créateur</option><option value="clipper">Clippeur</option></select></div>
           <div class="field"><label for="nName">Nom affiché</label><input id="nName" required></div>
           <div class="field"><label for="nEmail">Email</label><input id="nEmail" type="email" required></div>
           <button class="btn btn-solid btn-sm" style="margin-top:16px" id="bNew">Créer l'accès</button>
@@ -358,10 +375,13 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
 'use strict';
 var SB_URL = 'https://uinkjgbisypgrtnojuyo.supabase.co';
 var SB_KEY = 'sb_publishable_M8nkSG-QmQhdfJZIKbxNGg_NKCUZrYX';
-var DEMO = /[?&]demo/.test(location.search);
+var DEMO = /[?&]demo/.test(location.search), DEMO_CLIP = /demo=clip/.test(location.search);
+var SITE = 'https://klipagencyy-collab.github.io/klip-site/espace/', PRICE = 0.7;
 var $ = function (id) { return document.getElementById(id); };
 var sb = (!DEMO && window.supabase) ? window.supabase.createClient(SB_URL, SB_KEY) : null;
-var state = { me: null, creator: null, clips: [], stats: [], transfers: [], sort: 'views', chan: null, creators: [] };
+var state = { me: null, creator: null, view: 'creator', clips: [], stats: [], transfers: [], sort: 'views', chan: null, creators: [], names: {} };
+function eur(c) { return (c / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }); }
+function gains(cl) { return cl.reduce(function (a, c) { return a + (c.status === 'valide' ? Math.round(PRICE * 100) + Math.round((+c.bonus || 0) * 100) : 0); }, 0); }
 
 /* ---------- formats ---------- */
 function fmt(n) {
@@ -399,8 +419,9 @@ function demoData() {
   var now = Date.now(), clips = [], stats = [];
   titles.forEach(function (t, i) {
     var age = (titles.length - i) * 2.3 + 1, v = Math.round((i % 3 === 0 ? 900000 : 60000 + (i * 73123) % 380000) * (1 + (i % 4) * .3));
-    var covers = ['/media/t/V1.jpg', '/media/t/V2.jpg', '/clips/01_elle-monte.jpg', '/media/t/V3.jpg', '/media/t/V4.jpg', '/clips/03_ranucci.jpg', '/media/t/V5.jpg', '/media/t/V6.jpg', '/clips/07_argent.jpg', '/media/t/V7.jpg'];
+    var covers = ['../media/t/V1.jpg', '../media/t/V2.jpg', '../clips/01_elle-monte.jpg', '../media/t/V3.jpg', '../media/t/V4.jpg', '../clips/03_ranucci.jpg', '../media/t/V5.jpg', '../media/t/V6.jpg', '../clips/07_argent.jpg', '../media/t/V7.jpg'];
     var c = { id: i + 1, url: 'https://www.tiktok.com/', title: t, author: 'klip.clips', cover_url: covers[i % covers.length], views: v, likes: Math.round(v * (.06 + (i % 5) * .012)), comments: Math.round(v * .004), shares: Math.round(v * .003), posted_at: new Date(now - age * 864e5).toISOString(), updated_at: new Date(now - 18 * 6e4).toISOString() };
+    c.status = DEMO_CLIP && i % 5 === 4 ? 'en_attente' : 'valide'; c.bonus = DEMO_CLIP && v > 500000 ? 5 : 0; c.creator_id = ['rios', 'ines', 'rios'][i % 3]; c.created_at = c.posted_at;
     clips.push(c);
     for (var d = 0; d <= Math.floor(age); d++) { var u = Math.min(1, Math.pow((d + 1) / Math.min(age, 6), .55)); stats.push({ clip_id: c.id, views: Math.round(v * u), captured_at: new Date(now - (age - d) * 864e5).toISOString() }); }
   });
@@ -411,12 +432,24 @@ function demoData() {
 function render() {
   var cl = state.clips, tot = 0, likes = 0, best = null, upd = null;
   cl.forEach(function (c) { tot += +c.views; likes += +c.likes; if (!best || +c.views > +best.views) best = c; if (c.updated_at && (!upd || c.updated_at > upd)) upd = c.updated_at; });
-  countTo($('kTotal'), tot); countTo($('kAvg'), cl.length ? Math.round(tot / cl.length) : 0); countTo($('kLikes'), likes);
-  countTo($('kClips'), cl.length, function (n) { return String(n); }); countTo($('kBest'), best ? +best.views : 0);
-  $('kAvgS').textContent = cl.length ? 'sur ' + cl.length + ' clip' + (cl.length > 1 ? 's' : '') : 'aucun clip pour l’instant';
-  $('kEng').textContent = tot ? 'engagement ' + (likes / tot * 100).toFixed(1).replace('.', ',') + ' %' : ' ';
-  var week = cl.filter(function (c) { return c.posted_at && Date.now() - new Date(c.posted_at) < 7 * 864e5; }).length;
-  $('kClipsS').textContent = week ? week + ' cette semaine' : ' ';
+  countTo($('kTotal'), tot); countTo($('kBest'), best ? +best.views : 0);
+  var week = cl.filter(function (c) { return (c.posted_at || c.created_at) && Date.now() - new Date(c.posted_at || c.created_at) < 7 * 864e5; }).length;
+  if (state.view === 'clipper') {
+    var val = cl.filter(function (c) { return c.status === 'valide'; }).length, wait = cl.filter(function (c) { return c.status === 'en_attente'; }).length;
+    $('kAvgL').textContent = 'Gains estimés'; countTo($('kAvg'), gains(cl), eur);
+    $('kAvgS').textContent = val + ' clip' + (val > 1 ? 's' : '') + ' validé' + (val > 1 ? 's' : '') + ' × 0,70 € + bonus';
+    $('kLikesL').textContent = 'Vues moyennes par clip'; countTo($('kLikes'), cl.length ? Math.round(tot / cl.length) : 0);
+    $('kEng').textContent = likes ? fmt(likes) + ' j\u2019aime au total' : '\u00a0';
+    $('kClipsL').textContent = 'Clips déposés'; countTo($('kClips'), cl.length, function (n) { return String(n); });
+    $('kClipsS').textContent = wait ? wait + ' en attente de validation' : (week ? week + ' cette semaine' : '\u00a0');
+  } else {
+    $('kAvgL').textContent = 'Vues moyennes par clip'; countTo($('kAvg'), cl.length ? Math.round(tot / cl.length) : 0);
+    $('kAvgS').textContent = cl.length ? 'sur ' + cl.length + ' clip' + (cl.length > 1 ? 's' : '') : 'aucun clip pour l\u2019instant';
+    $('kLikesL').textContent = 'J\u2019aime'; countTo($('kLikes'), likes);
+    $('kEng').textContent = tot ? 'engagement ' + (likes / tot * 100).toFixed(1).replace('.', ',') + ' %' : '\u00a0';
+    $('kClipsL').textContent = 'Clips publiés'; countTo($('kClips'), cl.length, function (n) { return String(n); });
+    $('kClipsS').textContent = week ? week + ' cette semaine' : '\u00a0';
+  }
   $('kBestS').textContent = best ? (best.title || 'Clip').slice(0, 42) : ' ';
   $('liveTxt').textContent = upd ? 'Mis à jour ' + ago(upd) : 'En direct';
   // évolution sur 24 h à partir de l'historique
@@ -506,9 +539,12 @@ function drawClips() {
     var g = gs[c.id];
     if (maxUp > 0 && g.up === maxUp) cov.appendChild(el('span', 'tag hot', '🔥 Celui qui monte'));
     else if (c.posted_at && Date.now() - new Date(c.posted_at) < 3 * 864e5) cov.appendChild(el('span', 'tag', 'Nouveau'));
+    if (c.status && c.status !== 'valide') cov.appendChild(el('span', 'tag', c.status === 'refuse' ? 'Refusé' : 'En attente'));
     var vw = el('div', 'views'); var vn = el('span', '', '0'); vw.appendChild(vn); vw.appendChild(el('small', '', 'vues')); cov.appendChild(vw);
     a.appendChild(cov);
-    var m = el('div', 'meta'); m.appendChild(el('div', 'ti', c.title || ('@' + (c.author || 'tiktok'))));
+    var m = el('div', 'meta');
+    if (state.view === 'clipper' && state.names[c.creator_id]) m.appendChild(el('div', 'for', 'Pour ' + state.names[c.creator_id] + (c.status === 'valide' ? ' · ' + eur(Math.round((PRICE + (+c.bonus || 0)) * 100)) : '')));
+    m.appendChild(el('div', 'ti', c.title || ('@' + (c.author || 'tiktok'))));
     var st = el('div', 'st');
     st.appendChild(el('span', '', '♥ ' + fmt(c.likes))); st.appendChild(el('span', '', '💬 ' + fmt(c.comments))); st.appendChild(el('span', '', '↗ ' + fmt(c.shares)));
     m.appendChild(st);
@@ -522,6 +558,13 @@ function drawClips() {
       var del = el('button', 'del', '✕'); del.title = 'Retirer ce clip'; del.setAttribute('aria-label', 'Retirer ce clip');
       del.onclick = function (ev) { ev.preventDefault(); if (!confirm('Retirer ce clip du tableau ?')) return; sb.from('clips').delete().eq('id', c.id).then(function (r) { if (!r.error) { state.clips = state.clips.filter(function (x) { return x.id !== c.id; }); render(); } }); };
       a.appendChild(del);
+      var act = el('div', 'act');
+      [['valide', '✓ Valider'], ['refuse', 'Refuser']].forEach(function (x) {
+        if (c.status === x[0]) return;
+        var b = el('button', 'mini', x[1]); b.onclick = function (ev) { ev.preventDefault(); sb.from('clips').update({ status: x[0] }).eq('id', c.id).then(function (r) { if (!r.error) { c.status = x[0]; render(); toast(x[0] === 'valide' ? 'Clip validé' : 'Clip refusé'); } }); }; act.appendChild(b);
+      });
+      var bb = el('button', 'mini', 'Bonus ' + (+c.bonus ? eur(Math.round(c.bonus * 100)) : '€')); bb.onclick = function (ev) { ev.preventDefault(); var v = prompt('Bonus pour ce clip (en €) :', c.bonus || 0); if (v === null) return; v = parseFloat(String(v).replace(',', '.')) || 0; sb.from('clips').update({ bonus: v }).eq('id', c.id).then(function (r) { if (!r.error) { c.bonus = v; render(); } }); }; act.appendChild(bb);
+      m.appendChild(act);
     }
     box.appendChild(a);
     countTo(vn, +c.views);
@@ -547,11 +590,12 @@ function drawTransfers() {
 }
 
 /* ---------- chargement ---------- */
+function col() { return state.view === 'clipper' ? 'clipper_id' : 'creator_id'; }
 function load(cid) {
-  if (DEMO) { var d = demoData(); state.clips = d.clips; state.stats = d.stats; state.transfers = d.transfers; render(); return Promise.resolve(); }
+  if (DEMO) { var d = demoData(); state.clips = d.clips; state.stats = d.stats; state.transfers = DEMO_CLIP ? [] : d.transfers; render(); return Promise.resolve(); }
   return Promise.all([
-    sb.from('clips').select('*').eq('creator_id', cid),
-    sb.from('transfers').select('*').eq('creator_id', cid).order('created_at', { ascending: false })
+    sb.from('clips').select('*').eq(col(), cid),
+    state.view === 'creator' ? sb.from('transfers').select('*').eq('creator_id', cid).order('created_at', { ascending: false }) : { data: [] }
   ]).then(function (r) {
     state.clips = r[0].data || []; state.transfers = r[1].data || [];
     var ids = state.clips.map(function (c) { return c.id; });
@@ -561,32 +605,58 @@ function load(cid) {
 function subscribe(cid) {
   if (state.chan) sb.removeChannel(state.chan);
   state.chan = sb.channel('c-' + cid)
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'clips', filter: 'creator_id=eq.' + cid }, function (p) {
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'clips', filter: col() + '=eq.' + cid }, function (p) {
       var n = p.new, i = state.clips.findIndex(function (c) { return c.id === (n && n.id || p.old && p.old.id); });
       if (p.eventType === 'DELETE') { if (i > -1) state.clips.splice(i, 1); }
       else if (i > -1) { var gain = n.views - state.clips[i].views; state.clips[i] = n; state.stats.push({ clip_id: n.id, views: n.views, captured_at: n.updated_at || new Date().toISOString() }); if (gain > 0) toast('+' + fmt(gain) + ' vues sur un clip'); }
-      else { state.clips.push(n); toast('Nouveau clip ajouté'); }
+      else { state.clips.push(n); toast(state.view === 'clipper' ? 'Clip reçu' : 'Nouveau clip ajouté'); }
       clearTimeout(subscribe.t); subscribe.t = setTimeout(render, 400);
     })
     .on('postgres_changes', { event: '*', schema: 'public', table: 'transfers', filter: 'creator_id=eq.' + cid }, function () { sb.from('transfers').select('*').eq('creator_id', cid).order('created_at', { ascending: false }).then(function (r) { state.transfers = r.data || []; drawTransfers(); }); })
     .subscribe(function (s) { $('live').classList.toggle('off', s !== 'SUBSCRIBED'); });
 }
+function setView(role) {
+  state.view = role === 'clipper' ? 'clipper' : 'creator';
+  var clip = state.view === 'clipper';
+  $('hLine').textContent = clip ? 'voilà ce que tes clips rapportent.' : 'voilà ce que tes clips font.';
+  $('eyebrow').textContent = state.me && state.me.role === 'admin' ? 'Espace admin' : (clip ? 'Espace clippeur' : 'Espace créateur');
+  $('hSub').textContent = clip ? 'Chaque clip que tu déposes, ses vues et ce qu\u2019il te rapporte.' : 'Chaque TikTok publié sur toi, suivi en continu.';
+  $('secLives').hidden = clip;
+  $('secDepot').hidden = !(clip && state.me && state.me.role === 'clipper');
+}
+function fillCreators(list) {
+  state.names = {}; var d = $('dCreator'); d.textContent = '';
+  list.forEach(function (p) { state.names[p.id] = p.name; var o = el('option', '', p.name); o.value = p.id; d.appendChild(o); });
+  if (!list.length) { var o = el('option', '', 'Aucun créateur pour l\u2019instant'); o.value = ''; d.appendChild(o); }
+}
 function showApp(me) {
   state.me = me; $('vLogin').hidden = true; $('vApp').hidden = false;
   $('hName').textContent = (me.name || 'toi').split(' ')[0];
   if (me.role === 'admin' && !DEMO) {
-    document.body.classList.add('admin'); $('admin').hidden = false; $('eyebrow').textContent = 'Espace admin';
+    document.body.classList.add('admin'); $('admin').hidden = false;
     sb.from('profiles').select('id,name,role').order('name').then(function (r) {
       state.creators = (r.data || []).filter(function (p) { return p.role !== 'admin'; });
+      fillCreators(state.creators.filter(function (p) { return p.role === 'creator'; }));
       var w = $('who'); w.hidden = false; w.textContent = '';
-      if (!state.creators.length) { var o = el('option', '', 'Aucun créateur'); o.value = ''; w.appendChild(o); $('hSub').textContent = 'Crée ton premier accès créateur en bas de la page.'; render(); return; }
-      state.creators.forEach(function (p) { var o = el('option', '', p.name || 'Sans nom'); o.value = p.id; w.appendChild(o); });
-      pick(state.creators[0]);
+      if (!state.creators.length) { var o = el('option', '', 'Aucun compte'); o.value = ''; w.appendChild(o); setView('creator'); $('hSub').textContent = 'Crée ton premier accès (ReYoz, par exemple) en bas de la page.'; render(); return; }
+      [['creator', 'Créateurs'], ['clipper', 'Clippeurs']].forEach(function (g) {
+        var og = document.createElement('optgroup'); og.label = g[1];
+        state.creators.filter(function (p) { return p.role === g[0]; }).forEach(function (p) { var o = el('option', '', p.name || 'Sans nom'); o.value = p.id; og.appendChild(o); });
+        if (og.children.length) w.appendChild(og);
+      });
+      var keep = state.creator && state.creators.find(function (c) { return c.id === state.creator.id; });
+      pick(keep || state.creators[0]); w.value = (keep || state.creators[0]).id;
     });
-  } else { state.creator = me; load(me.id); }
+  } else {
+    state.creator = me; setView(me.role);
+    if (me.role === 'clipper') {
+      if (DEMO) { fillCreators([{ id: 'rios', name: 'ReYoz' }, { id: 'ines', name: 'Inès' }]); load(me.id); }
+      else sb.rpc('list_creators').then(function (r) { fillCreators(r.data || []); load(me.id); });
+    } else load(me.id);
+  }
   observe();
 }
-function pick(p) { state.creator = p; $('hName').textContent = (p.name || 'toi').split(' ')[0]; $('hSub').textContent = 'Tu vois l’espace de ' + (p.name || 'ce créateur') + ', exactement comme lui le voit.'; load(p.id); }
+function pick(p) { state.creator = p; setView(p.role); $('hName').textContent = (p.name || 'toi').split(' ')[0]; $('hSub').textContent = 'Tu vois l\u2019espace de ' + (p.name || 'ce compte') + ', exactement comme ' + (p.role === 'clipper' ? 'ce clippeur' : 'ce créateur') + ' le voit.'; load(p.id); }
 $('who').onchange = function () { var p = state.creators.find(function (c) { return c.id === $('who').value; }); if (p) pick(p); };
 
 /* ---------- actions ---------- */
@@ -601,7 +671,7 @@ $('fLogin').onsubmit = function (e) {
     boot();
   });
 };
-$('bOut').onclick = function () { if (DEMO) { location.href = '/espace/'; return; } sb.auth.signOut().then(function () { location.reload(); }); };
+$('bOut').onclick = function () { if (DEMO) { location.href = './'; return; } sb.auth.signOut().then(function () { location.reload(); }); };
 $('fTr').onsubmit = function (e) {
   e.preventDefault(); var url = $('trUrl').value.trim(), m = $('mTr');
   if (!/^https:\/\/([a-z0-9-]+\.)?(we\.tl|wetransfer\.com)\//i.test(url)) { m.className = 'msg err'; m.textContent = 'Colle un lien WeTransfer (https://we.tl/… ou wetransfer.com).'; return; }
@@ -614,6 +684,23 @@ $('fTr').onsubmit = function (e) {
     m.className = 'msg ok'; m.textContent = 'Reçu ! L’équipe est prévenue.'; toast('Lien envoyé à l’équipe');
   });
 };
+function tiktokLinks(txt) {
+  var l = txt.split(/\s+/).map(function (s) { return s.trim().replace(/\?.*$/, ''); }).filter(function (s) { return /^https:\/\/([a-z]+\.)?tiktok\.com\//i.test(s); });
+  return l.filter(function (u, i) { return l.indexOf(u) === i; });
+}
+$('fDep').onsubmit = function (e) {
+  e.preventDefault(); var m = $('mDep'), cid = $('dCreator').value, links = tiktokLinks($('dLinks').value);
+  if (!cid) { m.className = 'msg err'; m.textContent = 'Choisis le créateur.'; return; }
+  if (!links.length) { m.className = 'msg err'; m.textContent = 'Colle au moins un lien TikTok (https://www.tiktok.com/…).'; return; }
+  if (DEMO) { links.forEach(function (u, k) { state.clips.push({ id: Date.now() + k, url: u, creator_id: cid, status: 'en_attente', views: 0, likes: 0, comments: 0, shares: 0, created_at: new Date().toISOString() }); }); render(); m.className = 'msg ok'; m.textContent = links.length + ' clip(s) déposé(s) (démo).'; $('dLinks').value = ''; return; }
+  $('bDep').disabled = true; var ok = 0, dup = 0, bad = 0;
+  links.reduce(function (pr, u) { return pr.then(function () { return sb.from('clips').insert({ url: u, creator_id: cid, clipper_id: state.me.id, status: 'en_attente' }).then(function (r) { if (!r.error) ok++; else if (r.error.code === '23505') dup++; else bad++; }); }); }, Promise.resolve()).then(function () {
+    $('bDep').disabled = false; $('dLinks').value = '';
+    m.className = 'msg ' + (ok ? 'ok' : 'err');
+    m.textContent = (ok ? ok + ' clip' + (ok > 1 ? 's' : '') + ' déposé' + (ok > 1 ? 's' : '') + ' pour ' + state.names[cid] + '. On valide vite. ' : '') + (dup ? dup + ' déjà déposé' + (dup > 1 ? 's' : '') + '. ' : '') + (bad ? bad + ' refusé' + (bad > 1 ? 's' : '') + ' (lien invalide).' : '');
+    if (ok) { toast(ok + ' clip' + (ok > 1 ? 's' : '') + ' déposé' + (ok > 1 ? 's' : '')); load(state.me.id); }
+  });
+};
 function genPass() { var a = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789', r = new Uint32Array(12), s = ''; crypto.getRandomValues(r); r.forEach(function (x) { s += a[x % a.length]; }); return s.slice(0, 4) + '-' + s.slice(4, 8) + '-' + s.slice(8); }
 $('fNew').onsubmit = function (e) {
   e.preventDefault(); var name = $('nName').value.trim(), email = $('nEmail').value.trim(), m = $('mNew');
@@ -623,11 +710,11 @@ $('fNew').onsubmit = function (e) {
   var tmp = window.supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession: false, autoRefreshToken: false, storageKey: 'klip-tmp' } });
   tmp.auth.signUp({ email: email, password: pass, options: { data: { name: name } } }).then(function (r) {
     if (r.error || !r.data.user) { $('bNew').disabled = false; m.className = 'msg err'; m.textContent = r.error && /registered/i.test(r.error.message) ? 'Cet email a déjà un compte.' : 'Création impossible : ' + (r.error ? r.error.message : 'réessaie'); return; }
-    return sb.from('profiles').update({ approved: true, name: name }).eq('id', r.data.user.id).then(function (u) {
+    return sb.from('profiles').update({ approved: true, name: name, role: $('nRole').value }).eq('id', r.data.user.id).then(function (u) {
       $('bNew').disabled = false;
       if (u.error) { m.className = 'msg err'; m.textContent = 'Compte créé mais pas activé : ' + u.error.message; return; }
       m.className = 'msg ok'; m.textContent = 'Accès créé pour ' + name + '.';
-      var box = $('pwBox'); box.textContent = 'Lien : klipagency.netlify.app/espace · Email : ' + email + ' · Mot de passe : ' + pass; box.classList.add('on');
+      var box = $('pwBox'); box.textContent = 'Lien : ' + SITE + ' · Email : ' + email + ' · Mot de passe : ' + pass; box.classList.add('on');
       $('nName').value = ''; $('nEmail').value = '';
       showApp(state.me);
     });
@@ -635,10 +722,9 @@ $('fNew').onsubmit = function (e) {
 };
 $('fClips').onsubmit = function (e) {
   e.preventDefault(); var m = $('mClips');
-  if (!state.creator || state.creator.role === 'admin') { m.className = 'msg err'; m.textContent = 'Choisis d’abord un créateur en haut de la page.'; return; }
-  var links = $('cLinks').value.split(/\s+/).map(function (s) { return s.trim().replace(/\?.*$/, ''); }).filter(function (s) { return /^https:\/\/(www\.|vm\.|vt\.|m\.)?tiktok\.com\//i.test(s); });
+  if (!state.creator || state.creator.role !== 'creator') { m.className = 'msg err'; m.textContent = 'Choisis d\u2019abord un créateur en haut de la page.'; return; }
+  var links = tiktokLinks($('cLinks').value);
   if (!links.length) { m.className = 'msg err'; m.textContent = 'Aucun lien TikTok reconnu.'; return; }
-  links = links.filter(function (u, i) { return links.indexOf(u) === i; });
   $('bClips').disabled = true;
   sb.from('clips').upsert(links.map(function (u) { return { url: u, creator_id: state.creator.id }; }), { onConflict: 'url', ignoreDuplicates: true }).select().then(function (r) {
     $('bClips').disabled = false;
@@ -651,7 +737,7 @@ setInterval(function () { if (!$('vApp').hidden) { var upd = state.clips.reduce(
 
 /* ---------- démarrage ---------- */
 function boot() {
-  if (DEMO) { $('demoBand').hidden = false; showApp({ id: 'demo', name: 'Nathan', role: 'creator' }); return; }
+  if (DEMO) { $('demoBand').hidden = false; showApp(DEMO_CLIP ? { id: 'demo', name: 'Yanis', role: 'clipper' } : { id: 'demo', name: 'ReYoz', role: 'creator' }); return; }
   if (!sb) { $('vLogin').hidden = false; observe(); return; }
   sb.auth.getSession().then(function (r) {
     var u = r.data.session && r.data.session.user;
