@@ -40,15 +40,23 @@ create table if not exists public.clip_stats (
 );
 create index if not exists clip_stats_clip on public.clip_stats (clip_id, captured_at);
 
--- 4) Liens WeTransfer des créateurs
+-- 4) Liens des lives envoyés par les créateurs (WeTransfer, Google Drive…)
 create table if not exists public.transfers (
   id bigint generated always as identity primary key,
   creator_id uuid not null references public.profiles on delete cascade,
-  url text not null check (url ~* '^https://([a-z0-9-]+\.)?(we\.tl|wetransfer\.com)/'),
+  url text not null,
+  provider text not null default 'wetransfer',
   note text default '' check (char_length(note) <= 500),
   status text not null default 'recu' check (status in ('recu', 'en_cours', 'clipe')),
   created_at timestamptz not null default now()
 );
+
+-- Liens : WeTransfer, Google Drive, Dropbox ou autre (au choix du créateur)
+alter table public.transfers add column if not exists provider text not null default 'wetransfer';
+alter table public.transfers drop constraint if exists transfers_url_check;
+alter table public.transfers add constraint transfers_url_check check (url ~* '^https://[^ ]+$' and char_length(url) <= 1000);
+alter table public.transfers drop constraint if exists transfers_provider_check;
+alter table public.transfers add constraint transfers_provider_check check (provider in ('wetransfer', 'drive', 'dropbox', 'autre'));
 
 -- Profil créé automatiquement à chaque nouveau compte
 create or replace function public.handle_new_user() returns trigger

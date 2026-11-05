@@ -180,7 +180,19 @@ select.who { padding: 10px 14px; border-radius: 999px; border: 1px solid var(--l
 .panel .hint { color: var(--muted); font-size: 14px; margin-top: 6px; }
 .tlist { display: flex; flex-direction: column; gap: 10px; }
 .tr { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid var(--line); animation: popin .6s cubic-bezier(.2,1.4,.4,1) both; }
-.tr .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, #4B6BFB, #2C46D1); color: #fff; font: 400 16px var(--display); }
+.tr .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: #fff; font: 400 16px var(--display); }
+.pi, .tr .ic { background: linear-gradient(135deg, #4B6BFB, #2C46D1); }
+.pi.drive, .tr .ic.drive { background: linear-gradient(135deg, #34A853, #1E8E3E); }
+.pi.dropbox, .tr .ic.dropbox { background: linear-gradient(135deg, #3D8BFF, #0061FE); }
+.pi.autre, .tr .ic.autre { background: linear-gradient(135deg, #3A3A44, #22222A); }
+.flabel { font: 700 13px/1 var(--body); color: var(--muted); }
+.prov { display: flex; flex-wrap: wrap; gap: 8px; }
+.prov label { cursor: pointer; }
+.prov input { position: absolute; opacity: 0; pointer-events: none; }
+.prov span { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 8px; border-radius: 999px; border: 1px solid var(--line2); background: rgba(0,0,0,.3); font: 700 13px/1 var(--body); transition: border-color .2s, background .2s, transform .25s cubic-bezier(.2,1.4,.4,1); }
+.prov .pi { width: 24px; height: 24px; border-radius: 8px; display: grid; place-items: center; color: #fff; font: 400 12px var(--display); font-style: normal; }
+.prov input:checked + span { border-color: rgba(255,225,77,.7); background: rgba(255,225,77,.1); transform: scale(1.04); }
+.prov input:focus-visible + span { outline: 3px solid var(--y); outline-offset: 2px; }
 .tr .u { min-width: 0; } .tr .u a { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 14px/1.3 var(--body); }
 .tr .u small { color: var(--dim); font: 600 12px/1.3 var(--body); }
 .chip { padding: 7px 10px; border-radius: 999px; font: 800 11px/1 var(--body); letter-spacing: .04em; text-transform: uppercase; border: 1px solid; white-space: nowrap; }
@@ -320,12 +332,20 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
     </section>
 
     <section class="sect" id="secLives" aria-labelledby="tLives">
-      <header class="rv"><div><h2 id="tLives">Tes <span class="hl">lives</span> à clipper.</h2><p>Colle ton lien WeTransfer ici : plus besoin de nous l'envoyer en privé.</p></div></header>
+      <header class="rv"><div><h2 id="tLives">Tes <span class="hl">lives</span> à clipper.</h2><p>Colle le lien de ton live ici (WeTransfer, Google Drive…) : plus besoin de nous l'envoyer en privé.</p></div></header>
       <div class="split">
         <form class="panel rv" id="fTr" novalidate>
           <h3>Envoyer un lien</h3>
-          <p class="hint">Lien WeTransfer (we.tl ou wetransfer.com). Ajoute une note si tu veux qu'on regarde un moment précis.</p>
-          <div class="field"><label for="trUrl">Lien WeTransfer</label><input id="trUrl" type="url" placeholder="https://we.tl/t-…" required></div>
+          <p class="hint">Choisis d'où vient ton lien, colle-le, et ajoute une note si tu veux qu'on regarde un moment précis.</p>
+          <div class="field"><span class="flabel">Ton lien vient de</span>
+            <div class="prov" role="radiogroup" aria-label="Type de lien">
+              <label><input type="radio" name="prov" value="wetransfer" checked><span><i class="pi wetransfer">W</i>WeTransfer</span></label>
+              <label><input type="radio" name="prov" value="drive"><span><i class="pi drive">G</i>Google Drive</span></label>
+              <label><input type="radio" name="prov" value="dropbox"><span><i class="pi dropbox">D</i>Dropbox</span></label>
+              <label><input type="radio" name="prov" value="autre"><span><i class="pi autre">↗</i>Autre lien</span></label>
+            </div>
+          </div>
+          <div class="field"><label for="trUrl">Lien</label><input id="trUrl" type="url" placeholder="https://we.tl/t-…" required></div>
           <div class="field"><label for="trNote">Note (facultatif)</label><input id="trNote" type="text" maxlength="500" placeholder="Ex. : le passage à 1 h 12 est fou"></div>
           <button class="btn btn-solid" style="margin-top:18px" id="bTr">Envoyer à l'équipe</button>
           <p class="msg" id="mTr"></p>
@@ -425,7 +445,7 @@ function demoData() {
     clips.push(c);
     for (var d = 0; d <= Math.floor(age); d++) { var u = Math.min(1, Math.pow((d + 1) / Math.min(age, 6), .55)); stats.push({ clip_id: c.id, views: Math.round(v * u), captured_at: new Date(now - (age - d) * 864e5).toISOString() }); }
   });
-  return { clips: clips, stats: stats, transfers: [{ id: 1, url: 'https://we.tl/t-demo123', note: 'Live du 2 novembre, regardez vers 1 h 12', status: 'clipe', created_at: new Date(now - 6 * 864e5).toISOString() }, { id: 2, url: 'https://we.tl/t-demo456', note: 'Podcast avec Inès', status: 'en_cours', created_at: new Date(now - 864e5).toISOString() }] };
+  return { clips: clips, stats: stats, transfers: [{ id: 1, provider: 'drive', url: 'https://drive.google.com/file/d/demo', note: 'Live du 2 novembre, regardez vers 1 h 12', status: 'clipe', created_at: new Date(now - 6 * 864e5).toISOString() }, { id: 2, url: 'https://we.tl/t-demo456', note: 'Podcast avec Inès', status: 'en_cours', created_at: new Date(now - 864e5).toISOString() }] };
 }
 
 /* ---------- rendu ---------- */
@@ -576,7 +596,8 @@ function drawTransfers() {
   if (!state.transfers.length) { box.appendChild(el('p', 'hint', 'Aucun envoi pour l’instant.')); return; }
   state.transfers.forEach(function (t) {
     var r = el('div', 'tr'), u = el('div', 'u'), a = el('a', '', t.url);
-    r.appendChild(el('span', 'ic', 'W')); a.href = t.url; a.target = '_blank'; a.rel = 'noopener'; u.appendChild(a);
+    var pv = { wetransfer: ['W', 'WeTransfer'], drive: ['G', 'Google Drive'], dropbox: ['D', 'Dropbox'], autre: ['↗', 'Lien'] }[t.provider || 'wetransfer'] || ['↗', 'Lien'];
+    var ic = el('span', 'ic ' + (t.provider || 'wetransfer'), pv[0]); ic.title = pv[1]; r.appendChild(ic); a.href = t.url; a.target = '_blank'; a.rel = 'noopener'; u.appendChild(a);
     u.appendChild(el('small', '', new Date(t.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' }) + (t.note ? ' · ' + t.note : '')));
     r.appendChild(u);
     if (state.me && state.me.role === 'admin' && !DEMO) {
@@ -673,11 +694,11 @@ $('fLogin').onsubmit = function (e) {
 };
 $('bOut').onclick = function () { if (DEMO) { location.href = './'; return; } sb.auth.signOut().then(function () { location.reload(); }); };
 $('fTr').onsubmit = function (e) {
-  e.preventDefault(); var url = $('trUrl').value.trim(), m = $('mTr');
-  if (!/^https:\/\/([a-z0-9-]+\.)?(we\.tl|wetransfer\.com)\//i.test(url)) { m.className = 'msg err'; m.textContent = 'Colle un lien WeTransfer (https://we.tl/… ou wetransfer.com).'; return; }
-  if (DEMO) { state.transfers.unshift({ id: Date.now(), url: url, note: $('trNote').value, status: 'recu', created_at: new Date().toISOString() }); drawTransfers(); m.className = 'msg ok'; m.textContent = 'Reçu ! (démo)'; return; }
+  e.preventDefault(); var url = $('trUrl').value.trim(), m = $('mTr'), prov = (document.querySelector('input[name=prov]:checked') || {}).value || 'autre';
+  if (!/^https:\/\/\S+$/i.test(url)) { m.className = 'msg err'; m.textContent = 'Colle un lien complet qui commence par https://'; return; }
+  if (DEMO) { state.transfers.unshift({ id: Date.now(), url: url, provider: prov, note: $('trNote').value, status: 'recu', created_at: new Date().toISOString() }); drawTransfers(); m.className = 'msg ok'; m.textContent = 'Reçu ! (démo)'; return; }
   $('bTr').disabled = true;
-  sb.from('transfers').insert({ creator_id: state.creator.id, url: url, note: $('trNote').value.trim() }).select().then(function (r) {
+  sb.from('transfers').insert({ creator_id: state.creator.id, url: url, provider: prov, note: $('trNote').value.trim() }).select().then(function (r) {
     $('bTr').disabled = false;
     if (r.error) { m.className = 'msg err'; m.textContent = 'L’envoi n’a pas marché, réessaie.'; return; }
     state.transfers.unshift(r.data[0]); drawTransfers(); $('trUrl').value = ''; $('trNote').value = '';
@@ -701,6 +722,7 @@ $('fDep').onsubmit = function (e) {
     if (ok) { toast(ok + ' clip' + (ok > 1 ? 's' : '') + ' déposé' + (ok > 1 ? 's' : '')); load(state.me.id); }
   });
 };
+document.querySelectorAll('input[name=prov]').forEach(function (r) { r.onchange = function () { $('trUrl').placeholder = { wetransfer: 'https://we.tl/t-…', drive: 'https://drive.google.com/…', dropbox: 'https://www.dropbox.com/…', autre: 'https://…' }[r.value]; }; });
 function genPass() { var a = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789', r = new Uint32Array(12), s = ''; crypto.getRandomValues(r); r.forEach(function (x) { s += a[x % a.length]; }); return s.slice(0, 4) + '-' + s.slice(4, 8) + '-' + s.slice(8); }
 $('fNew').onsubmit = function (e) {
   e.preventDefault(); var name = $('nName').value.trim(), email = $('nEmail').value.trim(), m = $('mNew');
