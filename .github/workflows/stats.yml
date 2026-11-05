@@ -1,0 +1,19 @@
+name: Stats des clips
+on:
+  schedule:
+    - cron: "7 5,17 * * *"   # 6 h 07 et 18 h 07 (heure de Paris en hiver)
+  workflow_dispatch: {}        # bouton « Run workflow » pour actualiser tout de suite
+jobs:
+  maj:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python espace/maj_stats.py
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}

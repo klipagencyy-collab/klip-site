@@ -9,3 +9,8 @@ Site vitrine de Klip Agency (agence de clipping) : https://klipagency.netlify.ap
 - Les formulaires créateurs et clippeurs envoient les candidatures vers Google Forms.
 
 Pour publier avec GitHub Pages : Settings → Pages → Branch `main`, dossier `/ (root)`.
+
+## Espace créateur (`/espace/`)
+- `espace/index.html` : connexion des créateurs, stats (vues, j'aime, courbes), clips, liens WeTransfer, panneau admin. Aperçu : `/espace/?demo`.
+- `espace/supabase.sql` : à lancer une fois dans Supabase (tables, sécurité, temps réel).
+- `espace/maj_stats.py` + `.github/workflows/stats.yml` : robot qui lit les stats TikTok via Apify à 6 h et 18 h (secrets GitHub : SUPABASE_URL, SUPABASE_SERVICE_KEY, APIFY_TOKEN).
