@@ -201,6 +201,25 @@ select.who { padding: 10px 14px; border-radius: 999px; border: 1px solid var(--l
 .chip.clipe { color: var(--ok); border-color: rgba(89,211,142,.35); background: rgba(89,211,142,.08); }
 .tr select { padding: 7px 10px; border-radius: 999px; background: rgba(0,0,0,.4); border: 1px solid var(--line2); font: 700 12px/1 var(--body); }
 
+
+/* bloc « lives » : épuré, en premier */
+.lives { margin: 28px 0 0; padding: clamp(20px, 3vw, 32px); border-radius: 28px; background: linear-gradient(180deg, rgba(255,225,77,.07), rgba(255,225,77,.015)); border: 1px solid rgba(255,225,77,.22); box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+.lv-head { display: flex; align-items: baseline; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap; margin-bottom: 16px; }
+.lv-head h2 { font: 400 clamp(24px, 2.8vw, 34px)/1.05 var(--display); letter-spacing: -.02em; }
+.lv-head p { color: var(--muted); font-size: 15px; }
+.lv-row { display: flex; gap: 10px; margin-top: 14px; }
+.lv-row input, #trNote, .lives textarea, .lives select { flex: 1; min-width: 0; padding: 16px 18px; border-radius: 16px; border: 1px solid var(--line2); background: rgba(0,0,0,.4); font-size: 16px; transition: border-color .2s, box-shadow .2s; }
+.lv-row input:focus, #trNote:focus, .lives textarea:focus, .lives select:focus { border-color: rgba(255,225,77,.6); box-shadow: 0 0 0 4px rgba(255,225,77,.12); outline: none; }
+#trNote { width: 100%; margin-top: 10px; font-size: 14px; padding: 13px 16px; }
+.lv-note-t { margin-top: 10px; border: 0; background: none; padding: 4px 0; color: var(--muted); font: 700 13px/1 var(--body); cursor: pointer; }
+.lv-note-t:hover { color: var(--y); }
+.lives .msg { margin-top: 8px; min-height: 0; }
+.lives .tlist { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); gap: 8px; }
+.lives .tlist:empty { display: none; }
+.lives .tr { padding: 10px 12px; background: rgba(0,0,0,.25); }
+.lives .tr .ic { width: 34px; height: 34px; border-radius: 10px; font-size: 14px; }
+.lives .split { gap: 10px; }
+@media (max-width: 600px) { .lv-row { flex-direction: column; } .lv-row .btn { width: 100%; } .lv-row select { flex: 1 1 auto !important; } }
 .adminbox { margin-top: 56px; border-radius: 28px; padding: clamp(20px, 3vw, 34px); border: 1px solid rgba(255,225,77,.25); background: linear-gradient(180deg, rgba(255,225,77,.06), rgba(255,225,77,.01)); }
 .adminbox .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
 .pw { margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(0,0,0,.4); border: 1px solid var(--line2); font: 700 14px/1.5 var(--body); word-break: break-all; display: none; }
@@ -283,6 +302,41 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
     </nav>
     <div class="demo-band" id="demoBand" hidden>Aperçu avec des chiffres de démonstration. Les vrais chiffres apparaîtront dès que tes clips seront ajoutés.</div>
 
+    <section class="lives rv" id="secDepot" hidden aria-labelledby="tDepot">
+      <form id="fDep" novalidate>
+        <div class="lv-head"><h2 id="tDepot">Déposer tes <span class="hl">clips</span></h2><p>Choisis le créateur, colle tes liens TikTok.</p></div>
+        <div class="lv-row">
+          <select id="dCreator" aria-label="Le clip est pour" required style="flex:0 0 210px"></select>
+          <textarea id="dLinks" rows="1" aria-label="Liens TikTok, un par ligne" placeholder="Liens TikTok, un par ligne" style="min-height:56px;resize:vertical"></textarea>
+          <button class="btn btn-solid" id="bDep">Déposer</button>
+        </div>
+        <p class="msg" id="mDep">0,70 € par clip validé, plus un bonus aux vues.</p>
+      </form>
+    </section>
+
+    <section class="lives rv" id="secLives" aria-labelledby="tLives">
+      <form id="fTr" novalidate>
+        <div class="lv-head">
+          <h2 id="tLives">Tes <span class="hl">lives</span> à clipper</h2>
+          <p>Colle ton lien, on s'occupe du reste.</p>
+        </div>
+        <div class="prov" role="radiogroup" aria-label="Type de lien">
+          <label><input type="radio" name="prov" value="wetransfer" checked><span><i class="pi wetransfer">W</i>WeTransfer</span></label>
+          <label><input type="radio" name="prov" value="drive"><span><i class="pi drive">G</i>Google Drive</span></label>
+          <label><input type="radio" name="prov" value="dropbox"><span><i class="pi dropbox">D</i>Dropbox</span></label>
+          <label><input type="radio" name="prov" value="autre"><span><i class="pi autre">↗</i>Autre</span></label>
+        </div>
+        <div class="lv-row">
+          <input id="trUrl" type="url" placeholder="https://we.tl/t-…" aria-label="Lien de ton live" required>
+          <button class="btn btn-solid" id="bTr">Envoyer</button>
+        </div>
+        <button type="button" class="lv-note-t" id="noteT">+ Ajouter une note</button>
+        <input id="trNote" type="text" maxlength="500" placeholder="Ex. : le passage à 1 h 12 est fou" aria-label="Note pour l'équipe" hidden>
+        <p class="msg" id="mTr"></p>
+      </form>
+      <div class="tlist" id="tlist"></div>
+    </section>
+
     <header class="dhero">
       <div class="rv">
         <span class="eyebrow" id="eyebrow">Espace créateur</span>
@@ -303,18 +357,6 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
       <div class="kpi rv" style="--d:.26s"><div class="k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span id="kBestL">Meilleur clip</span></div><div class="v" id="kBest">0</div><div class="s" id="kBestS">&nbsp;</div></div>
     </div>
 
-    <section class="sect" id="secDepot" hidden aria-labelledby="tDepot">
-      <header class="rv"><div><h2 id="tDepot">Déposer tes <span class="hl">clips</span>.</h2><p>Choisis le créateur, colle tes liens TikTok : on valide, puis les vues sont suivies automatiquement.</p></div></header>
-      <form class="panel rv" id="fDep" novalidate>
-        <div class="split" style="align-items:end">
-          <div class="field" style="margin-top:0"><label for="dCreator">Le clip est pour</label><select id="dCreator" required></select></div>
-          <div class="field" style="margin-top:0"><label for="dLinks">Liens TikTok (un par ligne)</label><textarea id="dLinks" style="min-height:56px" placeholder="https://www.tiktok.com/@toncompte/video/…"></textarea></div>
-        </div>
-        <button class="btn btn-solid" style="margin-top:18px" id="bDep">Déposer</button>
-        <p class="msg" id="mDep">0,70 € par clip validé, plus un bonus aux vues.</p>
-      </form>
-    </section>
-
     <section class="sect" aria-labelledby="tCourbe">
       <header class="rv"><div><h2 id="tCourbe">Ta <span class="hl">courbe</span>.</h2><p>Le total de vues de tous tes clips, jour après jour.</p></div></header>
       <div class="charts">
@@ -329,29 +371,6 @@ footer { margin: 80px 0 30px; color: var(--dim); font-size: 13px; text-align: ce
         <div class="tools" role="group" aria-label="Trier les clips"><button class="on" data-s="views">Plus vus</button><button data-s="new">Plus récents</button><button data-s="up">Qui montent</button></div>
       </header>
       <div class="clips" id="clips"></div>
-    </section>
-
-    <section class="sect" id="secLives" aria-labelledby="tLives">
-      <header class="rv"><div><h2 id="tLives">Tes <span class="hl">lives</span> à clipper.</h2><p>Colle le lien de ton live ici (WeTransfer, Google Drive…) : plus besoin de nous l'envoyer en privé.</p></div></header>
-      <div class="split">
-        <form class="panel rv" id="fTr" novalidate>
-          <h3>Envoyer un lien</h3>
-          <p class="hint">Choisis d'où vient ton lien, colle-le, et ajoute une note si tu veux qu'on regarde un moment précis.</p>
-          <div class="field"><span class="flabel">Ton lien vient de</span>
-            <div class="prov" role="radiogroup" aria-label="Type de lien">
-              <label><input type="radio" name="prov" value="wetransfer" checked><span><i class="pi wetransfer">W</i>WeTransfer</span></label>
-              <label><input type="radio" name="prov" value="drive"><span><i class="pi drive">G</i>Google Drive</span></label>
-              <label><input type="radio" name="prov" value="dropbox"><span><i class="pi dropbox">D</i>Dropbox</span></label>
-              <label><input type="radio" name="prov" value="autre"><span><i class="pi autre">↗</i>Autre lien</span></label>
-            </div>
-          </div>
-          <div class="field"><label for="trUrl">Lien</label><input id="trUrl" type="url" placeholder="https://we.tl/t-…" required></div>
-          <div class="field"><label for="trNote">Note (facultatif)</label><input id="trNote" type="text" maxlength="500" placeholder="Ex. : le passage à 1 h 12 est fou"></div>
-          <button class="btn btn-solid" style="margin-top:18px" id="bTr">Envoyer à l'équipe</button>
-          <p class="msg" id="mTr"></p>
-        </form>
-        <div class="panel rv" style="--d:.1s"><h3>Suivi de tes envois</h3><p class="hint">Reçu → En cours de clipping → Clipé.</p><div class="tlist" id="tlist" style="margin-top:16px"></div></div>
-      </div>
     </section>
 
     <!-- ============ ADMIN ============ -->
@@ -593,8 +612,8 @@ function drawClips() {
 var LBL = { recu: 'Reçu', en_cours: 'En cours', clipe: 'Clipé' };
 function drawTransfers() {
   var box = $('tlist'); box.textContent = '';
-  if (!state.transfers.length) { box.appendChild(el('p', 'hint', 'Aucun envoi pour l’instant.')); return; }
-  state.transfers.forEach(function (t) {
+  if (!state.transfers.length) return;
+  state.transfers.slice(0, 5).forEach(function (t) {
     var r = el('div', 'tr'), u = el('div', 'u'), a = el('a', '', t.url);
     var pv = { wetransfer: ['W', 'WeTransfer'], drive: ['G', 'Google Drive'], dropbox: ['D', 'Dropbox'], autre: ['↗', 'Lien'] }[t.provider || 'wetransfer'] || ['↗', 'Lien'];
     var ic = el('span', 'ic ' + (t.provider || 'wetransfer'), pv[0]); ic.title = pv[1]; r.appendChild(ic); a.href = t.url; a.target = '_blank'; a.rel = 'noopener'; u.appendChild(a);
@@ -723,6 +742,7 @@ $('fDep').onsubmit = function (e) {
   });
 };
 document.querySelectorAll('input[name=prov]').forEach(function (r) { r.onchange = function () { $('trUrl').placeholder = { wetransfer: 'https://we.tl/t-…', drive: 'https://drive.google.com/…', dropbox: 'https://www.dropbox.com/…', autre: 'https://…' }[r.value]; }; });
+$('noteT').onclick = function () { $('trNote').hidden = false; $('trNote').focus(); this.hidden = true; };
 function genPass() { var a = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789', r = new Uint32Array(12), s = ''; crypto.getRandomValues(r); r.forEach(function (x) { s += a[x % a.length]; }); return s.slice(0, 4) + '-' + s.slice(4, 8) + '-' + s.slice(8); }
 $('fNew').onsubmit = function (e) {
   e.preventDefault(); var name = $('nName').value.trim(), email = $('nEmail').value.trim(), m = $('mNew');
