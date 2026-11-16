@@ -159,7 +159,7 @@ nav.scrolled .navlinks .btn { padding: 10px 14px; }
 
 
 /* graphiques */
-.charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.charts { display: grid; grid-template-columns: minmax(0, 760px); justify-content: center; gap: 16px; margin-top: 16px; }
 .chart { margin: 0; border-radius: var(--r); background: linear-gradient(180deg, var(--panel2), var(--panel)); border: 1px solid var(--line); padding: 22px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .chart figcaption { display: flex; flex-direction: column; gap: 4px; } .chart figcaption b { font: 800 17px/1.25 var(--body); } .chart figcaption span { color: var(--muted); font-size: 14px; font-weight: 600; }
 .chart svg { width: 100%; height: auto; display: block; overflow: visible; }
@@ -249,7 +249,7 @@ section, .sec { padding-block: 96px; }
 
 /* blocs repris (simulateurs, tableau, portes, formulaires, FAQ) */
 .door .head, .door .head.c { margin-bottom: 36px; }
-.sims { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.sims { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 .sim { border-radius: var(--r); background: linear-gradient(180deg, var(--panel2), var(--panel)); border: 1px solid var(--line); padding: 24px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .sim label { color: var(--muted); font-weight: 600; } .sim output { color: var(--y); font-weight: 800; }
 input[type=range] { width: 100%; accent-color: var(--y); }
@@ -426,7 +426,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
           <div class="backlogo"><svg width="34" height="58" viewBox="0 0 72 124" aria-hidden="true"><rect x="5" y="5" width="62" height="114" rx="14" fill="none" stroke="#0E0E10" stroke-width="10"/><path d="M28 46 L50 62 L28 78 Z" fill="#0E0E10"/></svg><span>klip</span><small>AGENCY</small></div>
         </div>
       </div>
-      <div class="float f1 pop" data-depth="26" style="left:-6%;top:6%;--d:.15s"><div class="coin">0,70 €</div></div>
+      <div class="float f1 pop" data-depth="26" style="left:-6%;top:6%;--d:.15s"><div class="coin">▶ 30 s</div></div>
       <div class="float f2 pop" data-depth="40" style="right:2%;top:9%;--d:.3s"><div class="pill notif"><span>▶ +1 clip validé</span></div></div>
       <!-- Miniature de la vidéo longue : remplace assets/miniature.jpg (format 16:9) -->
       <div class="float f3 pop far" data-depth="8" style="left:-14%;top:30%;z-index:1;--d:.45s"><div class="thumb"><img src="assets/miniature.jpg" alt=""><span class="live">▶ Vidéo longue</span><i class="playb"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 4l13 8-13 8z"/></svg></i></div></div>
@@ -458,8 +458,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
     <div class="bento">
       <article class="tile">
         <span class="tag"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.6-1-1.7-1.5-3-1.5-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.3 2.2-3 2.2-1.4 0-2.5-.6-3-1.6M12 6v2M12 16v2"/></svg>Clippeurs payés</span>
-        <div class="viz coins"><i style="left:16%;top:16%">€</i><i class="big" style="animation-delay:-1.5s">0,70</i><i style="right:14%;top:22%;animation-delay:-3s">€</i><i style="left:30%;bottom:6%;animation-delay:-2s">€</i></div>
-        <p><b>0,70 € par clip</b> + bonus dès 1 000 vues.</p>
+        <div class="viz coins"><i style="left:16%;top:16%">€</i><i class="big" style="animation-delay:-1.5s">€</i><i style="right:14%;top:22%;animation-delay:-3s">€</i><i style="left:30%;bottom:6%;animation-delay:-2s">€</i></div>
+        <p><b>Payés à chaque clip</b> + bonus dès 1 000 vues.</p>
       </article>
       <article class="tile">
         <span class="tag"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Rythme régulier</span>
@@ -506,9 +506,9 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
       <p>Nos vrais tarifs, sans promesse de vues.</p>
     </div>
     <div class="bf" id="bf">
-      <p class="eyebrow" id="bf-tag">Offre Black Friday · jusqu'au 30 novembre</p>
-      <h3 id="bf-title">1 € le clip jusqu'au 30 novembre, 1,25 € ensuite.</h3>
-      <p id="bf-txt">Nos tarifs augmentent de 0,25 € par clip le 1er décembre 2026. Réserve ton pack avant le 30 novembre pour le payer au tarif actuel, soit 20 % de moins sur le pack 100.</p>
+      <p class="eyebrow" id="bf-tag">Packs</p>
+      <h3 id="bf-title">1,50 € le clip, et moins cher avec le volume.</h3>
+      <p id="bf-txt">Monté, sous-titré, prêt à poster. Plus tu prends de clips, plus le prix par clip baisse.</p>
       <div class="packs" id="packs"></div>
       <p class="fine" style="margin:14px 0 0">2 à 3 clips test offerts avant de t'engager. Prix TTC, TVA non applicable (art. 293 B du CGI).</p>
     </div>
@@ -519,27 +519,15 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
         <input id="s-hours" type="range" min="2" max="120" step="2" value="20">
         <label for="s-rate">Clips par heure de contenu : <output id="o-rate">6</output></label>
         <input id="s-rate" type="range" min="2" max="15" step="1" value="6">
-        <div class="res"><div><b id="r-clips">120</b><span>clips par mois</span></div><div><b id="r-price">1,00 €</b><span>par clip</span></div><div><b id="r-total">120 €</b><span>par mois</span></div></div>
-        <p class="fine">2 à 3 clips test offerts. Jamais sous <span class="k-floor">0,70 €</span> le clip.</p>
-      </div>
-      <div class="sim">
-        <h3>Je suis clippeur</h3>
-        <label for="s-clips">Clips validés par semaine : <output id="o-clips">30</output></label>
-        <input id="s-clips" type="range" min="5" max="150" step="5" value="30">
-        <div class="res"><div><b id="r-week">21 €</b><span>par semaine</span></div><div><b id="r-month">91 €</b><span>par mois environ</span></div><div><b>+ bonus</b><span>dès 1 000 vues</span></div></div>
-        <p class="fine">Payé chaque fin de semaine. Bonus aux vues en plus.</p>
+        <div class="res"><div><b id="r-clips">120</b><span>clips par mois</span></div><div><b id="r-price">1,50 €</b><span>par clip</span></div><div><b id="r-total">180 €</b><span>par mois</span></div></div>
+        <p class="fine">2 à 3 clips test offerts. Jamais sous <span class="k-floor">1,20 €</span> le clip.</p>
       </div>
     </div>
     <div class="charts">
       <figure class="chart">
         <figcaption><b>Prix par clip selon le volume</b><span>Créateurs · après les clips test offerts</span></figcaption>
-        <svg id="ch-price" viewBox="0 0 560 300" role="img" aria-label="Prix par clip : 1 € à 100 clips, puis 5 centimes de moins par tranche de 100 clips, jusqu'à 0,70 € dès 700 clips"></svg>
+        <svg id="ch-price" viewBox="0 0 560 300" role="img" aria-label="Prix par clip : 1,50 € à 100 clips, puis 5 centimes de moins par tranche de 100 clips, jusqu'à 1,20 € dès 700 clips"></svg>
         <p class="fine">La barre jaune suit le simulateur.</p>
-      </figure>
-      <figure class="chart">
-        <figcaption><b>Ce que gagne un clippeur par semaine</b><span>0,70 € par clip validé, hors bonus aux vues</span></figcaption>
-        <svg id="ch-earn" viewBox="0 0 560 300" role="img" aria-label="Gains d'un clippeur : 0,70 € par clip validé, de 7 € pour 10 clips à 105 € pour 150 clips par semaine"></svg>
-        <p class="fine">Le point jaune suit le simulateur. Bonus aux vues en plus.</p>
       </figure>
     </div>
   </div>
@@ -552,7 +540,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
       <h2 id="t-cmp">La pub s'arrête quand tu arrêtes de payer. <span class="hl">Un clip continue.</span></h2>
     </div>
     <div class="tblwrap"><table class="cmp"><thead><tr><th scope="col"></th><th scope="col">Pub payante</th><th scope="col">Clipping Klip</th></tr></thead><tbody>
-      <tr><th scope="row">Ce que tu paies</th><td>Chaque vue, chaque clic</td><td>Un prix fixe par clip, dès <span class="k-floor">0,70 €</span></td></tr>
+      <tr><th scope="row">Ce que tu paies</th><td>Chaque vue, chaque clic</td><td>Un prix fixe par clip, dès <span class="k-floor">1,20 €</span></td></tr>
       <tr><th scope="row">Quand tu arrêtes</th><td>Plus aucune vue</td><td>Les clips restent en ligne et continuent d'être vus</td></tr>
       <tr><th scope="row">Ce que voit le public</th><td>Une publicité</td><td>Ton vrai contenu, tes vrais moments</td></tr>
       <tr><th scope="row">Ce que tu dois produire</th><td>Des créas pub à part</td><td>Rien de plus : tu continues tes lives</td></tr>
@@ -630,7 +618,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
 
     <div class="perks">
       <div class="perk"><h3>Les rushs sont fournis</h3><p>Contenus déjà autorisés par les créateurs.</p></div>
-      <div class="perk"><h3>0,70 € par clip + bonus</h3><p>Bonus dès 1 000 vues. PayPal ou virement chaque semaine.</p></div>
+      <div class="perk"><h3>Payé à chaque clip + bonus</h3><p>Le tarif t'est envoyé par email dès ta candidature. PayPal ou virement chaque semaine.</p></div>
       <div class="perk"><h3>Un cahier des charges clair</h3><p>Tu sais exactement ce qu'on attend.</p></div>
     </div>
 
@@ -687,11 +675,11 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
       <details><summary>Il faut combien d'abonnés pour candidater ?</summary><div><p>Aucun. Il suffit d'avoir du contenu long.</p></div></details>
       <details><summary>Comment je vous envoie mes vidéos ?</summary><div><p>Par Google Drive ou WeTransfer.</p></div></details>
       <details><summary>Je découpe déjà mes clips moi-même, vous pouvez juste les monter ?</summary><div><p>Oui. Envoie-nous tes passages déjà choisis par Google Drive ou WeTransfer : on les monte simplement (format vertical, cadrage, sous-titres, titre), sans toucher à ce que tu as sélectionné. Même tarif que pour les clips qu'on découpe nous-mêmes.</p></div></details>
-      <details><summary>Combien ça coûte après les clips test ?</summary><div><p id="faq-price">Jusqu'au 30 novembre 2026 (offre Black Friday), le prix baisse avec le volume et ne descend jamais sous 0,70 € le clip. À partir du 1er décembre, chaque palier augmente de 0,25 €.</p>
-        <div style="overflow-x: auto"><table class="prices" id="tbl-prices"><thead><tr><th scope="col">Clips par mois</th><th scope="col">Prix par clip</th><th scope="col">Total</th></tr></thead><tbody><tr><td>100</td><td>1,00 €</td><td>100 €</td></tr><tr><td>200</td><td>0,95 €</td><td>190 €</td></tr><tr><td>300</td><td>0,90 €</td><td>270 €</td></tr><tr><td>400</td><td>0,85 €</td><td>340 €</td></tr><tr><td>500</td><td>0,80 €</td><td>400 €</td></tr><tr><td>600</td><td>0,75 €</td><td>450 €</td></tr><tr><td>700 et plus</td><td>0,70 €</td><td>0,70 € × nombre de clips</td></tr></tbody></table></div>
+      <details><summary>Combien ça coûte après les clips test ?</summary><div><p id="faq-price">1,50 € le clip, et le prix baisse avec le volume sans jamais descendre sous 1,20 € le clip :</p>
+        <div style="overflow-x: auto"><table class="prices" id="tbl-prices"><thead><tr><th scope="col">Clips par mois</th><th scope="col">Prix par clip</th><th scope="col">Total</th></tr></thead><tbody><tr><td>100</td><td>1,50 €</td><td>150 €</td></tr><tr><td>200</td><td>1,45 €</td><td>290 €</td></tr><tr><td>300</td><td>1,40 €</td><td>420 €</td></tr><tr><td>400</td><td>1,35 €</td><td>540 €</td></tr><tr><td>500</td><td>1,30 €</td><td>650 €</td></tr><tr><td>600</td><td>1,25 €</td><td>750 €</td></tr><tr><td>700+</td><td>1,20 €</td><td>1,20 € × nombre de clips</td></tr></tbody></table></div>
         </div></details>
       <details><summary>Est-ce que je garde mes droits ?</summary><div><p>Oui, tes contenus restent à toi. La monétisation des clips revient au clippeur et à Klip ; toi, tu gagnes la visibilité.</p></div></details>
-      <details><summary>Je suis clippeur, combien je gagne ?</summary><div><p>0,70 € par clip validé, même avec peu de vues, plus un bonus dès 1 000 vues. Payé chaque semaine, sans statut.</p></div></details>
+      <details><summary>Je suis clippeur, combien je gagne ?</summary><div><p>Chaque clip validé est payé, même avec peu de vues, plus un bonus dès 1 000 vues. Le tarif exact t'est envoyé par email dès que tu envoies ta candidature. Payé chaque semaine, sans statut.</p></div></details>
       <details><summary>C'est légal de clipper le contenu d'un créateur ?</summary><div><p>Oui : on ne clippe que des créateurs sous contrat.</p></div></details>
     </div>
   </div>
@@ -773,29 +761,17 @@ var GFORMS = {
 (function sims() {
   var $ = function (id) { return document.getElementById(id); };
   var eur = function (x) { return x.toFixed(2).replace('.', ',').replace(',00', '') + ' €'; };
-  // Offre Black Friday : tarifs actuels jusqu'au 30/11/2026 inclus, +0,25 € par clip à partir du 1er décembre (bascule automatique)
-  var BF = Date.now() < Date.parse('2026-12-01T00:00:00+01:00'), UP = BF ? 0 : 0.25; window.KLIP_UP = UP;
-  function base(n) { return n < 100 ? 1 : Math.max(0.70, Math.round((1 - 0.05 * (Math.floor(n / 100) - 1)) * 100) / 100); }
-  function price(n) { return Math.round((base(n) + UP) * 100) / 100; }
+  function base(n) { return n < 100 ? 1.5 : Math.max(1.20, Math.round((1.5 - 0.05 * (Math.floor(n / 100) - 1)) * 100) / 100); }
+  function price(n) { return base(n); }
   var packs = $('packs');
   [50, 100, 200, 500].forEach(function (n) {
     var d = document.createElement('div'); d.className = 'pack';
-    var now = n * (base(n) + UP), dec = n * (base(n) + 0.25);
-    d.innerHTML = '<span class="n">Pack ' + n + ' clips</span><b>' + eur(now) + '</b><span class="u">' + eur(base(n) + UP) + ' le clip</span>' +
-      (BF ? '<span class="later"><s>' + eur(dec) + '</s> à partir du 1er décembre</span>' : '');
+    d.innerHTML = '<span class="n">Pack ' + n + ' clips</span><b>' + eur(n * base(n)) + '</b><span class="u">' + eur(base(n)) + ' le clip</span>';
     packs.appendChild(d);
   });
-  if (!BF) {
-    $('bf-tag').textContent = 'Packs'; $('bf-title').textContent = 'Nos packs de clips.'; $('bf-txt').textContent = 'Le prix par clip baisse avec le volume.';
-    document.querySelectorAll('.k-floor').forEach(function (e) { e.textContent = '0,95 €'; });
-    $('faq-price').textContent = 'Le prix baisse avec le volume, et ne descend jamais sous 0,95 € le clip :';
-    $('tbl-prices').querySelectorAll('tbody tr').forEach(function (tr, i) { var p = Math.max(0.70, 1 - 0.05 * i) + 0.25, n = (i + 1) * 100;
-      tr.cells[1].textContent = eur(p).replace(' €', (p * 100 % 100 ? '' : ',00') + ' €'); tr.cells[2].textContent = i === 6 ? eur(p) + ' × nombre de clips' : eur(n * p); });
-  }
   function crea() { var h = +$('s-hours').value, r = +$('s-rate').value, n = h * r, p = price(n);
     $('o-hours').textContent = h; $('o-rate').textContent = r; $('r-clips').textContent = n; $('r-price').textContent = eur(p); $('r-total').textContent = eur(n * p); }
-  function clip() { var c = +$('s-clips').value; $('o-clips').textContent = c; $('r-week').textContent = eur(c * 0.70); $('r-month').textContent = eur(Math.round(c * 0.70 * 52 / 12)); }
-  ['s-hours', 's-rate'].forEach(function (id) { $(id).addEventListener('input', crea); }); $('s-clips').addEventListener('input', clip); crea(); clip();
+  ['s-hours', 's-rate'].forEach(function (id) { $(id).addEventListener('input', crea); }); crea();
 })();
 
 function setStatus(form, text, isErr) {
@@ -854,10 +830,10 @@ document.getElementById('copy').addEventListener('click', function () {
   var eur = function (x, d) { return x.toFixed(d === undefined ? 2 : d).replace('.', ','); };
   // 1) prix par clip
   var P = document.getElementById('ch-price'), L = 54, Rr = 545, T = 24, B = 262, steps = [100, 200, 300, 400, 500, 600, 700];
-  [0, .25, .5, .75, 1].forEach(function (v) { var y = B - (B - T) * v; el('line', { x1: L, x2: Rr, y1: y, y2: y, class: 'ax' }, P); el('text', { x: L - 10, y: y + 4, class: 'tk', 'text-anchor': 'end' }, P).textContent = eur(v * (window.KLIP_UP ? 1.25 : 1)) + ' €'; });
+  [0, 1/3, 2/3, 1].forEach(function (v) { var y = B - (B - T) * v; el('line', { x1: L, x2: Rr, y1: y, y2: y, class: 'ax' }, P); el('text', { x: L - 10, y: y + 4, class: 'tk', 'text-anchor': 'end' }, P).textContent = eur(v * 1.5) + ' €'; });
   var bw = (Rr - L) / steps.length, bars = [];
   steps.forEach(function (n, i) {
-    var UPc = window.KLIP_UP || 0, MX = UPc ? 1.25 : 1, price = Math.max(.70, 1 - .05 * i) + UPc, h = (B - T) * price / MX, x = L + i * bw + bw * .18, w = bw * .64;
+    var price = Math.max(1.2, 1.5 - .05 * i), h = (B - T) * price / 1.5, x = L + i * bw + bw * .18, w = bw * .64;
     var r = el('rect', { x: x, y: B - h, width: w, height: h, rx: 8, class: 'bar', style: 'animation-delay:' + (i * 70) + 'ms' }, P);
     var t = el('text', { x: x + w / 2, y: B - h - 8, class: 'val' }, P); t.textContent = eur(price) + ' €';
     el('text', { x: x + w / 2, y: B + 20, class: 'tk', 'text-anchor': 'middle' }, P).textContent = n + (i === steps.length - 1 ? '+' : '');
@@ -866,22 +842,9 @@ document.getElementById('copy').addEventListener('click', function () {
   el('text', { x: (L + Rr) / 2, y: 298, class: 'tk', 'text-anchor': 'middle' }, P).textContent = 'clips par mois';
   function hiPrice() { var n = (+document.getElementById('s-hours').value) * (+document.getElementById('s-rate').value), idx = n < 100 ? -1 : Math.min(6, Math.floor(n / 100) - 1);
     bars.forEach(function (b, i) { b.r.classList.toggle('on', i === idx); b.t.classList.toggle('on', i === idx); }); }
-  // 2) gains clippeur
-  var E = document.getElementById('ch-earn'), xmin = 10, xmax = 150, ymax = 110;
-  var X = function (c) { return L + (Rr - L) * (c - xmin) / (xmax - xmin); }, Y = function (v) { return B - (B - T) * v / ymax; };
-  var d = el('defs', {}, E), g = el('linearGradient', { id: 'earnfill', x1: 0, y1: 0, x2: 0, y2: 1 }, d);
-  el('stop', { offset: '0', 'stop-color': '#FFE14D', 'stop-opacity': '.28' }, g); el('stop', { offset: '1', 'stop-color': '#FFE14D', 'stop-opacity': '0' }, g);
-  [0, 25, 50, 75, 100].forEach(function (v) { el('line', { x1: L, x2: Rr, y1: Y(v), y2: Y(v), class: 'ax' }, E); el('text', { x: L - 10, y: Y(v) + 4, class: 'tk', 'text-anchor': 'end' }, E).textContent = v + ' €'; });
-  [10, 50, 100, 150].forEach(function (c) { el('text', { x: X(c), y: B + 20, class: 'tk', 'text-anchor': 'middle' }, E).textContent = c; });
-  el('text', { x: (L + Rr) / 2, y: 298, class: 'tk', 'text-anchor': 'middle' }, E).textContent = 'clips validés par semaine';
-  el('path', { d: 'M' + X(xmin) + ' ' + Y(xmin * .7) + ' L' + X(xmax) + ' ' + Y(xmax * .7) + ' L' + X(xmax) + ' ' + B + ' L' + X(xmin) + ' ' + B + ' Z', class: 'area' }, E);
-  el('path', { d: 'M' + X(xmin) + ' ' + Y(xmin * .7) + ' L' + X(xmax) + ' ' + Y(xmax * .7), class: 'line', pathLength: 1 }, E);
-  var halo = el('circle', { r: 16, class: 'halo' }, E), dot = el('circle', { r: 8, class: 'dot' }, E), lab = el('text', { class: 'lab', 'text-anchor': 'middle' }, E);
-  function hiEarn() { var c = +document.getElementById('s-clips').value, x = X(c), y = Y(c * .7);
-    [halo, dot].forEach(function (k) { k.setAttribute('cx', x); k.setAttribute('cy', y); }); lab.setAttribute('x', Math.min(Rr - 30, Math.max(L + 30, x))); lab.setAttribute('y', y - 22); lab.textContent = eur(c * .7, c * .7 % 1 ? 2 : 0) + ' €'; }
-  ['s-hours', 's-rate'].forEach(function (id) { document.getElementById(id).addEventListener('input', hiPrice); }); document.getElementById('s-clips').addEventListener('input', hiEarn);
-  hiPrice(); hiEarn();
-  if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('grow'); io.unobserve(e.target); } }); }, { threshold: .35 }); [P, E].forEach(function (k) { io.observe(k); }); }
+  ['s-hours', 's-rate'].forEach(function (id) { document.getElementById(id).addEventListener('input', hiPrice); });
+  hiPrice();
+  if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('grow'); io.unobserve(e.target); } }); }, { threshold: .35 }); io.observe(P); }
 })();
 (function toc() {
   var links = [].slice.call(document.querySelectorAll('#toc a')), prog = document.getElementById('tocprog');
