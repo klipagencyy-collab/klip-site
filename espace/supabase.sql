@@ -82,6 +82,12 @@ language sql stable security definer set search_path = public as $$
   where p.role = 'creator' and p.approved and public.my_role() in ('clipper', 'admin') order by p.name;
 $$;
 
+-- Vrai si l'id est un créateur validé (security definer : le clippeur n'a pas le droit de lire le profil du créateur)
+create or replace function public.is_creator(cid uuid) returns boolean
+language sql stable security definer set search_path = public as $$
+  select exists (select 1 from public.profiles p where p.id = cid and p.role = 'creator' and p.approved);
+$$;
+
 -- Sécurité : chacun ne voit que ses données, l'admin voit tout
 alter table public.profiles enable row level security;
 alter table public.clips enable row level security;
@@ -101,7 +107,7 @@ create policy c_read on public.clips for select using (
 drop policy if exists c_clipper_insert on public.clips;
 create policy c_clipper_insert on public.clips for insert with check (
   public.my_role() = 'clipper' and clipper_id = auth.uid() and status = 'en_attente' and bonus = 0 and views = 0
-  and exists (select 1 from public.profiles p where p.id = creator_id and p.role = 'creator' and p.approved));
+  and public.is_creator(creator_id));
 drop policy if exists c_admin on public.clips;
 create policy c_admin on public.clips for all using (public.is_admin()) with check (public.is_admin());
 

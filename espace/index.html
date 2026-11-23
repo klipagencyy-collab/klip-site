@@ -822,11 +822,11 @@ $('fDep').onsubmit = function (e) {
   if (!cid) { m.className = 'msg err'; m.textContent = 'Choisis le créateur.'; return; }
   if (!links.length) { m.className = 'msg err'; m.textContent = 'Colle au moins un lien TikTok (https://www.tiktok.com/…).'; return; }
   if (DEMO) { links.forEach(function (u, k) { state.clips.push({ id: Date.now() + k, url: u, creator_id: cid, status: 'en_attente', views: 0, likes: 0, comments: 0, shares: 0, created_at: new Date().toISOString() }); }); render(); m.className = 'msg ok'; m.textContent = links.length + ' clip(s) déposé(s) (démo).'; $('dLinks').value = ''; return; }
-  $('bDep').disabled = true; var ok = 0, dup = 0, bad = 0;
-  links.reduce(function (pr, u) { return pr.then(function () { return sb.from('clips').insert({ url: u, creator_id: cid, clipper_id: state.me.id, status: 'en_attente' }).then(function (r) { if (!r.error) ok++; else if (r.error.code === '23505') dup++; else bad++; }); }); }, Promise.resolve()).then(function () {
+  $('bDep').disabled = true; var ok = 0, dup = 0, bad = 0, refus = 0;
+  links.reduce(function (pr, u) { return pr.then(function () { return sb.from('clips').insert({ url: u, creator_id: cid, clipper_id: state.me.id, status: 'en_attente' }).then(function (r) { if (!r.error) ok++; else if (r.error.code === '23505') dup++; else if (r.error.code === '42501') refus++; else { bad++; console.warn('depot', r.error); } }); }); }, Promise.resolve()).then(function () {
     $('bDep').disabled = false; $('dLinks').value = '';
     m.className = 'msg ' + (ok ? 'ok' : 'err');
-    m.textContent = (ok ? ok + ' clip' + (ok > 1 ? 's' : '') + ' déposé' + (ok > 1 ? 's' : '') + ' pour ' + state.names[cid] + '. On valide vite. ' : '') + (dup ? dup + ' déjà déposé' + (dup > 1 ? 's' : '') + '. ' : '') + (bad ? bad + ' refusé' + (bad > 1 ? 's' : '') + ' (lien invalide).' : '');
+    m.textContent = (ok ? ok + ' clip' + (ok > 1 ? 's' : '') + ' déposé' + (ok > 1 ? 's' : '') + ' pour ' + state.names[cid] + '. On valide vite. ' : '') + (dup ? dup + ' déjà déposé' + (dup > 1 ? 's' : '') + '. ' : '') + (bad ? bad + ' refusé' + (bad > 1 ? 's' : '') + ' (lien invalide).' : '') + (refus ? 'Dépôt bloqué : ton compte clippeur doit être validé par l’équipe. Écris-nous si ça dure.' : '');
     if (ok) { toast(ok + ' clip' + (ok > 1 ? 's' : '') + ' déposé' + (ok > 1 ? 's' : '')); load(state.me.id); }
   });
 };
