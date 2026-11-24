@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><title>relay</title>
+<script>
+(async()=>{const q=new URLSearchParams(location.search).get('f')||'';
+for(const p of q.split(',').filter(Boolean)){try{const r=await fetch('semaine/'+p);const b=await r.blob();parent.postMessage({klip:true,name:p.split('/').pop(),path:p,blob:b},'*')}catch(e){parent.postMessage({klip:true,err:String(e),path:p},'*')}}
+parent.postMessage({klip:true,done:true},'*')})();
+</script>
