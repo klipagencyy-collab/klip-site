@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><title>relais Klip</title><body style="font:16px sans-serif">relais…<script>
+(async()=>{const q=new URLSearchParams(location.search).get('f')||'';const fs=q.split(',').filter(Boolean);const out=[];
+for(const f of fs){const r=await fetch(f);if(!r.ok)throw new Error(f+' '+r.status);const b=await r.arrayBuffer();out.push({name:f,type:f.endsWith('.mp4')?'video/mp4':'image/jpeg',buf:b});}
+const t=window.opener;if(!t){document.body.textContent='PAS D OPENER';return;}
+t.postMessage({klip:2,files:out},'*',out.map(o=>o.buf));document.body.textContent='envoye '+out.length;setTimeout(()=>window.close(),1500);})().catch(e=>{document.body.textContent='ERR '+e;try{window.opener.postMessage({klip:2,err:String(e)},'*')}catch(_){}});
+</script>
