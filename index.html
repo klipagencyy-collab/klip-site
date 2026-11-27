@@ -395,7 +395,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
       </div>
       <div class="trust">
         <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>0 abonné minimum</span>
-        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>2 à 3 clips test offerts</span>
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>1 clip test offert</span>
         <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>Contrat signé avant le 1er clip</span>
       </div>
     </div>
@@ -510,7 +510,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
       <h3 id="bf-title">1,50 € le clip, et moins cher avec le volume.</h3>
       <p id="bf-txt">Monté, sous-titré, prêt à poster. Plus tu prends de clips, plus le prix par clip baisse.</p>
       <div class="packs" id="packs"></div>
-      <p class="fine" style="margin:14px 0 0">2 à 3 clips test offerts avant de t'engager. Prix TTC, TVA non applicable (art. 293 B du CGI).</p>
+      <p class="fine" style="margin:14px 0 0">1 clip test offert avant de t'engager. Prix TTC, TVA non applicable (art. 293 B du CGI).</p>
     </div>
     <div class="sims">
       <div class="sim">
@@ -520,12 +520,12 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
         <label for="s-rate">Clips par heure de contenu : <output id="o-rate">6</output></label>
         <input id="s-rate" type="range" min="2" max="15" step="1" value="6">
         <div class="res"><div><b id="r-clips">120</b><span>clips par mois</span></div><div><b id="r-price">1,50 €</b><span>par clip</span></div><div><b id="r-total">180 €</b><span>par mois</span></div></div>
-        <p class="fine">2 à 3 clips test offerts. Jamais sous <span class="k-floor">1,20 €</span> le clip.</p>
+        <p class="fine">1 clip test offert. Jamais sous <span class="k-floor">1,20 €</span> le clip.</p>
       </div>
     </div>
     <div class="charts">
       <figure class="chart">
-        <figcaption><b>Prix par clip selon le volume</b><span>Créateurs · après les clips test offerts</span></figcaption>
+        <figcaption><b>Prix par clip selon le volume</b><span>Créateurs · après ton clip test offert</span></figcaption>
         <svg id="ch-price" viewBox="0 0 560 300" role="img" aria-label="Prix par clip : 1,50 € à 100 clips, puis 5 centimes de moins par tranche de 100 clips, jusqu'à 1,20 € dès 700 clips"></svg>
         <p class="fine">La barre jaune suit le simulateur.</p>
       </figure>
@@ -561,7 +561,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
 
     <ol class="steps">
       <li><h3>Candidature</h3><p>Tu remplis le formulaire.</p></li>
-      <li><h3>Clips test</h3><p>2 à 3 clips offerts pour valider le style.</p></li>
+      <li><h3>Clips test</h3><p>1 clip offert pour valider le style.</p></li>
       <li><h3>Contrat</h3><p>Un pack de clips par mois.</p></li>
       <li><h3>Clips et stats</h3><p>Tes clips chaque semaine, un bilan chaque mois.</p></li>
     </ol>
@@ -675,7 +675,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: cent
       <details><summary>Il faut combien d'abonnés pour candidater ?</summary><div><p>Aucun. Il suffit d'avoir du contenu long.</p></div></details>
       <details><summary>Comment je vous envoie mes vidéos ?</summary><div><p>Par Google Drive ou WeTransfer.</p></div></details>
       <details><summary>Je découpe déjà mes clips moi-même, vous pouvez juste les monter ?</summary><div><p>Oui. Envoie-nous tes passages déjà choisis par Google Drive ou WeTransfer : on les monte simplement (format vertical, cadrage, sous-titres, titre), sans toucher à ce que tu as sélectionné. Même tarif que pour les clips qu'on découpe nous-mêmes.</p></div></details>
-      <details><summary>Combien ça coûte après les clips test ?</summary><div><p id="faq-price">1,50 € le clip, et le prix baisse avec le volume sans jamais descendre sous 1,20 € le clip :</p>
+      <details><summary>Combien ça coûte après le clip test ?</summary><div><p id="faq-price">1,50 € le clip, et le prix baisse avec le volume sans jamais descendre sous 1,20 € le clip :</p>
         <div style="overflow-x: auto"><table class="prices" id="tbl-prices"><thead><tr><th scope="col">Clips par mois</th><th scope="col">Prix par clip</th><th scope="col">Total</th></tr></thead><tbody><tr><td>100</td><td>1,50 €</td><td>150 €</td></tr><tr><td>200</td><td>1,45 €</td><td>290 €</td></tr><tr><td>300</td><td>1,40 €</td><td>420 €</td></tr><tr><td>400</td><td>1,35 €</td><td>540 €</td></tr><tr><td>500</td><td>1,30 €</td><td>650 €</td></tr><tr><td>600</td><td>1,25 €</td><td>750 €</td></tr><tr><td>700+</td><td>1,20 €</td><td>1,20 € × nombre de clips</td></tr></tbody></table></div>
         </div></details>
       <details><summary>Est-ce que je garde mes droits ?</summary><div><p>Oui, tes contenus restent à toi. La monétisation des clips revient au clippeur et à Klip ; toi, tu gagnes la visibilité.</p></div></details>
